@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   await loadSharedLayout();
   initActiveNavigation();
   initMobileNavigation();
+  initHeaderScrollState();
+  initAmbientMotion();
   initSmoothScrolling();
   initRevealAnimation();
   initContactForms();
@@ -73,6 +75,51 @@ function initMobileNavigation() {
         toggle.setAttribute("aria-expanded", "false");
       }
     });
+  });
+}
+
+function initHeaderScrollState() {
+  const header = document.querySelector(".site-header");
+  if (!header) return;
+
+  const syncState = () => {
+    header.classList.toggle("scrolled", window.scrollY > 8);
+  };
+
+  syncState();
+  window.addEventListener("scroll", syncState, { passive: true });
+}
+
+function initAmbientMotion() {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduceMotion || window.innerWidth < 768) return;
+
+  const motionTargets = document.querySelectorAll(".hero-card, .cta-banner");
+  if (!motionTargets.length) return;
+
+  let rafId = null;
+  let mouseX = 0;
+  let mouseY = 0;
+
+  const animate = () => {
+    const offsetX = (mouseX / window.innerWidth - 0.5) * 8;
+    const offsetY = (mouseY / window.innerHeight - 0.5) * 8;
+
+    motionTargets.forEach((el, index) => {
+      const factor = index % 2 === 0 ? 1 : 0.7;
+      el.style.transform = `translate3d(${offsetX * factor}px, ${offsetY * factor}px, 0)`;
+    });
+
+    rafId = null;
+  };
+
+  window.addEventListener("mousemove", (event) => {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+
+    if (!rafId) {
+      rafId = window.requestAnimationFrame(animate);
+    }
   });
 }
 
