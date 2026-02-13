@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kontakt | rokabo</title>
+    <meta
+      name="description"
+      content="Kontakt zu rokabo. Jetzt kostenloses Erstgespräch anfragen und das passende Website-Abo für dein Unternehmen finden."
+    />
+    <meta name="author" content="rokabo" />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
+
+    <div data-site-header></div>
+
+    <main id="main-content">
+      <!-- Kontakt Hero -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div>
+            <p class="kicker">Kontakt</p>
+            <h1>Lass uns über deine Website sprechen.</h1>
+            <p>
+              Du bekommst ein kostenloses Erstgespräch mit klaren Empfehlungen für dein Unternehmen.
+              Ohne Verkaufsdruck, dafür mit ehrlicher Einschätzung.
+            </p>
+          </div>
+          <aside class="hero-card reveal">
+            <h2 class="section-title">Was im Gespräch passiert</h2>
+            <ul class="check-list">
+              <li>Wir klären deine Ziele und Zielgruppe.</li>
+              <li>Wir besprechen dein Budget realistisch.</li>
+              <li>Du erhältst eine konkrete Paketempfehlung.</li>
+              <li>Wir zeigen dir den nächsten Schritt.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Kontaktformular und Kontaktdaten -->
+      <section class="section">
+        <div class="container contact-grid">
+          <article class="form reveal">
+            <h2 class="section-title">Kostenloses Erstgespräch anfragen</h2>
+            <p class="form-note">Bitte fülle die Felder aus. Wir melden uns zeitnah bei dir zurück.</p>
+
+            <!-- Frontend-Validierung erfolgt in js/main.js -->
+            <form data-contact-form novalidate>
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input class="form-input" type="text" id="name" name="name" autocomplete="name" required />
+              </div>
+
+              <div class="form-group">
+                <label for="email">E-Mail</label>
+                <input class="form-input" type="email" id="email" name="email" autocomplete="email" required />
+              </div>
+
+              <div class="form-group">
+                <label for="company">Unternehmen</label>
+                <input class="form-input" type="text" id="company" name="company" autocomplete="organization" required />
+              </div>
+
+              <div class="form-group">
+                <label for="package">Gewünschtes Paket</label>
+                <select class="form-select" id="package" name="package" required>
+                  <option value="">Bitte wählen</option>
+                  <option value="Light">Light</option>
+                  <option value="Professional">Professional</option>
+                  <option value="Premium">Premium</option>
+                  <option value="Unsicher">Ich bin noch unsicher</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">Nachricht</label>
+                <textarea
+                  class="form-textarea"
+                  id="message"
+                  name="message"
+                  placeholder="Beschreibe kurz dein Unternehmen und was deine Website leisten soll."
+                  required
+                ></textarea>
+              </div>
+
+              <button class="btn btn-primary" type="submit">Anfrage senden</button>
+              <p class="success-message" data-form-success>
+                Danke für deine Anfrage. Dein E-Mail-Programm öffnet sich jetzt zur Bestätigung.
+              </p>
+            </form>
+          </article>
+
+          <aside class="card reveal" aria-label="Kontaktdaten">
+            <h2 class="section-title">Direktkontakt</h2>
+            <p class="muted">Wenn du lieber direkt schreiben oder anrufen möchtest, erreichst du uns hier.</p>
+            <ul class="check-list">
+              <li>E-Mail: <a href="mailto:info@rokabo.de">info@rokabo.de</a></li>
+              <li>Telefon: <a href="tel:+490000000000">+49 0000 000000</a></li>
+              <li>Antwort in der Regel innerhalb eines Werktags</li>
+            </ul>
+            <p class="highlight">Gemeinsam finden wir eine Lösung, die zu deinem Alltag passt.</p>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <div data-site-footer></div>
+
+    <script src="js/main.js" defer></script>
+  </body>
+</html>

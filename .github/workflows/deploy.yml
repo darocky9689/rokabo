@@ -1,0 +1,63 @@
+name: Validate before Plesk Pull
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Verify required files exist
+        run: |
+          set -e
+          required_files=(
+            "index.html"
+            "leistungen.html"
+            "preise.html"
+            "ueber-uns.html"
+            "kontakt.html"
+            "impressum.html"
+            "datenschutz.html"
+            "css/styles.css"
+            "js/main.js"
+            "partials/header.html"
+            "partials/footer.html"
+            "README.md"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [ ! -f "$file" ]; then
+              echo "Missing required file: $file"
+              exit 1
+            fi
+          done
+
+      - name: Basic HTML sanity checks
+        run: |
+          set -e
+          html_files=("index.html" "leistungen.html" "preise.html" "ueber-uns.html" "kontakt.html")
+
+          for file in "${html_files[@]}"; do
+            grep -qi "<!DOCTYPE html>" "$file"
+            grep -qi "<meta name=\"description\"" "$file"
+            grep -qi "<script src=\"js/main.js\"" "$file"
+            grep -qi "<link rel=\"stylesheet\" href=\"css/styles.css\"" "$file"
+          done
+
+      - name: Basic CSS and JS sanity checks
+        run: |
+          set -e
+          grep -q ":root" css/styles.css
+          grep -q "--color-primary" css/styles.css
+          grep -q "initMobileNavigation" js/main.js
+          grep -q "initContactForms" js/main.js
+
+      - name: Build summary
+        run: echo "Quality checks passed. Plesk can safely pull from main."
