@@ -19,6 +19,7 @@
     />
     <meta name="theme-color" content="#3B0A45" />
     <link rel="canonical" href="https://rokabo.de/" />
+    <link rel="alternate" hreflang="de-DE" href="https://rokabo.de/" />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:site_name" content="rokabo" />
     <meta property="og:title" content="rokabo | Websites im Abo" />
@@ -29,6 +30,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://rokabo.de/" />
     <meta property="og:image" content="https://rokabo.de/images/ROKABO.png" />
+    <meta property="og:image:alt" content="rokabo Logo" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="rokabo | Websites im Abo" />
     <meta
@@ -39,20 +41,59 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "rokabo",
-        "url": "https://rokabo.de/",
-        "logo": "https://rokabo.de/images/ROKABO.png",
-        "email": "info@rokabo.de",
-        "telephone": "+49 0000 000000",
-        "description": "rokabo erstellt Websites im Abo für kleine Unternehmen, lokale Dienstleister und Gründer.",
-        "sameAs": ["https://rokabo.de/"]
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://rokabo.de/#organization",
+            "name": "rokabo",
+            "url": "https://rokabo.de/",
+            "logo": "https://rokabo.de/images/ROKABO.png",
+            "email": "info@rokabo.de",
+            "telephone": "+49 175 624 0804",
+            "description": "rokabo erstellt Websites im Abo für kleine Unternehmen, lokale Dienstleister und Gründer."
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://rokabo.de/#website",
+            "url": "https://rokabo.de/",
+            "name": "rokabo",
+            "inLanguage": "de-DE",
+            "publisher": {
+              "@id": "https://rokabo.de/#organization"
+            }
+          },
+          {
+            "@type": "Service",
+            "name": "Websites im Abo",
+            "provider": {
+              "@id": "https://rokabo.de/#organization"
+            },
+            "areaServed": "DE",
+            "offers": {
+              "@type": "Offer",
+              "price": "79",
+              "priceCurrency": "EUR",
+              "description": "Professional Paket ab 79 € pro Monat"
+            }
+          }
+        ]
       }
     </script>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Direkt zum Inhalt</a>
+    <noscript>
+      <nav class="seo-noscript" aria-label="Schnellnavigation ohne JavaScript">
+        <a href="index.html">Start</a>
+        <a href="leistungen.html">Leistungen</a>
+        <a href="preise.html">Preise</a>
+        <a href="ueber-uns.html">Über uns</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </noscript>
 
     <div data-site-header></div>
 
