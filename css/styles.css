@@ -127,6 +127,12 @@ a {
   color: var(--color-primary);
 }
 
+.brand-logo {
+  width: 2rem;
+  height: 2rem;
+  object-fit: contain;
+}
+
 .brand-mark {
   width: 1.2rem;
   height: 1.2rem;
