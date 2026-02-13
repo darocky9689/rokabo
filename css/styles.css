@@ -130,8 +130,10 @@ a {
 }
 
 .brand-logo {
-  width: var(--brand-logo-size);
-  height: var(--brand-logo-size);
+  width: auto;
+  height: auto;
+  max-height: 90px;
+  max-width: 90px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -535,11 +537,6 @@ label {
 
 /* Desktop */
 @media (min-width: 48rem) {
-  .brand-logo {
-    width: var(--brand-logo-size-desktop);
-    height: var(--brand-logo-size-desktop);
-  }
-
   .menu-toggle {
     display: none;
   }
