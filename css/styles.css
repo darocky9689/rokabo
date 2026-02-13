@@ -26,6 +26,8 @@
 
   --container: 72rem;
   --header-height: 4.5rem;
+  --brand-logo-size: 1.65rem;
+  --brand-logo-size-desktop: 1.85rem;
 }
 
 * {
@@ -128,8 +130,8 @@ a {
 }
 
 .brand-logo {
-  width: clamp(2rem, 4.2vw, 2.6rem);
-  height: clamp(2rem, 4.2vw, 2.6rem);
+  width: var(--brand-logo-size);
+  height: var(--brand-logo-size);
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -533,6 +535,11 @@ label {
 
 /* Desktop */
 @media (min-width: 48rem) {
+  .brand-logo {
+    width: var(--brand-logo-size-desktop);
+    height: var(--brand-logo-size-desktop);
+  }
+
   .menu-toggle {
     display: none;
   }
