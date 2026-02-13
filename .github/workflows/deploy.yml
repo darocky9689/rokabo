@@ -46,7 +46,7 @@ jobs:
 
           for file in "${html_files[@]}"; do
             grep -qi "<!DOCTYPE html>" "$file"
-            grep -qi "<meta name=\"description\"" "$file"
+            grep -qi "name=\"description\"" "$file"
             grep -qi "<script src=\"js/main.js\"" "$file"
             grep -qi "<link rel=\"stylesheet\" href=\"css/styles.css\"" "$file"
           done
@@ -55,7 +55,7 @@ jobs:
         run: |
           set -e
           grep -q ":root" css/styles.css
-          grep -q "--color-primary" css/styles.css
+          grep -q -- "--color-primary" css/styles.css
           grep -q "initMobileNavigation" js/main.js
           grep -q "initContactForms" js/main.js
 
