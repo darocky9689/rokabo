@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:dist": "npm run build && rm -rf dist-site && cp -R out dist-site",
     "start": "next start",
     "lint": "next lint"
   },

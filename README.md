@@ -54,12 +54,22 @@ GitHub Actions Workflow baut das Next.js-Projekt bei Push auf `main`:
 Diese Migration nutzt **Static Export** (`output: 'export'`).
 Dadurch ist kein dauerhaft laufender Node-Prozess nötig.
 
-### Plesk Git Deployment Action (wichtig)
+### Option B, ohne Node.js auf Plesk (empfohlen bei Shared Hosting)
 
-Im Git-Deployment in Plesk diese Schritte ausführen:
+Wenn auf Plesk kein `npm` verfügbar ist, wird die statische Version lokal gebaut und als `dist-site/` ins Repository committed.
+
+#### Lokal vor jedem Push
 
 1. `npm install`
-2. `npm run build`
-3. Export aus `out/` in den Webroot deployen, z. B. nach `httpdocs/`
+2. `npm run build:dist`
+3. `git add dist-site`
+4. Commit + Push
 
-Wenn `out/` nicht in `httpdocs/` kopiert wird, zeigt die Domain einen 404, obwohl der Pull erfolgreich war.
+#### Plesk Deployment Action
+
+Nur statisch deployen, kein npm:
+
+1. `rm -rf httpdocs/*`
+2. `cp -R dist-site/* httpdocs/`
+
+Wenn `dist-site` nicht in `httpdocs` kopiert wird, liefert die Domain 404.
