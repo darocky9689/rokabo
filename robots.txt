@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-
-# Legal pages should stay crawlable for links but not indexed via meta tags in page head.
-Sitemap: https://rokabo.de/sitemap.xml
