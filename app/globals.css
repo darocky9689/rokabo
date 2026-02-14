@@ -93,6 +93,21 @@ label { display: block; margin-bottom: .3rem; font-weight: 500; }
 .error { color: #9f1239; }
 .success-message { color: #116b4f; }
 
+.faq-list { display: grid; gap: .75rem; }
+.faq-item {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: .1rem .9rem;
+}
+.faq-item summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--color-primary);
+  padding: .8rem 0;
+}
+.faq-item p { margin: 0 0 .9rem; color: var(--color-muted); }
+
 .site-footer { margin-top: 2.5rem; background: #180d1d; color: #d0c8d5; padding: 2rem 0 1.2rem; }
 .footer-grid { display: grid; gap: 1rem; }
 .footer-grid h3 { margin-top: 0; color: #fff; }

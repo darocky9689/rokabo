@@ -45,6 +45,19 @@ export default function HomePage() {
           <Link className="btn btn-accent" href="/kontakt">Beratungsgespräch anfragen</Link>
         </div>
       </section>
+
+      <section className="section">
+        <div className="container card">
+          <h2 className="section-title">Noch Fragen vor dem Start?</h2>
+          <p className="section-subtitle">
+            Alle häufigen Fragen zu Kosten, Laufzeit, Umsetzung und Betreuung findest du kompakt in unserem FAQ.
+          </p>
+          <div className="btn-row">
+            <Link className="btn btn-primary" href="/faq">Zum FAQ</Link>
+            <Link className="btn btn-secondary" href="/kontakt">Frage direkt stellen</Link>
+          </div>
+        </div>
+      </section>
     </main>
   );
 }

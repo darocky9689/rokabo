@@ -14,6 +14,7 @@ export function SiteFooter() {
             <li><Link href="/">Start</Link></li>
             <li><Link href="/leistungen">Leistungen</Link></li>
             <li><Link href="/preise">Preise</Link></li>
+            <li><Link href="/faq">FAQ</Link></li>
             <li><Link href="/ueber-uns">Über uns</Link></li>
             <li><Link href="/kontakt">Kontakt</Link></li>
           </ul>
