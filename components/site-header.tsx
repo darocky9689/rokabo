@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { ThemeToggle } from './theme-toggle';
 
 const navItems = [
   { href: '/', label: 'Start' },
@@ -26,15 +27,18 @@ export function SiteHeader() {
           rokabo
         </Link>
 
-        <button
-          className="menu-toggle"
-          type="button"
-          aria-label="Menü öffnen"
-          aria-expanded={open}
-          onClick={() => setOpen((state) => !state)}
-        >
-          ☰
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <ThemeToggle />
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label="Menü öffnen"
+            aria-expanded={open}
+            onClick={() => setOpen((state) => !state)}
+          >
+            ☰
+          </button>
+        </div>
 
         <nav className={`nav ${open ? 'open' : ''}`} aria-label="Hauptmenü">
           <ul className="nav-list">
