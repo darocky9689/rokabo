@@ -33,6 +33,11 @@ const faqs = [
       'Ja. Hosting, Updates, technische Wartung und Sicherheitsmaßnahmen sind Bestandteil unserer Betreuung.'
   },
   {
+    question: 'Arbeitet ihr nur mit WordPress?',
+    answer:
+      'Nein. Neben WordPress realisieren wir auch individuelle Websites mit Next.js und TypeScript, wenn dein Projekt mehr Flexibilität, Performance oder spezielle Funktionen benötigt.'
+  },
+  {
     question: 'Kündigungsfrist und Vertragslaufzeit?',
     answer:
       'Die genauen Bedingungen hängen vom gewählten Paket ab. Wir legen alle Laufzeiten und Fristen vor Vertragsstart offen.'
@@ -47,7 +52,7 @@ const faqs = [
 export const metadata: Metadata = {
   title: 'FAQ | rokabo',
   description:
-    'Häufige Fragen zu Websites im Abo: Kosten, Laufzeit, Leistungen, Umsetzung und Betreuung bei rokabo.',
+    'Häufige Fragen zu Websites im Abo: Kosten, Laufzeit, Leistungen, WordPress oder Next.js mit TypeScript, Umsetzung und Betreuung bei rokabo.',
   alternates: { canonical: '/faq' }
 };
 

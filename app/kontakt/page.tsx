@@ -3,7 +3,8 @@ import { ContactForm } from '@/components/contact-form';
 
 export const metadata: Metadata = {
   title: 'Kontakt | rokabo',
-  description: 'Jetzt kostenloses Erstgespräch anfragen und das passende Website-Abo für dein Unternehmen finden.',
+  description:
+    'Jetzt kostenloses Erstgespräch anfragen und das passende Website-Abo finden – von WordPress bis individuelle Next.js- und TypeScript-Lösung.',
   alternates: { canonical: '/kontakt' }
 };
 
@@ -13,7 +14,10 @@ export default function KontaktPage() {
       <div className="container contact-grid">
         <article className="form">
           <h1 className="section-title">Kostenloses Erstgespräch anfragen</h1>
-          <p className="form-note">Wir melden uns in der Regel innerhalb eines Werktags zurück.</p>
+          <p className="form-note">
+            Wir melden uns in der Regel innerhalb eines Werktags zurück und beraten dich, ob WordPress oder eine
+            individuelle Next.js- und TypeScript-Lösung besser zu deinem Vorhaben passt.
+          </p>
           <ContactForm />
         </article>
 

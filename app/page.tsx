@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'rokabo | Websites im Abo für kleine Unternehmen',
+  title: 'rokabo | Website im Abo: WordPress oder individuell mit Next.js',
   description:
-    'Professionelle Website ohne hohe Startkosten. Monatlich planbar, mit laufender Betreuung, Support und modernen Technologien.',
+    'Professionelle Website im Abo ohne hohe Startkosten: WordPress-Websites oder individuelle Lösungen mit Next.js und TypeScript. Monatlich planbar mit laufender Betreuung und SEO-Fokus.',
   alternates: { canonical: '/' }
 };
 
@@ -18,7 +18,8 @@ export default function HomePage() {
             <h1>Deine professionelle Website. Ohne hohe Startkosten, mit laufender Betreuung.</h1>
             <p>
               Du willst sichtbar werden und neue Kunden gewinnen, aber eine klassische Agenturrechnung passt nicht ins Budget.
-              Genau dafür gibt es rokabo. Du zahlst monatlich, wir kümmern uns um Technik, Pflege und Updates.
+              Genau dafür gibt es rokabo. Du zahlst monatlich, wir kümmern uns um Technik, Pflege, SEO und Updates –
+              wahlweise mit WordPress oder als individuelle Weblösung mit Next.js und TypeScript.
             </p>
             <div className="btn-row">
               <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch sichern</Link>
@@ -31,10 +32,29 @@ export default function HomePage() {
               <li>Kein großer Einmalbetrag am Anfang</li>
               <li>Feste monatliche Kosten, sicher planbar</li>
               <li>Laufende Betreuung statt einmaliger Übergabe</li>
-              <li>Moderne Technik mit WordPress und Elementor</li>
+              <li>Technologie passend zum Ziel: WordPress oder Next.js + TypeScript</li>
               <li>Hosting, Sicherheit und Support aus einer Hand</li>
             </ul>
           </aside>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container grid grid-2">
+          <article className="card">
+            <h2 className="section-title">WordPress für schnellen Start</h2>
+            <p className="muted">
+              Ideal für klassische Unternehmensseiten, lokale Sichtbarkeit und schnelle Go-Lives.
+              Mit sauberer Struktur, leichter Pflege und erprobten SEO-Grundlagen.
+            </p>
+          </article>
+          <article className="card">
+            <h2 className="section-title">Next.js & TypeScript für individuelle Projekte</h2>
+            <p className="muted">
+              Wenn du mehr brauchst als Standard: performante, individuell entwickelte Websites mit
+              moderner Architektur, hoher Ladegeschwindigkeit und flexiblen Erweiterungsmöglichkeiten.
+            </p>
+          </article>
         </div>
       </section>
 

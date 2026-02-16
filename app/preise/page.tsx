@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Preise | rokabo',
-  description: 'Transparente Preise für Websites im Abo. Light, Professional und Premium im direkten Vergleich.',
+  description:
+    'Transparente Preise für Websites im Abo: WordPress-Pakete und individuelle Webentwicklung mit Next.js und TypeScript im Vergleich.',
   alternates: { canonical: '/preise' }
 };
 
@@ -12,7 +13,10 @@ export default function PreisePage() {
     <main id="main-content" className="section">
       <div className="container">
         <h1 className="section-title">Preise</h1>
-        <p className="section-subtitle">Klare Pakete, klare monatliche Kosten, keine hohe Anfangsinvestition.</p>
+        <p className="section-subtitle">
+          Klare Pakete, klare monatliche Kosten, keine hohe Anfangsinvestition. Je nach Ziel mit WordPress oder
+          individuellen Next.js- und TypeScript-Komponenten.
+        </p>
 
         <div className="table-wrap">
           <table>

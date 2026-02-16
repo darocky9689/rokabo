@@ -3,7 +3,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Über uns | rokabo',
-  description: 'rokabo ist der verlässliche Partner für Websites im Abo. Einfach, flexibel, verlässlich und kreativ.',
+  description:
+    'rokabo ist dein Partner für Websites im Abo: WordPress für schnelle Umsetzung und individuelle Webentwicklung mit Next.js und TypeScript für mehr Flexibilität.',
   alternates: { canonical: '/ueber-uns' }
 };
 
@@ -12,7 +13,10 @@ export default function UeberUnsPage() {
     <main id="main-content" className="section">
       <div className="container">
         <h1 className="section-title">Über uns</h1>
-        <p className="section-subtitle">Wir bauen Websites, die kleinen Unternehmen den Rücken freihalten.</p>
+        <p className="section-subtitle">
+          Wir bauen Websites, die kleinen Unternehmen den Rücken freihalten – mit klaren Prozessen,
+          SEO-Fokus und der passenden Technologie für dein Wachstum.
+        </p>
 
         <div className="grid grid-2">
           <article className="card">
@@ -28,6 +32,9 @@ export default function UeberUnsPage() {
             <h3>Warum Abo-Modell</h3>
             <p className="muted">
               Keine hohe Einmalinvestition. Stattdessen ein klarer monatlicher Rahmen mit laufender Weiterentwicklung.
+            </p>
+            <p className="muted">
+              Je nach Bedarf setzen wir auf WordPress oder entwickeln individuelle Lösungen mit Next.js und TypeScript.
             </p>
             <Link className="btn btn-primary" href="/kontakt">Unverbindlich anfragen</Link>
           </article>

@@ -5,9 +5,9 @@ import './globals.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://rokabo.de'),
-  title: 'rokabo | Websites im Abo',
+  title: 'rokabo | Websites im Abo mit WordPress, Next.js & TypeScript',
   description:
-    'rokabo erstellt moderne Websites im Abo für kleine Unternehmen. Ohne hohe Startkosten, mit laufender Betreuung und planbaren monatlichen Preisen.',
+    'rokabo erstellt moderne Websites im Abo für kleine Unternehmen: WordPress-Lösungen und individuelle Webentwicklung mit Next.js und TypeScript. Ohne hohe Startkosten, mit laufender Betreuung.',
   robots: {
     index: true,
     follow: true
