@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build Validation
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,17 +28,5 @@ jobs:
       - name: Build Next.js app
         run: npm run build:dist
 
-      - name: Upload to Plesk via SFTP
-        if: github.ref == 'refs/heads/main' && success()
-        uses: wangyuanji/sftp-upload-action@v1.4.8
-        with:
-          host: ${{ secrets.PLESK_HOST }}
-          port: ${{ secrets.PLESK_PORT || 22 }}
-          username: ${{ secrets.PLESK_USER }}
-          password: ${{ secrets.PLESK_PASSWORD }}
-          local_path: ./dist-site/*
-          remote_path: /rokabo.de/httpdocs/
-          delete: true
-
-      - name: Build summary
-        run: echo "✅ Build and deployment completed!"
+      - name: ✅ Build completed successfully
+        run: echo "Ready to deploy! dist-site/ folder is ready."
