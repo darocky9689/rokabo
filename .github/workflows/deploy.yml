@@ -31,4 +31,10 @@ jobs:
       - name: Build summary
         run: echo "✅ Next.js build validation passed."
 
-// Force webhook trigger Mon Feb 16 23:00:39 CET 2026
+      - name: Trigger Plesk Git Deployment
+        if: github.ref == 'refs/heads/main' && success()
+        run: |
+          curl -X POST "https://shared49.cloud86-host.nl:8443/modules/git/public/web-hook.php?uuid=6f3247e8-25c3-81bb-ea3c-7eb3fa84702e" \
+            -H "Content-Type: application/json" \
+            -d '{"ref":"refs/heads/main","repository":"rokabo"}' \
+            -v || echo "⚠️ Webhook trigger attempted"
