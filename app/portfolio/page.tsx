@@ -1,10 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
-
-// Note: Metadata export doesn't work in client components
-// So we'll handle SEO differently
+import { useState } from 'react';
 
 const projects = [
   {
@@ -12,8 +9,7 @@ const projects = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    thumbnail: '/images/portfolio/juro-fotografie.webp',
-    previewUrl: 'https://juro-fotografie.de',
+    image: '/images/portfolio/juro-fotografie.webp',
     url: 'https://juro-fotografie.de',
     tags: ['Hostinger', 'Portfolio', 'Fotografie']
   },
@@ -22,8 +18,7 @@ const projects = [
     title: 'Grundschule Spreenhagen',
     category: 'bildung',
     description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    thumbnail: '/images/portfolio/grundschule-spreenhagen.webp',
-    previewUrl: 'https://grundschule-spreenhagen.de',
+    image: '/images/portfolio/grundschule-spreenhagen.webp',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Wordpress', 'Schule', 'Bildung']
   }
@@ -33,7 +28,6 @@ const categories = ['alle', 'fotografie', 'bildung'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('alle');
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageError, setImageError] = useState<number | null>(null);
 
   const filteredProjects =
@@ -70,7 +64,7 @@ export default function PortfolioPage() {
                 <div className="portfolio-image-wrapper">
                   {imageError !== project.id ? (
                     <img
-                      src={project.thumbnail}
+                      src={project.image}
                       alt={project.title}
                       className="portfolio-image"
                       onError={() => setImageError(project.id)}
@@ -94,22 +88,14 @@ export default function PortfolioPage() {
                           </span>
                         ))}
                       </div>
-                      <div className="portfolio-links">
-                        <button
-                          className="portfolio-btn btn-preview"
-                          onClick={() => setPreviewUrl(project.previewUrl)}
-                        >
-                          Vorschau
-                        </button>
-                        <a
-                          href={project.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="portfolio-btn btn-visit"
-                        >
-                          Besuchen
-                        </a>
-                      </div>
+                      <a
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="portfolio-btn btn-visit"
+                      >
+                        Besuchen
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -124,46 +110,6 @@ export default function PortfolioPage() {
           )}
         </div>
       </section>
-
-      {/* Live Preview Modal */}
-      {previewUrl && (
-        <div className="preview-modal" onClick={() => setPreviewUrl(null)}>
-          <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
-            <div className="preview-modal-header">
-              <h3>Live Vorschau</h3>
-              <button className="preview-modal-close" onClick={() => setPreviewUrl(null)}>
-                ✕
-              </button>
-            </div>
-            <div className="preview-modal-body">
-              <div className="preview-device-frame">
-                <div className="preview-browser-header">
-                  <span className="browser-title">{previewUrl}</span>
-                </div>
-                <div className="preview-device-content">
-                  <img
-                    src={
-                      previewUrl.includes('juro') 
-                        ? '/images/portfolio/juro-fotografie.webp'
-                        : '/images/portfolio/grundschule-spreenhagen.webp'
-                    }
-                    alt="Website Preview"
-                    className="preview-screenshot"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="preview-modal-footer">
-              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1rem', textAlign: 'center' }}>
-                Öffne die Website in einem neuen Tab für die vollständige interaktive Erfahrung
-              </p>
-              <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Im neuen Tab öffnen
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* CTA Section */}
       <section className="section">
