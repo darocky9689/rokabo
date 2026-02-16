@@ -2,26 +2,40 @@
 
 ## 📋 Plesk Konfiguration
 
-### Schritt 1: Plesk Git-Einstellungen öffnen
+### Schritt 1: Git Repository in Plesk hinzufügen
 
 1. Einloggen in Plesk: `https://shared49.cloud86-host.nl:8443`
-2. Gehe zu: **Git** (in der Sidebar)
-3. Wähle das Repository: **rokabo** (`/rokabo/repo`)
-4. Klick auf **"Erweiterte Einstellungen anzeigen"** oder **"Additional deployment actions"**
+2. Gehe zu **"Websites & Domains"** → **rokabo.de**
+3. Klick auf **"Git"**
+4. Klick auf **"Repository hinzufügen"** oder **"Add Repository"**
+5. Fülle die Felder aus:
+   - **Repository Name:** `rokabo`
+   - **Repository URL:** `https://github.com/darocky9689/rokabo.git`
+   - **Repository Path:** `/rokabo/repo` (oder lass Plesk den Pfad wählen)
+   - **Branch:** `main`
+6. **"OK"** oder **"Hinzufügen"** klicken
+7. Plesk klont jetzt das Repository
 
 ### Schritt 2: Deployment-Script eintragen
 
+Nachdem das Repository geklont wurde:
+
+1. Klick auf das Repository **rokabo** in der Liste
+2. Klick auf **"Erweiterte Einstellungen anzeigen"** oder **"Additional deployment actions"**
+
 **Da Node.js nicht auf Plesk verfügbar ist, builden wir lokal und committen die fertigen Files.**
 
-Im Feld **"Additional deployment actions"** oder **"Actions for deploying the repository"** trage folgendes ein:
+Im Feld **"Additional deployment actions"** trage folgendes ein:
 
 ```bash
-REPO_DIR="/rokabo/repo"
 WEB_ROOT="/rokabo.de/httpdocs"
 
+# Plesk setzt automatisch das Working Directory auf das Repo
 rm -rf "$WEB_ROOT"/*
-cp -r "$REPO_DIR/dist-site/"* "$WEB_ROOT/"
+cp -r dist-site/* "$WEB_ROOT/"
 ```
+
+**Hinweis:** Wenn der Pfad `/rokabo.de/httpdocs` nicht funktioniert, schau in Plesk unter "Websites & Domains" → rokabo.de → "Hosting-Einstellungen" nach dem Document Root Pfad.
 
 Das war's! Das Script kopiert nur die fertigen Build-Files.
 
