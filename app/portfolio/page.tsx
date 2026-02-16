@@ -12,7 +12,7 @@ const projects = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    thumbnail: '/portfolio/juro-fotografie.svg',
+    thumbnail: '/images/portfolio/juro-fotografie.webp',
     previewUrl: 'https://juro-fotografie.de',
     url: 'https://juro-fotografie.de',
     tags: ['Hostinger', 'Portfolio', 'Fotografie']
@@ -22,7 +22,7 @@ const projects = [
     title: 'Grundschule Spreenhagen',
     category: 'bildung',
     description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    thumbnail: '/portfolio/grundschule-spreenhagen.svg',
+    thumbnail: '/images/portfolio/grundschule-spreenhagen.webp',
     previewUrl: 'https://grundschule-spreenhagen.de',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Wordpress', 'Schule', 'Bildung']
@@ -136,14 +136,27 @@ export default function PortfolioPage() {
               </button>
             </div>
             <div className="preview-modal-body">
-              <iframe
-                src={previewUrl}
-                className="preview-iframe"
-                title="Website Preview"
-                allowFullScreen
-              />
+              <div className="preview-device-frame">
+                <div className="preview-browser-header">
+                  <span className="browser-title">{previewUrl}</span>
+                </div>
+                <div className="preview-device-content">
+                  <img
+                    src={
+                      previewUrl.includes('juro') 
+                        ? '/images/portfolio/juro-fotografie.webp'
+                        : '/images/portfolio/grundschule-spreenhagen.webp'
+                    }
+                    alt="Website Preview"
+                    className="preview-screenshot"
+                  />
+                </div>
+              </div>
             </div>
             <div className="preview-modal-footer">
+              <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '1rem', textAlign: 'center' }}>
+                Öffne die Website in einem neuen Tab für die vollständige interaktive Erfahrung
+              </p>
               <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Im neuen Tab öffnen
               </a>

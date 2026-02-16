@@ -830,74 +830,55 @@ footer p, .site-footer p {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3));
+  background: #000;
+  min-height: 300px;
   padding: var(--space-2);
-  min-height: 400px;
-  position: relative;
 }
 
-.preview-image-container {
-  position: relative;
+.preview-device-frame {
   width: 100%;
-  max-width: 100%;
+  max-width: 900px;
+  background: var(--card-bg);
   border-radius: var(--radius-md);
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--card-border);
 }
 
-.preview-image {
+.preview-browser-header {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.05));
+  border-bottom: 1px solid var(--card-border);
+  padding: 0.75rem 1rem;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-family: monospace;
+  word-break: break-all;
+}
+
+.browser-title {
+  display: inline-block;
+  color: var(--link-color);
+}
+
+.preview-device-content {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  background: var(--card-bg);
+}
+
+.preview-screenshot {
   width: 100%;
   height: auto;
   display: block;
-  filter: grayscale(100%);
+  filter: grayscale(0%);
   transition: filter 600ms ease;
 }
 
-.preview-image-container:hover .preview-image {
+.preview-device-content:hover .preview-screenshot {
   filter: grayscale(0%);
-}
-
-.preview-info-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-  padding: var(--space-3) var(--space-2) var(--space-2);
-  color: white;
-  transform: translateY(0);
-  transition: transform 300ms ease;
-}
-
-.preview-image-container:hover .preview-info-overlay {
-  transform: translateY(-10px);
-}
-
-.preview-info-content {
-  margin-top: 0.5rem;
-}
-
-.preview-subtitle {
-  margin: 0 0 0.8rem;
-  font-size: 0.95rem;
-  line-height: 1.5;
-  opacity: 0.95;
-}
-
-.preview-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.preview-tag {
-  display: inline-block;
-  padding: 0.3rem 0.7rem;
-  background: rgba(64, 224, 208, 0.2);
-  border: 1px solid rgba(64, 224, 208, 0.5);
-  border-radius: 999px;
-  font-size: 0.75rem;
-  color: #40e0d0;
 }
 
 .preview-modal-footer {
