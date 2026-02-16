@@ -23,7 +23,10 @@
   --link-color: #40e0d0;
   --link-hover: #6fffef;
   --button-primary-bg: rgba(59, 10, 69, 0.8);
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: rgba(255, 255, 255, 0.15);
   --button-secondary-border: rgba(255, 255, 255, 0.3);
+  --button-secondary-text: #ffffff;
   --button-accent-bg: rgba(64, 224, 208, 0.9);
   --button-accent-text: #1a1a1a;
 }
@@ -41,7 +44,10 @@
   --link-color: #a020c0;
   --link-hover: #3b0a45;
   --button-primary-bg: #3b0a45;
-  --button-secondary-border: rgba(59, 10, 69, 0.3);
+  --button-primary-text: #ffffff;
+  --button-secondary-bg: rgba(59, 10, 69, 0.12);
+  --button-secondary-border: rgba(59, 10, 69, 0.4);
+  --button-secondary-text: #1a0f20;
   --button-accent-bg: #40e0d0;
   --button-accent-text: #1a0f20;
 }
@@ -292,35 +298,39 @@ body > main { flex: 1; }
   border: 2px solid transparent;
   backdrop-filter: blur(10px);
   transition: all 250ms ease;
-  color: var(--text-primary);
 }
 .btn-primary {
   background: var(--button-primary-bg);
-  border: 1px solid var(--button-secondary-border);
-  box-shadow: 0 4px 16px rgba(59, 10, 69, 0.4);
+  color: var(--button-primary-text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(59, 10, 69, 0.3);
 }
 .btn-primary:hover {
-  background: rgba(59, 10, 69, 0.95);
-  box-shadow: 0 6px 24px rgba(59, 10, 69, 0.5);
+  background: var(--link-color);
+  color: var(--button-primary-text);
+  box-shadow: 0 6px 24px rgba(59, 10, 69, 0.4);
   transform: translateY(-2px);
 }
 .btn-secondary {
   border: 2px solid var(--button-secondary-border);
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--button-secondary-bg);
+  color: var(--button-secondary-text);
 }
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: var(--button-secondary-border);
+  background: var(--button-secondary-bg);
+  border-color: var(--link-color);
+  color: var(--link-color);
+  transform: translateY(-2px);
 }
 .btn-accent {
   background: var(--button-accent-bg);
   color: var(--button-accent-text);
   border: 1px solid var(--link-color);
-  box-shadow: 0 4px 16px rgba(64, 224, 208, 0.4);
+  box-shadow: 0 4px 16px rgba(64, 224, 208, 0.3);
 }
 .btn-accent:hover {
-  background: var(--link-hover);
-  box-shadow: 0 6px 24px rgba(64, 224, 208, 0.5);
+  background: var(--link-color);
+  box-shadow: 0 6px 24px rgba(64, 224, 208, 0.4);
   transform: translateY(-2px);
 }
 
