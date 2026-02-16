@@ -3,26 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const projects = [
-  {
-    id: 1,
-    title: 'juro-fotografie.de',
-    category: 'fotografie',
-    description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    image: '/images/portfolio/juro-fotografie.svg',
-    url: 'https://juro-fotografie.de',
-    tags: ['Hostinger', 'Portfolio', 'Fotografie']
-  },
-  {
-    id: 2,
-    title: 'Grundschule Spreenhagen',
-    category: 'bildung',
-    description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    image: '/images/portfolio/grundschule-spreenhagen.svg',
-    url: 'https://grundschule-spreenhagen.de',
-    tags: ['Wordpress', 'Schule', 'Bildung']
-  }
-];
+const projects = [];
 
 const categories = ['alle', 'fotografie', 'bildung'];
 
