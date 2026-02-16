@@ -10,7 +10,7 @@ const navItems = [
   { href: '/leistungen', label: 'Leistungen' },
   { href: '/preise', label: 'Preise' },
   { href: '/ueber-uns', label: 'Über uns' },
-  { href: '/kontakt', label: 'Kontakt' }
+  { href: '/kontakt', label: 'Kontakt' },
   { href: '/faq', label: 'FAQ' },
 ];
 
