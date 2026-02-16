@@ -31,3 +31,4 @@ jobs:
       - name: Build summary
         run: echo "✅ Next.js build validation passed."
 
+// Force webhook trigger Mon Feb 16 23:00:39 CET 2026
