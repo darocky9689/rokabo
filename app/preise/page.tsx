@@ -33,7 +33,12 @@ export default function PreisePage() {
               <tr><td>Jahresbetrag</td><td>ab 160,00 €</td><td>ab 900,00 €</td><td>ab 1200,00 €</td></tr>
               <tr><td>Website</td><td>Nein</td><td>Ja</td><td>Ja</td></tr>
               <tr><td>SEO</td><td>Nein</td><td>Basic SEO</td><td>Advanced SEO</td></tr>
-              <tr><td>CareCoins</td><td>Keine</td><td>6</td><td>12</td></tr>
+              <tr>
+                <td><Link className="inline-link" href="/faq#care-coins">Care Coins</Link></td>
+                <td>Keine</td>
+                <td>6</td>
+                <td>12</td>
+              </tr>
             </tbody>
           </table>
         </div>

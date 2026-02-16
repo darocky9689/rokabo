@@ -3,46 +3,61 @@ import Link from 'next/link';
 
 const faqs = [
   {
+    id: 'care-coins',
+    question: 'Was sind Care Coins?',
+    answer:
+      'Care Coins sind dein monatliches oder jährliches Änderungskontingent für kleine Website-Anpassungen. Dazu zählen zum Beispiel Textänderungen, Bildaustausch oder kleinere Layout-Optimierungen. Je nach Paket sind bereits Care Coins enthalten.'
+  },
+  {
+    id: 'zielgruppe',
     question: 'Für wen ist rokabo geeignet?',
     answer:
       'Für kleine Unternehmen, lokale Dienstleister und Gründer, die professionell sichtbar sein wollen, ohne hohe Einmal-Investition am Anfang.'
   },
   {
+    id: 'kosten',
     question: 'Was kostet eine Website im Abo?',
     answer:
       'Du wählst ein monatliches Paket mit planbaren Kosten. Die genauen Leistungen und Preise findest du auf unserer Preisseite.'
   },
   {
+    id: 'setup',
     question: 'Gibt es eine einmalige Setup-Gebühr?',
     answer:
       'Je nach Paket kann eine überschaubare Einrichtungsgebühr anfallen. Das besprechen wir transparent im Erstgespräch.'
   },
   {
+    id: 'dauer',
     question: 'Wie lange dauert die Umsetzung?',
     answer:
       'In der Regel 2 bis 4 Wochen, abhängig vom Umfang und davon, wie schnell Inhalte wie Texte, Bilder und Freigaben vorliegen.'
   },
   {
+    id: 'aenderungen',
     question: 'Kann ich später Inhalte ändern lassen?',
     answer:
       'Ja. Laufende Anpassungen sind Teil unseres Betreuungsmodells. So bleibt deine Website aktuell und leistungsfähig.'
   },
   {
+    id: 'hosting',
     question: 'Ist Hosting und Sicherheit inklusive?',
     answer:
       'Ja. Hosting, Updates, technische Wartung und Sicherheitsmaßnahmen sind Bestandteil unserer Betreuung.'
   },
   {
+    id: 'wordpress-nextjs',
     question: 'Arbeitet ihr nur mit WordPress?',
     answer:
       'Nein. Neben WordPress realisieren wir auch individuelle Websites mit Next.js und TypeScript, wenn dein Projekt mehr Flexibilität, Performance oder spezielle Funktionen benötigt.'
   },
   {
+    id: 'laufzeit',
     question: 'Kündigungsfrist und Vertragslaufzeit?',
     answer:
       'Die genauen Bedingungen hängen vom gewählten Paket ab. Wir legen alle Laufzeiten und Fristen vor Vertragsstart offen.'
   },
   {
+    id: 'start',
     question: 'Wie starte ich mit rokabo?',
     answer:
       'Über ein kostenloses Erstgespräch. Wir klären Ziele, Budget und empfehlen dir das passende Paket für dein Unternehmen.'
@@ -82,7 +97,7 @@ export default function FaqPage() {
 
           <div className="faq-list" aria-label="Häufige Fragen und Antworten">
             {faqs.map((item) => (
-              <details className="faq-item" key={item.question}>
+              <details className="faq-item" key={item.question} id={item.id}>
                 <summary>{item.question}</summary>
                 <p>{item.answer}</p>
               </details>

@@ -23,25 +23,26 @@ export default function LeistungenPage() {
             <h3>Light</h3>
             <ul className="check-list">
               <li>E-Mail Einrichtung und Basisbetreuung</li>
-              <li>Sauberer Einstieg</li>
-              <li>ab 160,00 € jährlich</li>
+              <li>Eigene Domain</li>
+              <li>Professioneller Außenauftritt</li>
             </ul>
           </article>
           <article className="card recommended">
             <h3>Professional</h3>
             <ul className="check-list">
-              <li>Website inklusive</li>
-              <li>Basic SEO</li>
-              <li>Hosting inklusive</li>
-              <li>6 CareCoins pro Monat</li>
+              <li>Alles aus Light</li>
+              <li>Hosting & eigene Domain</li>
+              <li>Eigene Website mit bis zu 5 Unterseiten</li>
+              <li>6 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
             </ul>
           </article>
           <article className="card">
             <h3>Premium</h3>
             <ul className="check-list">
-              <li>Advanced SEO</li>
-              <li>Extended Support</li>
-              <li>12 CareCoins pro Monat</li>
+              <li>Alles aus Professional</li>
+              <li>Individuelle Website mit bis zu 10 Unterseiten</li>
+              <li>Erweiterte SEO Möglichkeiten</li>
+              <li>12 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
             </ul>
           </article>
         </div>
