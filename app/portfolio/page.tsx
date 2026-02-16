@@ -12,8 +12,8 @@ const projects = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    thumbnail: '/portfolio/juro-fotografie-thumb.jpg',
-    fullImage: '/portfolio/juro-fotografie-full.jpg',
+    thumbnail: 'https://juro-fotografie.de/og-image.jpg',
+    previewUrl: 'https://juro-fotografie.de',
     url: 'https://juro-fotografie.de',
     tags: ['WordPress', 'Portfolio', 'Fotografie']
   },
@@ -22,8 +22,8 @@ const projects = [
     title: 'Grundschule Spreenhagen',
     category: 'bildung',
     description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    thumbnail: '/portfolio/grundschule-spreenhagen-thumb.jpg',
-    fullImage: '/portfolio/grundschule-spreenhagen-full.jpg',
+    thumbnail: 'https://grundschule-spreenhagen.de/og-image.jpg',
+    previewUrl: 'https://grundschule-spreenhagen.de',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Next.js', 'Schule', 'Bildung']
   }
@@ -33,7 +33,8 @@ const categories = ['alle', 'fotografie', 'bildung'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('alle');
-  const [lightboxImage, setLightboxImage] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [imageError, setImageError] = useState<number | null>(null);
 
   const filteredProjects =
     activeCategory === 'alle' ? projects : projects.filter((p) => p.category === activeCategory);
@@ -67,14 +68,21 @@ export default function PortfolioPage() {
             {filteredProjects.map((project) => (
               <article key={project.id} className="portfolio-item">
                 <div className="portfolio-image-wrapper">
-                  <img
-                    src={project.thumbnail}
-                    alt={project.title}
-                    className="portfolio-image"
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.backgroundColor = 'var(--card-bg)';
-                    }}
-                  />
+                  {imageError !== project.id ? (
+                    <img
+                      src={project.thumbnail}
+                      alt={project.title}
+                      className="portfolio-image"
+                      onError={() => setImageError(project.id)}
+                    />
+                  ) : (
+                    <div className="portfolio-placeholder">
+                      <div className="placeholder-content">
+                        <div className="placeholder-icon">🌐</div>
+                        <p>{project.title}</p>
+                      </div>
+                    </div>
+                  )}
                   <div className="portfolio-overlay">
                     <div className="portfolio-info">
                       <h3>{project.title}</h3>
@@ -89,9 +97,9 @@ export default function PortfolioPage() {
                       <div className="portfolio-links">
                         <button
                           className="portfolio-btn btn-preview"
-                          onClick={() => setLightboxImage(project.fullImage)}
+                          onClick={() => setPreviewUrl(project.previewUrl)}
                         >
-                          Preview
+                          Vorschau
                         </button>
                         <a
                           href={project.url}
@@ -117,14 +125,29 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Lightbox */}
-      {lightboxImage && (
-        <div className="lightbox" onClick={() => setLightboxImage(null)}>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <button className="lightbox-close" onClick={() => setLightboxImage(null)}>
-              ✕
-            </button>
-            <img src={lightboxImage} alt="Preview" className="lightbox-image" />
+      {/* Live Preview Modal */}
+      {previewUrl && (
+        <div className="preview-modal" onClick={() => setPreviewUrl(null)}>
+          <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
+            <div className="preview-modal-header">
+              <h3>Live Vorschau</h3>
+              <button className="preview-modal-close" onClick={() => setPreviewUrl(null)}>
+                ✕
+              </button>
+            </div>
+            <div className="preview-modal-body">
+              <iframe
+                src={previewUrl}
+                className="preview-iframe"
+                title="Website Preview"
+                allowFullScreen
+              />
+            </div>
+            <div className="preview-modal-footer">
+              <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Im neuen Tab öffnen
+              </a>
+            </div>
           </div>
         </div>
       )}
