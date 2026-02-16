@@ -2,30 +2,14 @@
 
 ## 📋 Plesk Konfiguration
 
-### Schritt 1: SSH Deploy Key einrichten
-
-**WICHTIG:** Damit Plesk von GitHub pullen kann, muss erst ein SSH-Schlüssel konfiguriert werden.
-
-1. In Plesk zu **Git** → Repository **rokabo** wählen
-2. Unter **"Repository-Einstellungen"** oder **"SSH Key"** findest du den **"Öffentlichen SSH-Schlüssel"**
-3. **Kopiere** diesen kompletten SSH-Schlüssel (beginnt mit `ssh-rsa ...`)
-4. Gehe zu GitHub: **https://github.com/darocky9689/rokabo/settings/keys**
-5. Klick **"Add deploy key"**
-6. Titel: `Plesk Deploy Key`
-7. Key: Den kopierten SSH-Schlüssel einfügen
-8. ✅ **"Allow write access"** NICHT aktivieren (nur Read reicht)
-9. **"Add key"** klicken
-
-Jetzt kann Plesk von GitHub pullen!
-
-### Schritt 2: Plesk Git-Einstellungen öffnen
+### Schritt 1: Plesk Git-Einstellungen öffnen
 
 1. Einloggen in Plesk: `https://shared49.cloud86-host.nl:8443`
 2. Gehe zu: **Git** (in der Sidebar)
 3. Wähle das Repository: **rokabo** (`/rokabo/repo`)
 4. Klick auf **"Erweiterte Einstellungen anzeigen"** oder **"Additional deployment actions"**
 
-### Schritt 3: Deployment-Script eintragen
+### Schritt 2: Deployment-Script eintragen
 
 **Da Node.js nicht auf Plesk verfügbar ist, builden wir lokal und committen die fertigen Files.**
 
@@ -41,7 +25,7 @@ cp -r "$REPO_DIR/dist-site/"* "$WEB_ROOT/"
 
 Das war's! Das Script kopiert nur die fertigen Build-Files.
 
-### Schritt 4: Speichern und testen
+### Schritt 3: Speichern und testen
 
 1. **Speichern** der Einstellungen
 2. In Plesk auf **"Pull Updates"** klicken zum Testen
@@ -87,6 +71,5 @@ Dann deployed es automatisch bei jedem `git push`!
 ## 📝 Hinweise
 
 - Das Script läuft auf dem Plesk-Server unter dem Plesk-User
-- `npm` und `node` müssen auf dem Server installiert sein
-- Logs werden nach `/var/log/rokabo-deploy.log` geschrieben
-- Der Build-Prozess dauert ca. 1-2 Minuten
+- Build erfolgt lokal, Plesk kopiert nur die fertigen Files
+- Der Deploy-Prozess dauert nur wenige Sekunden
