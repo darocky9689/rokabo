@@ -12,7 +12,7 @@ const projects = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    thumbnail: 'https://juro-fotografie.de/og-image.jpg',
+    thumbnail: '/portfolio/juro-fotografie.svg',
     previewUrl: 'https://juro-fotografie.de',
     url: 'https://juro-fotografie.de',
     tags: ['Hostinger', 'Portfolio', 'Fotografie']
@@ -22,7 +22,7 @@ const projects = [
     title: 'Grundschule Spreenhagen',
     category: 'bildung',
     description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    thumbnail: 'https://grundschule-spreenhagen.de/og-image.jpg',
+    thumbnail: '/portfolio/grundschule-spreenhagen.svg',
     previewUrl: 'https://grundschule-spreenhagen.de',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Wordpress', 'Schule', 'Bildung']
@@ -33,7 +33,7 @@ const categories = ['alle', 'fotografie', 'bildung'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('alle');
-  const [previewProject, setPreviewProject] = useState<(typeof projects)[0] | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageError, setImageError] = useState<number | null>(null);
 
   const filteredProjects =
@@ -97,7 +97,7 @@ export default function PortfolioPage() {
                       <div className="portfolio-links">
                         <button
                           className="portfolio-btn btn-preview"
-                          onClick={() => setPreviewProject(project)}
+                          onClick={() => setPreviewUrl(project.previewUrl)}
                         >
                           Vorschau
                         </button>
@@ -125,45 +125,27 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Preview Modal */}
-      {previewProject && (
-        <div className="preview-modal" onClick={() => setPreviewProject(null)}>
+      {/* Live Preview Modal */}
+      {previewUrl && (
+        <div className="preview-modal" onClick={() => setPreviewUrl(null)}>
           <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="preview-modal-header">
-              <h3>{previewProject.title}</h3>
-              <button className="preview-modal-close" onClick={() => setPreviewProject(null)}>
+              <h3>Live Vorschau</h3>
+              <button className="preview-modal-close" onClick={() => setPreviewUrl(null)}>
                 ✕
               </button>
             </div>
             <div className="preview-modal-body">
-              <div className="preview-image-container">
-                <img
-                  src={previewProject.thumbnail}
-                  alt={previewProject.title}
-                  className="preview-image"
-                />
-                <div className="preview-info-overlay">
-                  <div className="preview-info-content">
-                    <p className="preview-subtitle">{previewProject.description}</p>
-                    <div className="preview-tags">
-                      {previewProject.tags.map((tag) => (
-                        <span key={tag} className="preview-tag">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <iframe
+                src={previewUrl}
+                className="preview-iframe"
+                title="Website Preview"
+                allowFullScreen
+              />
             </div>
             <div className="preview-modal-footer">
-              <a
-                href={previewProject.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Website besuchen →
+              <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                Im neuen Tab öffnen
               </a>
             </div>
           </div>
