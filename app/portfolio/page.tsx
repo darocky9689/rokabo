@@ -15,7 +15,7 @@ const projects = [
     thumbnail: 'https://juro-fotografie.de/og-image.jpg',
     previewUrl: 'https://juro-fotografie.de',
     url: 'https://juro-fotografie.de',
-    tags: ['WordPress', 'Portfolio', 'Fotografie']
+    tags: ['Hostinger', 'Portfolio', 'Fotografie']
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const projects = [
     thumbnail: 'https://grundschule-spreenhagen.de/og-image.jpg',
     previewUrl: 'https://grundschule-spreenhagen.de',
     url: 'https://grundschule-spreenhagen.de',
-    tags: ['Next.js', 'Schule', 'Bildung']
+    tags: ['Wordpress', 'Schule', 'Bildung']
   }
 ];
 
@@ -33,7 +33,7 @@ const categories = ['alle', 'fotografie', 'bildung'];
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('alle');
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewProject, setPreviewProject] = useState<(typeof projects)[0] | null>(null);
   const [imageError, setImageError] = useState<number | null>(null);
 
   const filteredProjects =
@@ -97,7 +97,7 @@ export default function PortfolioPage() {
                       <div className="portfolio-links">
                         <button
                           className="portfolio-btn btn-preview"
-                          onClick={() => setPreviewUrl(project.previewUrl)}
+                          onClick={() => setPreviewProject(project)}
                         >
                           Vorschau
                         </button>
@@ -125,27 +125,45 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* Live Preview Modal */}
-      {previewUrl && (
-        <div className="preview-modal" onClick={() => setPreviewUrl(null)}>
+      {/* Preview Modal */}
+      {previewProject && (
+        <div className="preview-modal" onClick={() => setPreviewProject(null)}>
           <div className="preview-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="preview-modal-header">
-              <h3>Live Vorschau</h3>
-              <button className="preview-modal-close" onClick={() => setPreviewUrl(null)}>
+              <h3>{previewProject.title}</h3>
+              <button className="preview-modal-close" onClick={() => setPreviewProject(null)}>
                 ✕
               </button>
             </div>
             <div className="preview-modal-body">
-              <iframe
-                src={previewUrl}
-                className="preview-iframe"
-                title="Website Preview"
-                allowFullScreen
-              />
+              <div className="preview-image-container">
+                <img
+                  src={previewProject.thumbnail}
+                  alt={previewProject.title}
+                  className="preview-image"
+                />
+                <div className="preview-info-overlay">
+                  <div className="preview-info-content">
+                    <p className="preview-subtitle">{previewProject.description}</p>
+                    <div className="preview-tags">
+                      {previewProject.tags.map((tag) => (
+                        <span key={tag} className="preview-tag">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="preview-modal-footer">
-              <a href={previewUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
-                Im neuen Tab öffnen
+              <a
+                href={previewProject.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary"
+              >
+                Website besuchen →
               </a>
             </div>
           </div>
