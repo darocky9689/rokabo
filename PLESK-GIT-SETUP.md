@@ -1,5 +1,35 @@
 # Plesk Git Deployment Setup
 
+## 🚨 Notfall: Domains wiederherstellen (AH00543)
+
+Wenn Plesk meldet `bad user name rokabo_ssh`, ist bei mindestens einer Domain ein ungültiger Systembenutzer hinterlegt.
+
+### Sofort-Fix (für beide Domains)
+
+1. In Plesk zu **"Websites & Domains"** gehen
+2. Domain **grundschule-spreenhagen.de** öffnen
+3. **"Hosting-Einstellungen"** öffnen
+4. Bei **"Systembenutzer"** einen gültigen Benutzer auswählen (nicht `rokabo_ssh`)
+5. Speichern
+6. Dasselbe für **rokabo.de** wiederholen
+
+### Danach neu anwenden
+
+1. Für beide Domains **"Apache & nginx-Einstellungen"** öffnen
+2. Speichern (ohne weitere Änderungen), damit Plesk die Konfiguration neu schreibt
+3. In **"Websites & Domains"** auf **"Reparieren"** / **"Neu konfigurieren"** klicken (falls verfügbar)
+
+### Wenn es weiter fehlschlägt
+
+- Prüfen, ob irgendwo manuell `rokabo_ssh` eingetragen wurde (vHost- oder zusätzliche Apache-Direktiven)
+- Falls vorhanden: Eintrag entfernen, speichern, erneut neu konfigurieren
+
+### Wichtig zur Trennung der Domains
+
+- Deployment-Aktionen nur bei **rokabo.de** eintragen
+- Bei **grundschule-spreenhagen.de** Git-Aktionen und automatische Bereitstellung deaktivieren
+- Für **grundschule-spreenhagen.de** muss der ursprüngliche Document Root/Anwendungsordner aktiv sein
+
 ## 📋 Plesk Konfiguration
 
 ### Schritt 1: Git Repository in Plesk hinzufügen

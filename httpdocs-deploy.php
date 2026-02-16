@@ -1,6 +1,6 @@
 <?php
 /**
- * rokabo Deployment Script
+ * rokabo Deployment Script (safe copy mode)
  * Place this in /rokabo.de/httpdocs/deploy.php
  * Access via browser: https://rokabo.de/deploy.php?token=YOUR_SECRET_TOKEN
  */
@@ -20,66 +20,58 @@ if (!isset($_GET['token']) || $_GET['token'] !== SECRET_TOKEN) {
 echo "=== rokabo Deployment Script ===\n";
 echo "Starting deployment at " . date('Y-m-d H:i:s') . "\n\n";
 
-// Change to repo directory
-if (!chdir(REPO_PATH)) {
-    die("Error: Cannot access repository at " . REPO_PATH . "\n");
+// Validate paths first
+$source = REPO_PATH . '/dist-site';
+$sourceReal = realpath($source);
+$targetReal = realpath(WEB_ROOT);
+
+if ($sourceReal === false || !is_dir($sourceReal)) {
+    die("✗ Error: Source directory not found: {$source}\n");
 }
 
-echo "✓ Working directory: " . getcwd() . "\n";
-
-// Pull latest code
-echo "\n→ Pulling latest code from GitHub...\n";
-$output = [];
-$return_var = 0;
-exec('git pull origin main 2>&1', $output, $return_var);
-if ($return_var !== 0) {
-    echo "✗ Git pull failed:\n";
-    echo implode("\n", $output) . "\n";
-    die();
-}
-echo implode("\n", $output) . "\n";
-
-// Install dependencies
-echo "\n→ Installing npm dependencies...\n";
-$output = [];
-exec('npm install 2>&1', $output, $return_var);
-if ($return_var !== 0) {
-    echo "✗ npm install failed\n";
-    // Don't die - continue anyway
-}
-echo "Done\n";
-
-// Build project
-echo "\n→ Building Next.js project...\n";
-$output = [];
-exec('npm run build:dist 2>&1', $output, $return_var);
-if ($return_var !== 0) {
-    echo "✗ Build failed:\n";
-    echo implode("\n", $output) . "\n";
-    die();
-}
-echo "✓ Build completed successfully\n";
-
-// Deploy to web root
-echo "\n→ Deploying to web root...\n";
-if (!is_dir(REPO_PATH . '/dist-site')) {
-    die("✗ Error: dist-site directory not found\n");
+if ($targetReal === false || !is_dir($targetReal)) {
+    die("✗ Error: Target directory not found: " . WEB_ROOT . "\n");
 }
 
-// Clear old files
-echo "  Clearing old files...\n";
-exec('rm -rf ' . escapeshellarg(WEB_ROOT) . '/* 2>&1');
-
-// Copy new files
-echo "  Copying new files...\n";
-exec('cp -r ' . escapeshellarg(REPO_PATH . '/dist-site') . '/* ' . escapeshellarg(WEB_ROOT) . '/ 2>&1', $output, $return_var);
-
-if ($return_var !== 0) {
-    echo "✗ Copy failed\n";
-    die();
+if (strpos($targetReal, '/httpdocs') === false) {
+    die("✗ Error: Refusing deploy, target is not an httpdocs directory: {$targetReal}\n");
 }
 
-echo "✓ Files deployed\n";
+echo "✓ Source: {$sourceReal}\n";
+echo "✓ Target: {$targetReal}\n";
+
+echo "\n→ Copying files (safe mode, no delete)...\n";
+
+$iterator = new RecursiveIteratorIterator(
+    new RecursiveDirectoryIterator($sourceReal, FilesystemIterator::SKIP_DOTS),
+    RecursiveIteratorIterator::SELF_FIRST
+);
+
+$copied = 0;
+foreach ($iterator as $item) {
+    $relativePath = substr($item->getPathname(), strlen($sourceReal) + 1);
+    $destPath = $targetReal . DIRECTORY_SEPARATOR . $relativePath;
+
+    if ($item->isDir()) {
+        if (!is_dir($destPath) && !mkdir($destPath, 0755, true)) {
+            die("✗ Error: Cannot create directory: {$destPath}\n");
+        }
+        continue;
+    }
+
+    $destDir = dirname($destPath);
+    if (!is_dir($destDir) && !mkdir($destDir, 0755, true)) {
+        die("✗ Error: Cannot create directory: {$destDir}\n");
+    }
+
+    if (!copy($item->getPathname(), $destPath)) {
+        die("✗ Error: Cannot copy file: {$relativePath}\n");
+    }
+
+    $copied++;
+}
+
+echo "✓ Files copied: {$copied}\n";
 echo "\n✅ Deployment completed successfully at " . date('Y-m-d H:i:s') . "\n";
 echo "📍 Website: https://rokabo.de\n";
 ?>
