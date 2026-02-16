@@ -183,6 +183,16 @@ body > main { flex: 1; }
   color: var(--link-color); 
 }
 
+/* Dark mode nav improvements */
+:root .nav-link {
+  color: #ffffff;
+}
+:root .nav-link.active,
+:root .nav-link:hover {
+  background: rgba(64, 224, 208, 0.2);
+  color: #40e0d0;
+}
+
 /* ===== THEME TOGGLE ===== */
 .theme-toggle {
   display: flex;
