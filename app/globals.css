@@ -26,11 +26,11 @@
 
 :root[data-theme="light"] {
   --bg-gradient: linear-gradient(135deg, #f5e6f0 0%, #e8d5e8 50%, #d4f0f5 100%);
-  --text-color: #2d1534;
-  --header-bg: rgba(255, 255, 255, 0.85);
-  --header-border: rgba(59, 10, 69, 0.15);
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-border: rgba(59, 10, 69, 0.12);
+  --text-color: #1a0f20;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-border: rgba(59, 10, 69, 0.2);
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-border: rgba(59, 10, 69, 0.25);
 }
 
 :root[data-theme="dark"] {
