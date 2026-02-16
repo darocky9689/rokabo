@@ -550,9 +550,15 @@ a:hover {
 }
 
 @media (min-width: 56rem) {
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
   .nav {
     position: static;
-    display: block;
+    display: flex !important;
     background: transparent;
     border: none;
   }

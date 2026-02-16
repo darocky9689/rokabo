@@ -20,15 +20,14 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header">
-      <div className="container nav-wrap">
-        <Link className="brand" href="/" aria-label="Zur Startseite">
-          <Image className="brand-logo" src="/images/ROKABO.png" alt="rokabo Logo" width={90} height={90} priority />
-          rokabo
-        </Link>
+    <header className="header">
+      <div className="container">
+        <div className="header-inner">
+          <Link className="brand" href="/" aria-label="Zur Startseite">
+            <Image className="brand-logo" src="/images/ROKABO.png" alt="rokabo Logo" width={90} height={90} priority />
+            rokabo
+          </Link>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <ThemeToggle />
           <button
             className="menu-toggle"
             type="button"
@@ -38,22 +37,25 @@ export function SiteHeader() {
           >
             ☰
           </button>
-        </div>
 
-        <nav className={`nav ${open ? 'open' : ''}`} aria-label="Hauptmenü">
-          <ul className="nav-list">
-            {navItems.map((item) => {
-              const active = pathname === item.href;
-              return (
-                <li key={item.href}>
-                  <Link className={`nav-link ${active ? 'active' : ''}`} href={item.href} onClick={() => setOpen(false)}>
-                    {item.label}
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
+          <nav className={`nav ${open ? 'open' : ''}`} aria-label="Hauptmenü">
+            <ul className="nav-list">
+              {navItems.map((item) => {
+                const active = pathname === item.href;
+                return (
+                  <li key={item.href}>
+                    <Link className={`nav-link ${active ? 'active' : ''}`} href={item.href} onClick={() => setOpen(false)}>
+                      {item.label}
+                    </Link>
+                  </li>
+                );
+              })}
+              <li>
+                <ThemeToggle />
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </header>
   );
