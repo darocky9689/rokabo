@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:dist": "npm run build && rm -rf dist-site && cp -R out dist-site",
-    "check:dist": "test -f dist-site/index.html",
-    "deploy:static-local": "sh scripts/plesk-deploy-static.sh",
+    "build:dist": "rm -rf dist-site && npm run build && mv out dist-site",
     "start": "next start",
     "lint": "next lint"
   },
