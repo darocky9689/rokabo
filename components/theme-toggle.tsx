@@ -22,13 +22,12 @@ export function ThemeToggle() {
     localStorage.setItem('theme', newTheme)
   }
 
-  if (!mounted) return null
-
   return (
     <button
       onClick={toggleTheme}
       className="theme-toggle"
       aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+      style={{ opacity: mounted ? 1 : 0.5 }}
     >
       {theme === 'dark' ? (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
