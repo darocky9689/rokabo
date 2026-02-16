@@ -22,14 +22,12 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Run linter
+        run: npm run lint
+
       - name: Build Next.js app
         run: npm run build
 
-      - name: Build static dist artifact
-        run: npm run build:dist
-
-      - name: Verify dist artifact
-        run: npm run check:dist
-
       - name: Build summary
-        run: echo "Next.js quality checks passed."
+        run: echo "✅ Next.js build validation passed."
+
