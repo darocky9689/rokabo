@@ -19,7 +19,7 @@ export default function PreisePage() {
         </p>
 
         <div className="table-wrap">
-          <table>
+          <table className="pricing-table">
             <thead>
               <tr>
                 <th>Leistung</th>

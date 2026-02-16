@@ -382,6 +382,24 @@ th {
   font-weight: 600; 
 }
 
+.pricing-table tbody td {
+  transition: background-color 260ms ease, color 260ms ease;
+}
+
+.pricing-table tbody tr:hover td {
+  background: rgba(64, 224, 208, 0.16);
+  color: var(--text-primary);
+}
+
+.pricing-table tbody tr:hover td:first-child {
+  color: var(--link-color);
+  font-weight: 700;
+}
+
+:root[data-theme="light"] .pricing-table tbody tr:hover td {
+  background: rgba(59, 10, 69, 0.09);
+}
+
 /* ===== CTA BANNER ===== */
 .cta-banner {
   background: var(--card-bg);
