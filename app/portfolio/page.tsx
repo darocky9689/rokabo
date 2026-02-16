@@ -3,7 +3,17 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const projects = [];
+interface Project {
+  id: number;
+  title: string;
+  category: string;
+  description: string;
+  image: string;
+  url: string;
+  tags: string[];
+}
+
+const projects: Project[] = [];
 
 const categories = ['alle', 'fotografie', 'bildung'];
 
