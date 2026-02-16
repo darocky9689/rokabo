@@ -28,14 +28,11 @@ Nachdem das Repository geklont wurde:
 Im Feld **"Additional deployment actions"** trage folgendes ein:
 
 ```bash
-WEB_ROOT="/rokabo.de/httpdocs"
-
-# Plesk setzt automatisch das Working Directory auf das Repo
-rm -rf "$WEB_ROOT"/*
-cp -r dist-site/* "$WEB_ROOT/"
+# SICHERES Deployment - kopiert nur, löscht nichts!
+cp -rfp dist-site/* httpdocs/
 ```
 
-**Hinweis:** Wenn der Pfad `/rokabo.de/httpdocs` nicht funktioniert, schau in Plesk unter "Websites & Domains" → rokabo.de → "Hosting-Einstellungen" nach dem Document Root Pfad.
+**WICHTIG:** Kein `rm -rf` verwenden! Das ist zu gefährlich in Plesk.
 
 Das war's! Das Script kopiert nur die fertigen Build-Files.
 
