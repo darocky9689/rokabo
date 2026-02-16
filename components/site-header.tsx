@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { ThemeToggle } from './theme-toggle';
 
 const navItems = [
   { href: '/', label: 'Start' },
@@ -19,8 +20,8 @@ export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="site-header">
-      <div className="container nav-wrap">
+    <header className="header">
+      <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Zur Startseite">
           <Image className="brand-logo" src="/images/ROKABO.png" alt="rokabo Logo" width={90} height={90} priority />
           rokabo
@@ -48,6 +49,9 @@ export function SiteHeader() {
                 </li>
               );
             })}
+            <li>
+              <ThemeToggle />
+            </li>
           </ul>
         </nav>
       </div>

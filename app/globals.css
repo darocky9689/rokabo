@@ -47,7 +47,7 @@ body > main {
 .skip-link { position: absolute; left: -9999px; }
 .skip-link:focus { left: 1rem; top: 1rem; background: var(--color-primary); color: #fff; padding: .5rem .75rem; border-radius: var(--radius-sm); z-index: 1000; }
 
-.site-header {
+.header {
   position: sticky;
   top: 0;
   z-index: 20;
@@ -56,7 +56,7 @@ body > main {
   backdrop-filter: blur(20px) saturate(180%);
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
-.nav-wrap {
+.header-inner {
   min-height: var(--header-height);
   display: flex;
   align-items: center;
@@ -64,12 +64,36 @@ body > main {
 }
 .brand { display: inline-flex; align-items: center; gap: .6rem; color: #ffffff; font-weight: 700; text-decoration: none; text-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 .brand-logo { width: auto; height: auto; max-height: 90px; max-width: 90px; }
-.menu-toggle { border: 0; background: transparent; font-size: 1.5rem; color: #ffffff; }
+.menu-toggle { border: 0; background: transparent; font-size: 1.5rem; color: #ffffff; cursor: pointer; }
 .nav { position: absolute; top: var(--header-height); left: 0; right: 0; background: rgba(255, 255, 255, 0.08); backdrop-filter: blur(20px) saturate(180%); border-bottom: 1px solid rgba(255, 255, 255, 0.18); display: none; }
 .nav.open { display: block; }
 .nav-list { list-style: none; margin: 0; padding: .5rem 1rem 1rem; display: grid; gap: .25rem; }
-.nav-link { display: block; padding: .7rem; border-radius: var(--radius-sm); text-decoration: none; color: rgba(255, 255, 255, 0.95); }
+.nav-link { display: block; padding: .7rem; border-radius: var(--radius-sm); text-decoration: none; color: rgba(255, 255, 255, 0.95); transition: background 200ms ease, color 200ms ease; }
 .nav-link.active, .nav-link:hover { background: rgba(64, 224, 208, 0.15); color: #40E0D0; }
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 0.5rem;
+  background: transparent;
+  border: 1px solid rgba(64, 224, 208, 0.3);
+  border-radius: var(--radius-sm);
+  color: #40E0D0;
+  cursor: pointer;
+  transition: background 200ms ease, border-color 200ms ease, color 200ms ease;
+}
+.theme-toggle:hover {
+  background: rgba(64, 224, 208, 0.1);
+  border-color: rgba(64, 224, 208, 0.6);
+  color: #6fffef;
+}
+.theme-toggle svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
 
 .hero {
   padding: calc(var(--space-4) + var(--space-1)) 0 var(--space-3);
