@@ -9,6 +9,7 @@ import { ThemeToggle } from './theme-toggle';
 const navItems = [
   { href: '/', label: 'Start' },
   { href: '/leistungen', label: 'Leistungen' },
+  { href: '/portfolio', label: 'Portfolio' },
   { href: '/preise', label: 'Preise' },
   { href: '/ueber-uns', label: 'Über uns' },
   { href: '/kontakt', label: 'Kontakt' },
