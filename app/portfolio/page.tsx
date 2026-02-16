@@ -9,7 +9,7 @@ const projects = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Professionelle Fotografiewebsite mit Portfolio und Buchungssystem',
-    image: '/images/portfolio/juro-fotografie.webp',
+    image: '/images/portfolio/juro-fotografie.svg',
     url: 'https://juro-fotografie.de',
     tags: ['Hostinger', 'Portfolio', 'Fotografie']
   },
@@ -18,7 +18,7 @@ const projects = [
     title: 'Grundschule Spreenhagen',
     category: 'bildung',
     description: 'Moderne Schulwebsite mit News, Galerie und Kontaktformular',
-    image: '/images/portfolio/grundschule-spreenhagen.webp',
+    image: '/images/portfolio/grundschule-spreenhagen.svg',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Wordpress', 'Schule', 'Bildung']
   }
