@@ -7,7 +7,7 @@ set -e
 
 # Konfiguration
 PLESK_HOST="shared49.cloud86-host.nl"
-PLESK_USER="root"  # ← ÄNDERN zu deinem SSH Benutzer
+PLESK_USER="rokabo_ssh"
 PLESK_PATH="/rokabo.de/httpdocs"
 LOCAL_BUILD="./dist-site"
 
