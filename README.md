@@ -58,6 +58,14 @@ Dadurch ist kein dauerhaft laufender Node-Prozess nötig.
 
 Wenn auf Plesk kein `npm` verfügbar ist, wird die statische Version lokal gebaut und als `dist-site/` ins Repository committed.
 
+### Wichtige Trennung bei mehreren Websites im gleichen Webspace
+
+Wenn `grundschule-spreenhagen.de` als WordPress in `httpdocs` läuft, muss `rokabo.de` zwingend getrennt werden:
+
+- `grundschule-spreenhagen.de` Dokumentenstamm: `httpdocs`
+- `rokabo.de` Dokumentenstamm: `rokabo/httpdocs`
+- `rokabo.de` Git-Checkout-Ziel: `rokabo/repo` (nicht `rokabo/httpdocs`)
+
 #### Lokal vor jedem Push
 
 1. `npm install`
@@ -65,11 +73,26 @@ Wenn auf Plesk kein `npm` verfügbar ist, wird die statische Version lokal gebau
 3. `git add dist-site`
 4. Commit + Push
 
+Optional lokal testen (kopiert `dist-site` nach `../httpdocs`):
+
+- `npm run deploy:static-local`
+
 #### Plesk Deployment Action
 
-Nur statisch deployen, kein npm:
+Nur statisch deployen, kein npm (im Git-Checkout-Ordner `rokabo/repo`):
 
-1. `rm -rf httpdocs/*`
-2. `cp -R dist-site/* httpdocs/`
+```sh
+[ -f dist-site/index.html ] || { echo "dist-site fehlt"; exit 1; }
+mkdir -p ../httpdocs
+rm -rf ../httpdocs/*
+cp -R dist-site/. ../httpdocs/
+[ -f ../httpdocs/index.html ] || { echo "Deploy fehlgeschlagen"; exit 1; }
+```
 
-Wenn `dist-site` nicht in `httpdocs` kopiert wird, liefert die Domain 404.
+Wenn `dist-site` nicht in den Live-Ordner von `rokabo.de` kopiert wird, liefert die Domain 404.
+
+### Niemals tun
+
+- Kein Deployment mit absoluten Pfaden auf `grundschule-spreenhagen.de/httpdocs`
+- Kein Git-Checkout von Rokabo direkt in `rokabo/httpdocs`
+- Keine gemeinsame Deploy-Action für beide Domains

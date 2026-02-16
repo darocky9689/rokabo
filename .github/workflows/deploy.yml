@@ -25,5 +25,11 @@ jobs:
       - name: Build Next.js app
         run: npm run build
 
+      - name: Build static dist artifact
+        run: npm run build:dist
+
+      - name: Verify dist artifact
+        run: npm run check:dist
+
       - name: Build summary
         run: echo "Next.js quality checks passed."
