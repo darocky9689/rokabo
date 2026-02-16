@@ -1,29 +1,31 @@
-#!/usr/bin/env sh
+#!/bin/bash
 # Deploy Script für Plesk
 # Wird vom Webhook aufgerufen
 
-set -eu
+set -e
 
-REPO_DIR="/home/yourdomain/rokabo-website"
-LOG_FILE="/home/yourdomain/deploy.log"
+REPO_DIR="/rokabo/repo"
+WEB_ROOT="/rokabo.de/httpdocs"
+LOG_FILE="/var/log/rokabo-deploy.log"
 
-echo "=== Deployment started at $(date) ===" >> "$LOG_FILE"
+echo "[$(date)] === Deployment started ===" >> "$LOG_FILE"
 
 # 1. Repository aktualisieren
 cd "$REPO_DIR"
-echo "Pulling from Git..." >> "$LOG_FILE"
+echo "[$(date)] Pulling from Git..." >> "$LOG_FILE"
 git pull origin main >> "$LOG_FILE" 2>&1
 
 # 2. Dependencies installieren
-echo "Installing dependencies..." >> "$LOG_FILE"
+echo "[$(date)] Installing dependencies..." >> "$LOG_FILE"
 npm install >> "$LOG_FILE" 2>&1
 
 # 3. Build durchführen
-echo "Building website..." >> "$LOG_FILE"
+echo "[$(date)] Building website..." >> "$LOG_FILE"
 npm run build:dist >> "$LOG_FILE" 2>&1
 
 # 4. Auf Plesk deployen
-echo "Deploying to httpdocs..." >> "$LOG_FILE"
-sh scripts/plesk-deploy-static.sh >> "$LOG_FILE" 2>&1
+echo "[$(date)] Deploying to httpdocs..." >> "$LOG_FILE"
+rm -rf "$WEB_ROOT"/*
+cp -r "$REPO_DIR/dist-site"/* "$WEB_ROOT"/ >> "$LOG_FILE" 2>&1
 
-echo "=== Deployment completed successfully ===" >> "$LOG_FILE"
+echo "[$(date)] === Deployment completed successfully ===" >> "$LOG_FILE"
