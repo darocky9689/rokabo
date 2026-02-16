@@ -155,11 +155,15 @@ body > main { flex: 1; }
   top: var(--header-height); 
   left: 0; 
   right: 0; 
-  background: var(--header-bg); 
+  background: rgba(20, 10, 30, 0.98);
   backdrop-filter: blur(20px) saturate(180%); 
-  border-bottom: 1px solid var(--header-border); 
+  border-bottom: 1px solid rgba(64, 224, 208, 0.3); 
   display: none; 
   transition: background 400ms ease, border-color 400ms ease; 
+}
+:root[data-theme="light"] .nav {
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom: 1px solid rgba(59, 10, 69, 0.2);
 }
 .nav.open { display: block; }
 .nav-list { 
@@ -174,23 +178,22 @@ body > main { flex: 1; }
   padding: .7rem; 
   border-radius: var(--radius-sm); 
   text-decoration: none; 
-  color: var(--text-primary); 
+  color: #ffffff;
+  font-weight: 500;
   transition: background 200ms ease, color 200ms ease; 
+}
+:root[data-theme="light"] .nav-link {
+  color: #1a0f20;
 }
 .nav-link.active,
 .nav-link:hover { 
-  background: var(--card-bg); 
-  color: var(--link-color); 
-}
-
-/* Dark mode nav improvements */
-:root .nav-link {
-  color: #ffffff;
-}
-:root .nav-link.active,
-:root .nav-link:hover {
-  background: rgba(64, 224, 208, 0.2);
+  background: rgba(64, 224, 208, 0.25);
   color: #40e0d0;
+}
+:root[data-theme="light"] .nav-link.active,
+:root[data-theme="light"] .nav-link:hover {
+  background: rgba(160, 32, 192, 0.15);
+  color: #a020c0;
 }
 
 /* ===== THEME TOGGLE ===== */
