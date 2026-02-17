@@ -432,6 +432,20 @@ th {
   transition: background-color 260ms ease, color 260ms ease;
 }
 
+.pricing-table {
+  table-layout: fixed;
+}
+
+.pricing-table th:first-child,
+.pricing-table td:first-child {
+  width: 40%;
+}
+
+.pricing-table th:not(:first-child),
+.pricing-table td:not(:first-child) {
+  width: 20%;
+}
+
 .pricing-table tbody td:first-child {
   font-weight: 600;
 }
