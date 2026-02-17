@@ -11,6 +11,7 @@
     "seo:content": "node scripts/seo-content-audit.mjs",
     "seo:links": "node scripts/seo-broken-links.mjs",
     "seo:images": "node scripts/seo-image-audit.mjs",
+    "deploy:no-onedrive": "bash scripts/deploy-without-onedrive.sh",
     "start": "next start",
     "lint": "next lint"
   },

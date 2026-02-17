@@ -29,3 +29,29 @@ Wenn nicht gesetzt, wird Standardwert `22` verwendet.
 ## Debug:
 - Gehe zu: **Actions Tab** → Letzer Run → Klick auf Job
 - Dort siehst du alle Logs der Deployment
+
+## Immer ohne OneDrive (Ein-Kommando-Deploy)
+
+Wenn du lokal im OneDrive-Ordner arbeitest, aber Build + Push immer außerhalb von OneDrive laufen sollen:
+
+1. Einmalig Non-OneDrive Repo anlegen:
+
+```bash
+git clone https://github.com/darocky9689/rokabo.git "$HOME/dev/rokabo-website-github"
+```
+
+2. Danach immer nur dieses Kommando ausführen:
+
+```bash
+npm run deploy:no-onedrive -- "dein commit text"
+```
+
+Der Ablauf ist dann automatisch:
+
+- Sync vom OneDrive-Projekt in `~/dev/rokabo-website-github`
+- `npm install`
+- `npm run build:dist`
+- `git add -A && git commit`
+- `git push origin main`
+
+Script-Datei: `scripts/deploy-without-onedrive.sh`
