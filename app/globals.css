@@ -447,6 +447,30 @@ th {
 }
 
 /* ===== FORMS ===== */
+.contact-grid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.form-note {
+  margin: 0 0 var(--space-1);
+  color: var(--text-secondary);
+  line-height: var(--line-height-body);
+}
+
+.form-group {
+  margin-bottom: var(--space-1);
+}
+
+.form-group:last-of-type {
+  margin-bottom: var(--space-2);
+}
+
 label { 
   display: block; 
   margin-bottom: .3rem; 
@@ -466,6 +490,17 @@ input, textarea, select {
   line-height: var(--line-height-ui);
   transition: border-color 200ms ease, background 200ms ease;
 }
+
+.form-input,
+.form-select,
+.form-textarea {
+  margin-top: .2rem;
+}
+
+.form-textarea {
+  min-height: 9rem;
+  resize: vertical;
+}
 input::placeholder, textarea::placeholder {
   color: var(--text-muted);
 }
@@ -473,6 +508,21 @@ input:focus, textarea:focus, select:focus {
   outline: none;
   border-color: var(--link-color);
   background: var(--card-bg);
+}
+
+.error,
+.success-message {
+  margin: .7rem 0 0;
+  font-size: 0.95rem;
+  line-height: var(--line-height-ui);
+}
+
+.error {
+  color: #ffb8c5;
+}
+
+.success-message {
+  color: var(--link-color);
 }
 
 /* ===== FOOTER ===== */
