@@ -482,9 +482,14 @@ th {
   .table-wrap .pricing-table:has(:is(th, td):nth-child(3):hover) :is(th, td):nth-child(3),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(4):hover) :is(th, td):nth-child(4),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(5):hover) :is(th, td):nth-child(5) {
-    border-left: 1px solid var(--link-color);
-    border-right: 1px solid var(--link-color);
-    transition: border-color 220ms ease;
+    border-left: 1px solid rgba(64, 224, 208, 0.75);
+    border-right: 1px solid rgba(64, 224, 208, 0.75);
+    background:
+      radial-gradient(120% 34% at 50% -10%, rgba(64, 224, 208, 0.22), transparent 70%),
+      radial-gradient(120% 34% at 50% 110%, rgba(64, 224, 208, 0.2), transparent 72%),
+      linear-gradient(180deg, rgba(64, 224, 208, 0.14), rgba(64, 224, 208, 0.06));
+    box-shadow: inset 0 0 0 1px rgba(64, 224, 208, 0.16), 0 0 18px rgba(64, 224, 208, 0.14);
+    transition: border-color 220ms ease, background 220ms ease, box-shadow 220ms ease;
   }
 
   .table-wrap .pricing-table:has(:is(th, td):nth-child(2):hover) th:nth-child(2),
@@ -492,14 +497,25 @@ th {
   .table-wrap .pricing-table:has(:is(th, td):nth-child(4):hover) th:nth-child(4),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(5):hover) th:nth-child(5) {
     color: var(--link-color);
-    border-top: 1px solid var(--link-color);
+    border-top: 1px solid rgba(64, 224, 208, 0.75);
   }
 
   .table-wrap .pricing-table:has(:is(th, td):nth-child(2):hover) tbody tr:last-child td:nth-child(2),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(3):hover) tbody tr:last-child td:nth-child(3),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(4):hover) tbody tr:last-child td:nth-child(4),
   .table-wrap .pricing-table:has(:is(th, td):nth-child(5):hover) tbody tr:last-child td:nth-child(5) {
-    border-bottom: 1px solid var(--link-color);
+    border-bottom: 1px solid rgba(64, 224, 208, 0.75);
+  }
+
+  :root[data-theme="light"] .table-wrap .pricing-table:has(:is(th, td):nth-child(2):hover) :is(th, td):nth-child(2),
+  :root[data-theme="light"] .table-wrap .pricing-table:has(:is(th, td):nth-child(3):hover) :is(th, td):nth-child(3),
+  :root[data-theme="light"] .table-wrap .pricing-table:has(:is(th, td):nth-child(4):hover) :is(th, td):nth-child(4),
+  :root[data-theme="light"] .table-wrap .pricing-table:has(:is(th, td):nth-child(5):hover) :is(th, td):nth-child(5) {
+    background:
+      radial-gradient(120% 34% at 50% -10%, rgba(64, 224, 208, 0.2), transparent 70%),
+      radial-gradient(120% 34% at 50% 110%, rgba(64, 224, 208, 0.18), transparent 72%),
+      linear-gradient(180deg, rgba(64, 224, 208, 0.12), rgba(59, 10, 69, 0.04));
+    box-shadow: inset 0 0 0 1px rgba(64, 224, 208, 0.14), 0 0 14px rgba(59, 10, 69, 0.1);
   }
 }
 
