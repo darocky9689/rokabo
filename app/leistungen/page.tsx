@@ -18,8 +18,8 @@ export default function LeistungenPage() {
           Next.js- und TypeScript-Lösungen.
         </p>
 
-        <div className="grid grid-3">
-          <article className="card">
+        <div className="grid grid-3 services-grid">
+          <article className="card service-card">
             <h3>Light</h3>
             <ul className="check-list">
               <li>E-Mail Einrichtung und Basisbetreuung</li>
@@ -27,7 +27,7 @@ export default function LeistungenPage() {
               <li>Professioneller Außenauftritt</li>
             </ul>
           </article>
-          <article className="card recommended">
+          <article className="card recommended service-card">
             <h3>Professional</h3>
             <ul className="check-list">
               <li>Alles aus Light</li>
@@ -36,7 +36,7 @@ export default function LeistungenPage() {
               <li>6 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
             </ul>
           </article>
-          <article className="card">
+          <article className="card service-card">
             <h3>Premium</h3>
             <ul className="check-list">
               <li>Alles aus Professional</li>

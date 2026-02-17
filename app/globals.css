@@ -310,6 +310,37 @@ p, li {
   color: var(--text-secondary); 
 }
 
+.services-grid .service-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 260ms ease, border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.services-grid .service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(64, 224, 208, 0.12), transparent 35%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 260ms ease;
+}
+
+.services-grid .service-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(64, 224, 208, 0.7);
+  box-shadow: 0 16px 38px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(64, 224, 208, 0.35);
+}
+
+.services-grid .service-card:hover::after {
+  opacity: 1;
+}
+
+:root[data-theme="light"] .services-grid .service-card:hover {
+  border-color: rgba(59, 10, 69, 0.5);
+  box-shadow: 0 14px 30px rgba(59, 10, 69, 0.16), 0 0 0 1px rgba(59, 10, 69, 0.24);
+}
+
 /* ===== BUTTONS ===== */
 .btn-row { 
   display: flex; 
