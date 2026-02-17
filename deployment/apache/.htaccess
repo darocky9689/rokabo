@@ -1,0 +1,70 @@
+# =============================================
+# SEO + Security + Performance Apache Template
+# Copy this file to your web root (e.g. httpdocs/.htaccess)
+# =============================================
+
+# -------------------------------
+# Force HTTPS
+# -------------------------------
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# -------------------------------
+# Trailing slash normalization
+# -------------------------------
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !\/$
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1/ [L,R=301]
+
+# -------------------------------
+# Legacy URL redirects (example)
+# -------------------------------
+Redirect 301 /about/ /ueber-uns/
+Redirect 301 /pricing/ /preise/
+
+# -------------------------------
+# 410 Gone for permanently removed URLs
+# -------------------------------
+Redirect gone /old-service/
+
+# -------------------------------
+# GZIP / Brotli friendly defaults
+# -------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript application/json image/svg+xml
+</IfModule>
+
+# -------------------------------
+# Browser caching
+# -------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 1 hour"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+</IfModule>
+
+# -------------------------------
+# Security headers
+# -------------------------------
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # CSP can require adaptation for analytics/tag manager usage.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'; frame-ancestors 'self'; base-uri 'self';"
+
+  # X-Robots-Tag for non-HTML assets (optional hardening)
+  <FilesMatch "\.(pdf|doc|docx)$">
+    Header set X-Robots-Tag "noindex, noarchive"
+  </FilesMatch>
+</IfModule>

@@ -7,6 +7,10 @@
     "build": "next build",
     "build:dist": "rm -rf dist-site && npm run build && mv out dist-site",
     "check:prepush": "npm run build:dist",
+    "seo:audit": "npm run build:dist && node scripts/seo-content-audit.mjs website && node scripts/seo-broken-links.mjs && node scripts/seo-image-audit.mjs",
+    "seo:content": "node scripts/seo-content-audit.mjs",
+    "seo:links": "node scripts/seo-broken-links.mjs",
+    "seo:images": "node scripts/seo-image-audit.mjs",
     "start": "next start",
     "lint": "next lint"
   },

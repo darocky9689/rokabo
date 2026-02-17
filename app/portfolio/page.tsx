@@ -125,6 +125,8 @@ export default function PortfolioPage() {
                         alt={project.imageAlt}
                         title={project.imageTitle}
                         className="portfolio-image"
+                        loading="lazy"
+                        decoding="async"
                         onError={() => setImageError(project.id)}
                       />
                     ) : (
@@ -193,6 +195,8 @@ export default function PortfolioPage() {
               alt={`${lightboxProject.imageAlt} (vergrößerte Ansicht)`}
               title={`${lightboxProject.imageTitle} (vergrößerte Ansicht)`}
               className="lightbox-image"
+              loading="lazy"
+              decoding="async"
             />
 
             <div className="lightbox-meta">

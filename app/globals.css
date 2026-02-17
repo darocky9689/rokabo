@@ -169,6 +169,8 @@ a:hover {
   border: 0; 
   background: transparent; 
   font-size: 1.5rem; 
+  min-width: 48px;
+  min-height: 48px;
   color: var(--text-primary); 
   cursor: pointer; 
 }
@@ -198,6 +200,7 @@ a:hover {
 .nav-link { 
   display: block; 
   padding: .7rem; 
+  min-height: 48px;
   border-radius: var(--radius-sm); 
   text-decoration: none; 
   color: #ffffff;

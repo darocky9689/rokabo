@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Leistungen | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Leistungen für Website im Abo und SEO | rokabo',
   description:
     'Leistungen im Überblick: Website im Abo mit WordPress oder individueller Entwicklung mit Next.js und TypeScript, inklusive Hosting, Support und SEO.',
-  alternates: { canonical: '/leistungen' }
-};
+  keyword: 'Website Leistungen',
+  path: '/leistungen'
+});
 
 export default function LeistungenPage() {
   return (

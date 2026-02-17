@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
 import { ContactForm } from '@/components/contact-form';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
-export const metadata: Metadata = {
-  title: 'Kontakt | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Kontakt für dein Website-Projekt | rokabo',
   description:
     'Jetzt kostenloses Erstgespräch anfragen und das passende Website-Abo finden – von WordPress bis individuelle Next.js- und TypeScript-Lösung.',
-  alternates: { canonical: '/kontakt' }
-};
+  keyword: 'Kontakt Website Agentur',
+  path: '/kontakt'
+});
 
 export default function KontaktPage() {
   return (

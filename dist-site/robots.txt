@@ -1,4 +1,7 @@
 User-Agent: *
 Allow: /
+Disallow: /api/
+Disallow: /_next/
 
+Host: https://rokabo.de
 Sitemap: https://rokabo.de/sitemap.xml

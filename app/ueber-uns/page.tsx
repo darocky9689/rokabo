@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Über uns | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Über rokabo: Partner für Website im Abo',
   description:
     'rokabo ist dein Partner für Websites im Abo: planbar, schnell und nachhaltig betreut. WordPress für schnelle Umsetzung oder individuelle Next.js- und TypeScript-Lösungen.',
-  alternates: { canonical: '/ueber-uns' }
-};
+  keyword: 'Webagentur Über uns',
+  path: '/ueber-uns'
+});
 
 export default function UeberUnsPage() {
   return (

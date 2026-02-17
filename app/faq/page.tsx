@@ -1,4 +1,7 @@
 import type { Metadata } from 'next';
+import { JsonLdScript } from '@/components/seo/json-ld';
+import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema, faqSchema } from '@/lib/seo/schema';
 import Link from 'next/link';
 
 const faqs = [
@@ -64,26 +67,20 @@ const faqs = [
   }
 ];
 
-export const metadata: Metadata = {
-  title: 'FAQ | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'FAQ zu Website im Abo und Betreuung | rokabo',
   description:
     'Häufige Fragen zu Websites im Abo: Kosten, Laufzeit, Leistungen, WordPress oder Next.js mit TypeScript, Umsetzung und Betreuung bei rokabo.',
-  alternates: { canonical: '/faq' }
-};
+  keyword: 'FAQ Website im Abo',
+  path: '/faq'
+});
 
 export default function FaqPage() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer
-      }
-    }))
-  };
+  const faqPageSchema = faqSchema(faqs.map((item) => ({ question: item.question, answer: item.answer })));
+  const breadcrumb = breadcrumbSchema([
+    { name: 'Start', path: '/' },
+    { name: 'FAQ', path: '/faq' }
+  ]);
 
   return (
     <main id="main-content">
@@ -115,10 +112,8 @@ export default function FaqPage() {
         </div>
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
+      <JsonLdScript id="faq-schema" schema={faqPageSchema} />
+      <JsonLdScript id="faq-breadcrumb-schema" schema={breadcrumb} />
     </main>
   );
 }
