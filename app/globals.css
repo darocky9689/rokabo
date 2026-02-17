@@ -440,6 +440,73 @@ th {
   transition: background-color 260ms ease, color 260ms ease;
 }
 
+.pricing-mobile-accordion {
+  display: grid;
+  gap: var(--space-1);
+  margin: var(--space-2) 0;
+}
+
+.pricing-mobile-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.pricing-mobile-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: var(--space-1) var(--space-2);
+  display: grid;
+  gap: 0.2rem;
+  color: var(--text-primary);
+}
+
+.pricing-mobile-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.pricing-mobile-item summary strong {
+  color: var(--link-color);
+  font-size: 0.95rem;
+}
+
+.pricing-mobile-item[open] summary {
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(64, 224, 208, 0.08);
+}
+
+:root[data-theme="light"] .pricing-mobile-item[open] summary {
+  background: rgba(59, 10, 69, 0.05);
+}
+
+.pricing-mobile-list {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+  display: grid;
+  gap: 0.55rem;
+}
+
+.pricing-mobile-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.45rem;
+}
+
+.pricing-mobile-list li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.pricing-mobile-list li strong {
+  color: var(--text-primary);
+  text-align: right;
+}
+
 .pricing-table {
   table-layout: fixed;
 }
@@ -1231,6 +1298,15 @@ footer p, .site-footer p {
   }
   .services-tile-extra {
     display: block;
+  }
+  .pricing-mobile-accordion {
+    display: none;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .table-wrap {
+    display: none;
   }
 }
 

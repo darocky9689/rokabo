@@ -46,6 +46,60 @@ export default function PreisePage() {
           </table>
         </div>
 
+        <div className="pricing-mobile-accordion" aria-label="Preise als Akkordeon">
+          <details className="pricing-mobile-item">
+            <summary>
+              <span>Basic</span>
+              <strong>ab 15 € / Monat</strong>
+            </summary>
+            <ul className="pricing-mobile-list">
+              <li><span>Preis pro Jahr</span><strong>ab 160,00 €</strong></li>
+              <li><span>Eigene Website</span><strong>Nein</strong></li>
+              <li><span>Google-Optimierung (SEO)</span><strong>Nein</strong></li>
+              <li><span>Care Coins</span><strong>Keine</strong></li>
+            </ul>
+          </details>
+
+          <details className="pricing-mobile-item">
+            <summary>
+              <span>Starter - Single Page</span>
+              <strong>ab 49 € / Monat</strong>
+            </summary>
+            <ul className="pricing-mobile-list">
+              <li><span>Preis pro Jahr</span><strong>ab 399,00 €</strong></li>
+              <li><span>Eigene Website</span><strong>Ja - eine (Single Site)</strong></li>
+              <li><span>Google-Optimierung (SEO)</span><strong>Nein</strong></li>
+              <li><span>Care Coins</span><strong>Keine</strong></li>
+            </ul>
+          </details>
+
+          <details className="pricing-mobile-item" open>
+            <summary>
+              <span>Professional (Empfohlen)</span>
+              <strong>ab 79 € / Monat</strong>
+            </summary>
+            <ul className="pricing-mobile-list">
+              <li><span>Preis pro Jahr</span><strong>ab 900,00 €</strong></li>
+              <li><span>Eigene Website</span><strong>Ja</strong></li>
+              <li><span>Google-Optimierung (SEO)</span><strong>SEO Basis</strong></li>
+              <li><span>Care Coins</span><strong>6</strong></li>
+            </ul>
+          </details>
+
+          <details className="pricing-mobile-item">
+            <summary>
+              <span>Premium</span>
+              <strong>ab 119 € / Monat</strong>
+            </summary>
+            <ul className="pricing-mobile-list">
+              <li><span>Preis pro Jahr</span><strong>ab 1200,00 €</strong></li>
+              <li><span>Eigene Website</span><strong>Ja</strong></li>
+              <li><span>Google-Optimierung (SEO)</span><strong>SEO Plus</strong></li>
+              <li><span>Care Coins</span><strong>12</strong></li>
+            </ul>
+          </details>
+        </div>
+
         <div className="btn-row" style={{ marginTop: '1rem' }}>
           <Link className="btn btn-primary" href="/kontakt">Passendes Paket kostenlos besprechen</Link>
         </div>
