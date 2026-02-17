@@ -1055,6 +1055,7 @@ footer p, .site-footer p {
 }
 
 .services-tile {
+  position: relative;
   text-align: left;
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
@@ -1097,6 +1098,17 @@ footer p, .site-footer p {
 .services-tile.is-active {
   border-color: var(--link-color);
   box-shadow: 0 8px 20px rgba(64, 224, 208, 0.18);
+}
+
+.services-tile.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.6rem;
+  bottom: 0.6rem;
+  width: 3px;
+  border-radius: 999px;
+  background: var(--link-color);
 }
 
 :root[data-theme="light"] .services-tile.is-active {
