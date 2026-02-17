@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import LeistungenJourney from '../../components/leistungen-journey';
 
 export const metadata: Metadata = {
   title: 'Leistungen | rokabo',
@@ -17,6 +18,17 @@ export default function LeistungenPage() {
           Du bekommst alles, was du für eine Website brauchst, die Vertrauen schafft und Anfragen bringt.
           Klar im Paket, klar im Preis.
         </p>
+
+        <section className="journey-section" aria-label="Interaktive Projektreise">
+          <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
+            Interaktive Projektreise: In 4 Schritten zur Live-Website
+          </h2>
+          <p className="section-subtitle">
+            Sieh dir an, wie wir Projekte strukturiert von der Idee bis zur laufenden Betreuung umsetzen.
+            Klick dich durch die Schritte oder lass die Reise automatisch laufen.
+          </p>
+          <LeistungenJourney />
+        </section>
 
         <div className="grid grid-3">
           <article className="card">
