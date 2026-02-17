@@ -1031,116 +1031,91 @@ footer p, .site-footer p {
   font-size: 1.1rem;
 }
 
-/* ===== LEISTUNGEN JOURNEY ===== */
-.journey-section {
+/* ===== LEISTUNGEN TABELLE ===== */
+.services-table-section {
   margin-bottom: var(--space-3);
 }
 
-.journey-shell {
+.services-table-shell {
   display: grid;
   gap: var(--space-2);
 }
 
-.journey-steps {
-  display: grid;
-  gap: 0.6rem;
+.services-table-scroll {
+  overflow-x: auto;
 }
 
-.journey-step {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.services-table {
   width: 100%;
-  text-align: left;
+  min-width: 720px;
+  border-collapse: collapse;
+  background: var(--card-bg);
+}
+
+.services-table th,
+.services-table td {
+  border-bottom: 1px solid var(--card-border);
+  vertical-align: top;
+}
+
+.services-table tbody tr {
+  transition: background-color 220ms ease;
+}
+
+.services-table tbody tr.is-active {
+  background: rgba(64, 224, 208, 0.14);
+}
+
+:root[data-theme="light"] .services-table tbody tr.is-active {
+  background: rgba(59, 10, 69, 0.08);
+}
+
+.services-plan-btn {
   border: 1px solid var(--card-border);
   border-radius: var(--radius-sm);
-  background: var(--card-bg);
+  background: transparent;
   color: var(--text-primary);
-  padding: 0.75rem 0.9rem;
+  padding: 0.5rem 0.7rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   cursor: pointer;
-  transition: border-color 220ms ease, transform 220ms ease, color 220ms ease;
+  transition: border-color 220ms ease, color 220ms ease, transform 220ms ease;
 }
 
-.journey-step:hover,
-.journey-step:focus-visible {
+.services-plan-btn:hover,
+.services-plan-btn:focus-visible {
   border-color: var(--link-color);
   color: var(--link-color);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
-.journey-step.active {
-  border-color: var(--link-color);
-}
-
-.journey-step-symbol {
-  font-size: 1.15rem;
-  line-height: 1;
-}
-
-.journey-step-title {
-  font-weight: 600;
-  line-height: var(--line-height-ui);
-}
-
-.journey-preview {
+.services-details {
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
-  overflow: hidden;
-  background: var(--card-bg);
-}
-
-.journey-image-wrap {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border-bottom: 1px solid var(--card-border);
-}
-
-.journey-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  animation: gridFadeIn 350ms ease;
-}
-
-.journey-content {
   padding: var(--space-2);
+  background: var(--card-bg);
+  animation: gridFadeIn 320ms ease;
 }
 
-.journey-kicker {
-  margin: 0 0 0.45rem;
+.services-details-kicker {
+  margin: 0 0 0.4rem;
   color: var(--link-color);
-  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.8rem;
+  font-weight: 700;
 }
 
-.journey-content h3 {
-  margin: 0 0 0.55rem;
+.services-details h3 {
+  margin: 0 0 0.6rem;
   color: var(--text-primary);
-  font-size: 1.2rem;
 }
 
-.journey-content p {
+.services-details p {
   margin: 0;
   color: var(--text-secondary);
-}
-
-.journey-progress {
-  margin-top: var(--space-1);
-  height: 0.38rem;
-  border-radius: 999px;
-  background: var(--card-border);
-  overflow: hidden;
-}
-
-.journey-progress-fill {
-  display: block;
-  height: 100%;
-  background: var(--link-color);
-  transition: width 320ms ease;
 }
 
 /* ===== MEDIA QUERIES ===== */
@@ -1171,5 +1146,5 @@ footer p, .site-footer p {
   .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
   .contact-grid { grid-template-columns: 1.1fr .9fr; }
   .footer-grid { grid-template-columns: 1.2fr .8fr .8fr; }
-  .journey-shell { grid-template-columns: 0.95fr 1.35fr; align-items: start; }
+  .services-table-shell { grid-template-columns: 1.45fr 1fr; align-items: start; }
 }

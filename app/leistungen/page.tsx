@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import LeistungenJourney from '../../components/leistungen-journey';
+import LeistungenTabelle from '@/components/leistungen-tabelle';
 
 export const metadata: Metadata = {
   title: 'Leistungen | rokabo',
@@ -19,53 +19,15 @@ export default function LeistungenPage() {
           Klar im Paket, klar im Preis.
         </p>
 
-        <section className="journey-section" aria-label="Interaktive Projektreise">
+        <section className="services-table-section" aria-label="Dynamische Leistungenstabelle">
           <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
-            Interaktive Projektreise: In 4 Schritten zur Live-Website
+            Leistungen im Vergleich
           </h2>
           <p className="section-subtitle">
-            Sieh dir an, wie wir Projekte strukturiert von der Idee bis zur laufenden Betreuung umsetzen.
-            Klick dich durch die Schritte oder lass die Reise automatisch laufen.
+            Klicke ein Paket an, um Details zu sehen. Reihenfolge: Basic, Starter, Professional, Premium.
           </p>
-          <LeistungenJourney />
+          <LeistungenTabelle />
         </section>
-
-        <div className="grid grid-3">
-          <article className="card">
-            <h3>Starter - Single Page</h3>
-            <ul className="check-list">
-              <li>Ideal für Einsteiger</li>
-              <li>Eine Website als Single Site</li>
-              <li>Wenig Kosten für den Start</li>
-            </ul>
-          </article>
-          <article className="card">
-            <h3>Basic</h3>
-            <ul className="check-list">
-              <li>E-Mail-Einrichtung und Start-Betreuung</li>
-              <li>Eigene Domain</li>
-              <li>Sauberer, professioneller Auftritt</li>
-            </ul>
-          </article>
-          <article className="card recommended">
-            <h3>Professional</h3>
-            <ul className="check-list">
-              <li>Alles aus Basic</li>
-              <li>Hosting & eigene Domain</li>
-              <li>Eigene Website mit bis zu 5 Seiten</li>
-              <li>6 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
-            </ul>
-          </article>
-          <article className="card">
-            <h3>Premium</h3>
-            <ul className="check-list">
-              <li>Alles aus Professional</li>
-              <li>Individuelle Website mit bis zu 10 Seiten</li>
-              <li>Stärkere Google-Optimierung</li>
-              <li>12 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
-            </ul>
-          </article>
-        </div>
 
         <section className="section" aria-label="Technologien und individuelle Möglichkeiten">
           <div className="grid grid-2">
