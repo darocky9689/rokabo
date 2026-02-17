@@ -1,11 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface Leistung {
   title: string;
-  symbol: string;
   description: string;
   audience: string;
   pages: string;
@@ -17,7 +16,6 @@ interface Leistung {
 const leistungen: Leistung[] = [
   {
     title: 'Basic',
-    symbol: '🛠️',
     description: 'Der solide Einstieg mit professionellem Grundaufbau und Betreuung zum Start.',
     audience: 'Unternehmen mit klarem Angebot und Wunsch nach professionellem Auftritt',
     pages: 'Basis-Website',
@@ -27,7 +25,6 @@ const leistungen: Leistung[] = [
   },
   {
     title: 'Starter',
-    symbol: '🌱',
     description: 'Die schlanke Lösung für den schnellen Start als Single-Page Website.',
     audience: 'Einsteiger und kleine Projekte mit knappem Budget',
     pages: 'Single Page',
@@ -37,7 +34,6 @@ const leistungen: Leistung[] = [
   },
   {
     title: 'Professional',
-    symbol: '🚀',
     description: 'Unser Fokuspaket für Wachstum mit mehreren Seiten und laufender Weiterentwicklung.',
     audience: 'Wachsende Unternehmen mit Fokus auf Anfragen und Sichtbarkeit',
     pages: 'Bis zu 5 Seiten',
@@ -47,7 +43,6 @@ const leistungen: Leistung[] = [
   },
   {
     title: 'Premium',
-    symbol: '👑',
     description: 'Die umfangreiche Lösung mit maximaler Flexibilität und starker Google-Optimierung.',
     audience: 'Unternehmen mit hohem Anspruch an Performance und Sichtbarkeit',
     pages: 'Bis zu 10 Seiten',
@@ -60,62 +55,41 @@ const leistungen: Leistung[] = [
 export default function LeistungenTabelle() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % leistungen.length);
-    }, 6500);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   const active = leistungen[activeIndex];
 
   return (
     <div className="services-table-shell card">
-      <div className="services-table-scroll">
-        <table className="services-table">
-          <thead>
-            <tr>
-              <th>Paket</th>
-              <th>Für wen</th>
-              <th>Seiten</th>
-              <th>SEO</th>
-              <th>Care Coins</th>
-            </tr>
-          </thead>
-          <tbody>
-            {leistungen.map((item, index) => {
-              const isActive = index === activeIndex;
+      <div className="services-horizontal-scroll">
+        <div className="services-horizontal" role="tablist" aria-label="Leistungsbausteine">
+          {leistungen.map((item, index) => {
+            const isActive = index === activeIndex;
 
-              return (
-                <tr key={item.title} className={isActive ? 'is-active' : ''}>
-                  <td>
-                    <button
-                      type="button"
-                      className="services-plan-btn"
-                      onClick={() => setActiveIndex(index)}
-                      aria-pressed={isActive}
-                    >
-                      <span aria-hidden="true">{item.symbol}</span>
-                      <span>{item.title}</span>
-                    </button>
-                  </td>
-                  <td>{item.audience}</td>
-                  <td>{item.pages}</td>
-                  <td>{item.seo}</td>
-                  <td>{item.careCoins}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+            return (
+              <button
+                key={item.title}
+                type="button"
+                role="tab"
+                aria-selected={isActive}
+                className={`services-tile ${isActive ? 'is-active' : ''}`}
+                onClick={() => setActiveIndex(index)}
+                onMouseEnter={() => setActiveIndex(index)}
+              >
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+                <ul className="services-tile-meta">
+                  <li>{item.pages}</li>
+                  <li>SEO: {item.seo}</li>
+                  <li>Care Coins: {item.careCoins}</li>
+                </ul>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       <article className="services-details" aria-live="polite">
         <p className="services-details-kicker">Aktives Paket</p>
-        <h3>
-          <span aria-hidden="true">{active.symbol}</span> {active.title}
-        </h3>
+        <h3>{active.title}</h3>
         <p>{active.description}</p>
         <ul className="check-list">
           {active.highlights.map((highlight) => (
