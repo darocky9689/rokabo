@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "[pre-push] Running local build check..."
+npm run check:prepush
+
+echo "[pre-push] Verifying dist-site is up to date..."
+if ! git diff --quiet -- dist-site; then
+  echo "[pre-push] dist-site changed after build. Commit dist-site and push again."
+  exit 1
+fi
+
+if ! git diff --cached --quiet -- dist-site; then
+  echo "[pre-push] There are staged dist-site changes pending. Commit them before push."
+  exit 1
+fi
+
+echo "[pre-push] OK"

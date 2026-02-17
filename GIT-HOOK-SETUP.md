@@ -1,56 +1,42 @@
-# Git Hook Installation für rokabo.de
+# Git Hook Setup (lokal testen vor Push)
 
-## Automatisches Deployment nach Git Pull
+Ziel: Immer erst lokal testen, dann erst pushen.
 
-Dieses Script sorgt dafür, dass nach jedem `git pull` automatisch `dist-site/` zu `/rokabo.de/httpdocs` kopiert wird.
+## Aktivierter Workflow
 
-### Installation auf Plesk Server
+Der lokale `pre-push` Hook prüft automatisch:
 
-1. **SSH zu Plesk Server** (oder Terminal in Plesk)
+1. `npm run build:dist` läuft erfolgreich
+2. `dist-site/` ist nach dem Build aktuell und sauber
 
-2. **Hook-Script erstellen:**
+Wenn der Hook Änderungen in `dist-site/` erkennt, wird der Push blockiert.
+
+## Täglicher Ablauf
+
+1. Lokal starten und prüfen
 ```bash
-cat > /rokabo/repo/.git/hooks/post-merge << 'EOF'
-#!/bin/bash
-set -e
-REPO_PATH="/rokabo/repo"
-WEB_ROOT="/rokabo.de/httpdocs"
-LOG_FILE="/var/log/rokabo-deploy.log"
-
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] Git merge detected - syncing dist-site..." >> "$LOG_FILE"
-cd "$REPO_PATH"
-
-if [ ! -d "$REPO_PATH/dist-site" ]; then
-    echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: dist-site not found!" >> "$LOG_FILE"
-    exit 1
-fi
-
-rm -rf "$WEB_ROOT"/*
-cp -r "$REPO_PATH/dist-site"/* "$WEB_ROOT"/ 2>> "$LOG_FILE"
-echo "[$(date '+%Y-%m-%d %H:%M:%S')] ✅ Deployment completed!" >> "$LOG_FILE"
-EOF
+npm run dev
 ```
 
-3. **Executable machen:**
+2. Änderungen committen
 ```bash
-chmod +x /rokabo/repo/.git/hooks/post-merge
+git add -A
+git commit -m "deine änderungen"
 ```
 
-4. **Fertig!** Nach nächstem Git Pull wird automatisch deployed ✅
-
-### Workflow dann:
-
-1. Lokal ändern
-2. `npm run build:dist` ausführen
-3. `git add -A && git commit -m "..." && git push origin main`
-4. Plesk Git Pull triggern (manuell oder via Webhook)
-5. **Automatisch:** dist-site/ wird zu httpdocs/ kopiert
-6. Website ist live! 🚀
-
-### Debug:
-
-Log ansehen:
+3. Push ausführen
 ```bash
-tail -f /var/log/rokabo-deploy.log
+git push origin main
+```
+
+Beim Push läuft der Hook automatisch. Falls `dist-site/` nicht aktuell ist, bekommst du eine Meldung und der Push stoppt.
+
+## Falls Push blockiert wird
+
+```bash
+npm run build:dist
+git add dist-site
+git commit -m "build: update dist-site"
+git push origin main
 ```
 
