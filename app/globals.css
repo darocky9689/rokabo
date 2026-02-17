@@ -1043,6 +1043,9 @@ footer p, .site-footer p {
 
 .services-horizontal-scroll {
   overflow-x: auto;
+  overflow-y: visible;
+  margin: -0.35rem -0.2rem 0;
+  padding: 0.35rem 0.2rem 0.25rem;
   padding-bottom: 0.25rem;
 }
 
