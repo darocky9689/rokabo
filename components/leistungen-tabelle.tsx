@@ -75,12 +75,14 @@ export default function LeistungenTabelle() {
                 onMouseEnter={() => setActiveIndex(index)}
               >
                 <h3>{item.title}</h3>
-                <p>{item.description}</p>
-                <ul className="services-tile-meta">
-                  <li>{item.pages}</li>
-                  <li>SEO: {item.seo}</li>
-                  <li>Care Coins: {item.careCoins}</li>
-                </ul>
+                <div className="services-tile-extra">
+                  <p>{item.description}</p>
+                  <ul className="services-tile-meta">
+                    <li>{item.pages}</li>
+                    <li>SEO: {item.seo}</li>
+                    <li>Care Coins: {item.careCoins}</li>
+                  </ul>
+                </div>
               </button>
             );
           })}
