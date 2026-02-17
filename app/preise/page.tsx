@@ -17,30 +17,30 @@ export default function PreisePage() {
           Wähle das Paket, das zu deinem Ziel passt. Du zahlst monatlich, ohne hohe Startkosten,
           und wir kümmern uns um deine Website.
         </p>
-        <p className="muted">Starter - Single Page: ideal für Einsteiger. Professional: unsere Empfehlung für die meisten Unternehmen.</p>
+        <p className="muted">Basic für Mail-Hosting. Starter für den schnellen Website-Start. Professional als Empfehlung für die meisten Unternehmen.</p>
 
         <div className="table-wrap">
           <table className="pricing-table">
             <thead>
               <tr>
                 <th>Leistung</th>
+                <th>Basic</th>
                 <th>Starter - Single Page (Ideal für Einsteiger)</th>
                 <th>Professional (Empfohlen)</th>
                 <th>Premium</th>
-                <th>Basic</th>
               </tr>
             </thead>
             <tbody>
-              <tr><td>Monatlicher Preis</td><td>ab 49 €</td><td>ab 79 €</td><td>ab 119 €</td><td>ab 15 €</td></tr>
-              <tr><td>Preis pro Jahr</td><td>ab 399,00 €</td><td>ab 900,00 €</td><td>ab 1200,00 €</td><td>ab 160,00 €</td></tr>
-              <tr><td>Eigene Website</td><td>Ja - eine (Single Site)</td><td>Ja</td><td>Ja</td><td>Nein</td></tr>
-              <tr><td>Google-Optimierung (SEO)</td><td>Nein</td><td>SEO Basis</td><td>SEO Plus</td><td>Nein</td></tr>
+              <tr><td>Monatlicher Preis</td><td>ab 15 €</td><td>ab 49 €</td><td>ab 79 €</td><td>ab 119 €</td></tr>
+              <tr><td>Preis pro Jahr</td><td>ab 160,00 €</td><td>ab 399,00 €</td><td>ab 900,00 €</td><td>ab 1200,00 €</td></tr>
+              <tr><td>Eigene Website</td><td>Nein</td><td>Ja - eine (Single Site)</td><td>Ja</td><td>Ja</td></tr>
+              <tr><td>Google-Optimierung (SEO)</td><td>Nein</td><td>Nein</td><td>SEO Basis</td><td>SEO Plus</td></tr>
               <tr>
                 <td><Link className="inline-link" href="/faq#care-coins">Care Coins</Link></td>
                 <td>Keine</td>
+                <td>Keine</td>
                 <td>6</td>
                 <td>12</td>
-                <td>Keine</td>
               </tr>
             </tbody>
           </table>
