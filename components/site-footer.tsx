@@ -13,11 +13,11 @@ export function SiteFooter() {
           <ul className="footer-links">
             <li><Link href="/">Start</Link></li>
             <li><Link href="/leistungen">Leistungen</Link></li>
+            <li><Link href="/portfolio">Portfolio</Link></li>
             <li><Link href="/preise">Preise</Link></li>
-            <li><Link href="/faq">FAQ</Link></li>
-            <li><Link href="/sitemap">Sitemap</Link></li>
             <li><Link href="/ueber-uns">Über uns</Link></li>
             <li><Link href="/kontakt">Kontakt</Link></li>
+            <li><Link href="/faq">FAQ</Link></li>
           </ul>
         </div>
         <div>

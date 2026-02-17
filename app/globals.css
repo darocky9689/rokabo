@@ -315,10 +315,18 @@ a:hover {
   margin: 0; 
   padding: 0; 
   display: grid; 
-  gap: .55rem; 
+  gap: clamp(0.65rem, 0.5rem + 0.5vw, 0.9rem); 
 }
 .check-list li { 
-  color: var(--text-secondary); 
+  color: var(--text-primary);
+  font-weight: 500;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  text-wrap: pretty;
+}
+
+.contact-aside {
+  margin-top: var(--space-2);
 }
 
 .contact-aside {

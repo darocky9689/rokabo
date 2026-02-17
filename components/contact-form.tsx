@@ -55,9 +55,10 @@ export function ContactForm() {
         <label htmlFor="package">Gewünschtes Paket</label>
         <select className="form-select" id="package" name="package" required>
           <option value="">Bitte wählen</option>
-          <option value="Light">Light</option>
+          <option value="Starter - Single Page">Starter - Single Page</option>
           <option value="Professional">Professional</option>
           <option value="Premium">Premium</option>
+          <option value="Basic">Basic</option>
           <option value="Unsicher">Ich bin noch unsicher</option>
         </select>
       </div>

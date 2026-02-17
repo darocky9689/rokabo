@@ -1,14 +1,12 @@
 import type { Metadata } from 'next';
-import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = buildPageMetadata({
-  title: 'Website im Abo mit WordPress und Next.js | rokabo',
+export const metadata: Metadata = {
+  title: 'rokabo | Website im Abo für mehr Anfragen',
   description:
-    'Professionelle Website im Abo ohne hohe Startkosten: WordPress-Websites oder individuelle Lösungen mit Next.js und TypeScript. Monatlich planbar mit laufender Betreuung und SEO-Fokus.',
-  keyword: 'Website im Abo',
-  path: '/'
-});
+    'Mehr Kundenanfragen mit einer klaren Website im Abo: ohne hohe Startkosten, mit festen Monatskosten und laufender Betreuung.',
+  alternates: { canonical: '/' }
+};
 
 export default function HomePage() {
   return (
@@ -17,25 +15,25 @@ export default function HomePage() {
         <div className="container hero-inner">
           <div>
             <p className="kicker">Websites im Abo</p>
-            <h1>Deine professionelle Website. Ohne hohe Startkosten, mit laufender Betreuung.</h1>
+            <h1>Mehr Anfragen über deine Website. Einfach, planbar und ohne hohe Startkosten.</h1>
             <p>
-              Du willst sichtbar werden und neue Kunden gewinnen, aber eine klassische Agenturrechnung passt nicht ins Budget.
-              Genau dafür gibt es rokabo. Du zahlst monatlich, wir kümmern uns um Technik, Pflege, SEO und Updates –
-              wahlweise mit WordPress oder als individuelle Weblösung mit Next.js und TypeScript.
+              Deine Website soll verkaufen, nicht nur gut aussehen.
+              Mit rokabo bekommst du eine klare Website, die Vertrauen schafft und neue Kunden anspricht.
+              Du zahlst monatlich, wir kümmern uns um Technik, Pflege und Sichtbarkeit bei Google.
             </p>
             <div className="btn-row">
-              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch sichern</Link>
+              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch buchen</Link>
               <Link className="btn btn-secondary" href="/preise">Pakete ansehen</Link>
             </div>
           </div>
           <aside className="hero-card" aria-label="Vorteile auf einen Blick">
-            <h2 className="section-title">Was du direkt bekommst</h2>
+            <h2 className="section-title">Dein Vorteil mit rokabo</h2>
             <ul className="check-list">
-              <li>Kein großer Einmalbetrag am Anfang</li>
-              <li>Feste monatliche Kosten, sicher planbar</li>
-              <li>Laufende Betreuung statt einmaliger Übergabe</li>
-              <li>Technologie passend zum Ziel: WordPress oder Next.js + TypeScript</li>
-              <li>Hosting, Sicherheit und Support aus einer Hand</li>
+              <li>Keine hohe Einmalzahlung zum Start</li>
+              <li>Feste Monatskosten, klar planbar</li>
+              <li>Persönliche Betreuung statt Alleingang</li>
+              <li>Texte und Aufbau mit Fokus auf Anfragen</li>
+              <li>Hosting, Sicherheit und Updates inklusive</li>
             </ul>
           </aside>
         </div>
@@ -44,17 +42,17 @@ export default function HomePage() {
       <section className="section">
         <div className="container grid grid-2">
           <article className="card">
-            <h2 className="section-title">WordPress für schnellen Start</h2>
+            <h2 className="section-title">WordPress: schnell online</h2>
             <p className="muted">
-              Ideal für klassische Unternehmensseiten, lokale Sichtbarkeit und schnelle Go-Lives.
-              Mit sauberer Struktur, leichter Pflege und erprobten SEO-Grundlagen.
+              Ideal, wenn du schnell starten willst. Klare Seitenstruktur,
+              einfache Pflege und eine solide Basis für lokale Google-Sichtbarkeit.
             </p>
           </article>
           <article className="card">
-            <h2 className="section-title">Next.js & TypeScript für individuelle Projekte</h2>
+            <h2 className="section-title">Individuell: für mehr Möglichkeiten</h2>
             <p className="muted">
-              Wenn du mehr brauchst als Standard: performante, individuell entwickelte Websites mit
-              moderner Architektur, hoher Ladegeschwindigkeit und flexiblen Erweiterungsmöglichkeiten.
+              Wenn dein Angebot mehr braucht als Standard: individuelle Umsetzung,
+              hohe Geschwindigkeit und flexibel erweiterbar.
             </p>
           </article>
         </div>
@@ -62,21 +60,21 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container cta-banner">
-          <h2>Jetzt unverbindlich beraten lassen</h2>
-          <p>In 20 Minuten klären wir Ziel, Budget und das passende Paket für deinen Betrieb.</p>
-          <Link className="btn btn-accent" href="/kontakt">Beratungsgespräch anfragen</Link>
+          <h2>Lass uns über deine neue Website sprechen</h2>
+          <p>In 20 Minuten klären wir, wie du mehr passende Anfragen bekommst.</p>
+          <Link className="btn btn-accent" href="/kontakt">Kostenloses Gespräch anfragen</Link>
         </div>
       </section>
 
       <section className="section">
         <div className="container card">
-          <h2 className="section-title">Noch Fragen vor dem Start?</h2>
+          <h2 className="section-title">Noch unsicher?</h2>
           <p className="section-subtitle">
-            Alle häufigen Fragen zu Kosten, Laufzeit, Umsetzung und Betreuung findest du kompakt in unserem FAQ.
+            Im FAQ findest du klare Antworten zu Kosten, Laufzeit, Ablauf und Betreuung.
           </p>
           <div className="btn-row">
-            <Link className="btn btn-primary" href="/faq">Zum FAQ</Link>
-            <Link className="btn btn-secondary" href="/kontakt">Frage direkt stellen</Link>
+            <Link className="btn btn-primary" href="/faq">FAQ ansehen</Link>
+            <Link className="btn btn-secondary" href="/kontakt">Direkt Kontakt aufnehmen</Link>
           </div>
         </div>
       </section>

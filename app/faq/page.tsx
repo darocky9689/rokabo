@@ -1,7 +1,4 @@
 import type { Metadata } from 'next';
-import { JsonLdScript } from '@/components/seo/json-ld';
-import { buildPageMetadata } from '@/lib/seo/metadata';
-import { breadcrumbSchema, faqSchema } from '@/lib/seo/schema';
 import Link from 'next/link';
 
 const faqs = [
@@ -9,78 +6,84 @@ const faqs = [
     id: 'care-coins',
     question: 'Was sind Care Coins?',
     answer:
-      'Care Coins sind dein monatliches oder jährliches Änderungskontingent für kleine Website-Anpassungen. Dazu zählen zum Beispiel Textänderungen, Bildaustausch oder kleinere Layout-Optimierungen. Je nach Paket sind bereits Care Coins enthalten.'
+      'Care Coins sind dein Kontingent für kleine Änderungen an deiner Website. Zum Beispiel Texte anpassen, Bilder tauschen oder kleine Layout-Updates. Je nach Paket sind Care Coins bereits enthalten.'
   },
   {
     id: 'zielgruppe',
     question: 'Für wen ist rokabo geeignet?',
     answer:
-      'Für kleine Unternehmen, lokale Dienstleister und Gründer, die professionell sichtbar sein wollen, ohne hohe Einmal-Investition am Anfang.'
+      'Für kleine Unternehmen, lokale Dienstleister und Gründer, die online professionell auftreten und mehr Anfragen gewinnen wollen.'
   },
   {
     id: 'kosten',
     question: 'Was kostet eine Website im Abo?',
     answer:
-      'Du wählst ein monatliches Paket mit planbaren Kosten. Die genauen Leistungen und Preise findest du auf unserer Preisseite.'
+      'Du wählst ein Paket mit festen Monatskosten. Alle Preise und Leistungen findest du auf unserer Preisseite.'
   },
   {
     id: 'setup',
     question: 'Gibt es eine einmalige Setup-Gebühr?',
     answer:
-      'Je nach Paket kann eine überschaubare Einrichtungsgebühr anfallen. Das besprechen wir transparent im Erstgespräch.'
+      'Je nach Paket kann eine einmalige Einrichtungsgebühr anfallen. Das klären wir klar und transparent im Erstgespräch.'
   },
   {
     id: 'dauer',
     question: 'Wie lange dauert die Umsetzung?',
     answer:
-      'In der Regel 2 bis 4 Wochen, abhängig vom Umfang und davon, wie schnell Inhalte wie Texte, Bilder und Freigaben vorliegen.'
+      'Meist 2 bis 4 Wochen. Es hängt davon ab, wie groß das Projekt ist und wie schnell Texte, Bilder und Freigaben vorliegen.'
   },
   {
     id: 'aenderungen',
     question: 'Kann ich später Inhalte ändern lassen?',
     answer:
-      'Ja. Laufende Anpassungen sind Teil unseres Betreuungsmodells. So bleibt deine Website aktuell und leistungsfähig.'
+      'Ja. Laufende Änderungen sind Teil unserer Betreuung. So bleibt deine Website immer aktuell.'
   },
   {
     id: 'hosting',
     question: 'Ist Hosting und Sicherheit inklusive?',
     answer:
-      'Ja. Hosting, Updates, technische Wartung und Sicherheitsmaßnahmen sind Bestandteil unserer Betreuung.'
+      'Ja. Hosting, Updates, Wartung und Sicherheit sind inklusive.'
   },
   {
     id: 'wordpress-nextjs',
     question: 'Arbeitet ihr nur mit WordPress?',
     answer:
-      'Nein. Neben WordPress realisieren wir auch individuelle Websites mit Next.js und TypeScript, wenn dein Projekt mehr Flexibilität, Performance oder spezielle Funktionen benötigt.'
+      'Nein. Wir arbeiten mit WordPress oder entwickeln individuell, wenn dein Projekt mehr Funktionen oder mehr Flexibilität braucht.'
   },
   {
     id: 'laufzeit',
     question: 'Kündigungsfrist und Vertragslaufzeit?',
     answer:
-      'Die genauen Bedingungen hängen vom gewählten Paket ab. Wir legen alle Laufzeiten und Fristen vor Vertragsstart offen.'
+      'Das hängt vom Paket ab. Alle Laufzeiten und Fristen bekommst du vor Vertragsstart klar genannt.'
   },
   {
     id: 'start',
     question: 'Wie starte ich mit rokabo?',
     answer:
-      'Über ein kostenloses Erstgespräch. Wir klären Ziele, Budget und empfehlen dir das passende Paket für dein Unternehmen.'
+      'Buche ein kostenloses Erstgespräch. Wir klären dein Ziel und empfehlen dir das passende Paket.'
   }
 ];
 
-export const metadata: Metadata = buildPageMetadata({
-  title: 'FAQ zu Website im Abo und Betreuung | rokabo',
+export const metadata: Metadata = {
+  title: 'FAQ | rokabo',
   description:
-    'Häufige Fragen zu Websites im Abo: Kosten, Laufzeit, Leistungen, WordPress oder Next.js mit TypeScript, Umsetzung und Betreuung bei rokabo.',
-  keyword: 'FAQ Website im Abo',
-  path: '/faq'
-});
+    'FAQ zu deiner Website im Abo: klare Antworten zu Preisen, Laufzeit, Leistungen und Betreuung.',
+  alternates: { canonical: '/faq' }
+};
 
 export default function FaqPage() {
-  const faqPageSchema = faqSchema(faqs.map((item) => ({ question: item.question, answer: item.answer })));
-  const breadcrumb = breadcrumbSchema([
-    { name: 'Start', path: '/' },
-    { name: 'FAQ', path: '/faq' }
-  ]);
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer
+      }
+    }))
+  };
 
   return (
     <main id="main-content">
@@ -88,8 +91,8 @@ export default function FaqPage() {
         <div className="container">
           <h1 className="section-title">Häufige Fragen (FAQ)</h1>
           <p className="section-subtitle">
-            Hier findest du schnelle Antworten rund um unser Website-Abo. Wenn deine Frage nicht dabei ist,
-            melde dich direkt bei uns.
+            Hier findest du kurze und klare Antworten zu unserem Website-Abo.
+            Wenn etwas offen ist, melde dich direkt bei uns.
           </p>
 
           <div className="faq-list" aria-label="Häufige Fragen und Antworten">
@@ -103,17 +106,19 @@ export default function FaqPage() {
 
           <div className="card" style={{ marginTop: '1rem' }}>
             <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Noch offene Fragen?</h2>
-            <p className="muted">Wir beraten dich kostenlos und zeigen dir, welches Paket für dein Unternehmen passt.</p>
+            <p className="muted">Wir beraten dich kostenlos und zeigen dir, wie du mit deiner Website mehr Anfragen bekommst.</p>
             <div className="btn-row">
-              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch sichern</Link>
+              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch buchen</Link>
               <Link className="btn btn-secondary" href="/preise">Preise ansehen</Link>
             </div>
           </div>
         </div>
       </section>
 
-      <JsonLdScript id="faq-schema" schema={faqPageSchema} />
-      <JsonLdScript id="faq-breadcrumb-schema" schema={breadcrumb} />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
     </main>
   );
 }

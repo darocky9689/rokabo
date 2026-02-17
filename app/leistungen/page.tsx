@@ -1,14 +1,12 @@
 import type { Metadata } from 'next';
-import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = buildPageMetadata({
-  title: 'Leistungen für Website im Abo und SEO | rokabo',
+export const metadata: Metadata = {
+  title: 'Leistungen | rokabo',
   description:
-    'Leistungen im Überblick: Website im Abo mit WordPress oder individueller Entwicklung mit Next.js und TypeScript, inklusive Hosting, Support und SEO.',
-  keyword: 'Website Leistungen',
-  path: '/leistungen'
-});
+    'Unsere Leistungen für deine Website im Abo: klare Pakete, feste Monatskosten und Betreuung aus einer Hand.',
+  alternates: { canonical: '/leistungen' }
+};
 
 export default function LeistungenPage() {
   return (
@@ -16,34 +14,42 @@ export default function LeistungenPage() {
       <div className="container">
         <h1 className="section-title">Leistungen</h1>
         <p className="section-subtitle">
-          Alles, was du für eine starke Website brauchst, in einem klaren Abo-Modell: von WordPress bis zu individuellen
-          Next.js- und TypeScript-Lösungen.
+          Du bekommst alles, was du für eine Website brauchst, die Vertrauen schafft und Anfragen bringt.
+          Klar im Paket, klar im Preis.
         </p>
 
-        <div className="grid grid-3 services-grid">
-          <article className="card service-card">
-            <h3>Light</h3>
+        <div className="grid grid-3">
+          <article className="card">
+            <h3>Starter - Single Page</h3>
             <ul className="check-list">
-              <li>E-Mail Einrichtung und Basisbetreuung</li>
-              <li>Eigene Domain</li>
-              <li>Professioneller Außenauftritt</li>
+              <li>Ideal für Einsteiger</li>
+              <li>Eine Website als Single Site</li>
+              <li>Wenig Kosten für den Start</li>
             </ul>
           </article>
-          <article className="card recommended service-card">
+          <article className="card">
+            <h3>Basic</h3>
+            <ul className="check-list">
+              <li>E-Mail-Einrichtung und Start-Betreuung</li>
+              <li>Eigene Domain</li>
+              <li>Sauberer, professioneller Auftritt</li>
+            </ul>
+          </article>
+          <article className="card recommended">
             <h3>Professional</h3>
             <ul className="check-list">
-              <li>Alles aus Light</li>
+              <li>Alles aus Basic</li>
               <li>Hosting & eigene Domain</li>
-              <li>Eigene Website mit bis zu 5 Unterseiten</li>
+              <li>Eigene Website mit bis zu 5 Seiten</li>
               <li>6 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
             </ul>
           </article>
-          <article className="card service-card">
+          <article className="card">
             <h3>Premium</h3>
             <ul className="check-list">
               <li>Alles aus Professional</li>
-              <li>Individuelle Website mit bis zu 10 Unterseiten</li>
-              <li>Erweiterte SEO Möglichkeiten</li>
+              <li>Individuelle Website mit bis zu 10 Seiten</li>
+              <li>Stärkere Google-Optimierung</li>
               <li>12 <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> pro Jahr</li>
             </ul>
           </article>
@@ -52,26 +58,26 @@ export default function LeistungenPage() {
         <section className="section" aria-label="Technologien und individuelle Möglichkeiten">
           <div className="grid grid-2">
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Technologien, die zu deinem Business passen</h2>
+              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>So setzen wir deine Website um</h2>
               <ul className="check-list">
-                <li>WordPress für schnelle Umsetzung und einfache Pflege</li>
-                <li>Next.js für hohe Performance und moderne Web-Architektur</li>
-                <li>TypeScript für stabile, wartbare und skalierbare Codebasis</li>
-                <li>SEO-Basis oder Advanced SEO je nach Paket</li>
+                <li>WordPress, wenn du schnell online sein willst</li>
+                <li>Individuelle Entwicklung, wenn du mehr brauchst</li>
+                <li>Schnelle Ladezeiten für bessere Nutzererfahrung</li>
+                <li>SEO je nach Paket inklusive</li>
               </ul>
             </article>
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Individuelle Möglichkeiten</h2>
+              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wenn du etwas Besonderes brauchst</h2>
               <p className="muted">
-                Du brauchst spezielle Funktionen, Schnittstellen oder besondere Seitenlogik? Wir entwickeln individuelle
-                Lösungen auf Next.js- und TypeScript-Basis, abgestimmt auf deine Ziele, Prozesse und Zielgruppe.
+                Ob spezielle Funktionen, Anbindungen oder eigene Abläufe:
+                Wir bauen die Lösung, die zu deinem Angebot und deinen Kunden passt.
               </p>
             </article>
           </div>
         </section>
 
         <div className="btn-row" style={{ marginTop: '1rem' }}>
-          <Link className="btn btn-primary" href="/kontakt">Beratung anfragen</Link>
+          <Link className="btn btn-primary" href="/kontakt">Kostenlos beraten lassen</Link>
           <Link className="btn btn-secondary" href="/preise">Preise vergleichen</Link>
         </div>
       </div>

@@ -8,9 +8,6 @@ interface Project {
   title: string;
   category: string;
   description: string;
-  imageTitle: string;
-  imageAlt: string;
-  imageDescription: string;
   image: string;
   url: string;
   tags: string[];
@@ -22,9 +19,6 @@ const projects: Project[] = [
     title: 'juro-fotografie.de',
     category: 'fotografie',
     description: 'Moderne Portfolio-Website für Fotografie mit klarer Bildsprache und schneller Navigation.',
-    imageTitle: 'Startseiten-Preview von juro-fotografie.de',
-    imageAlt: 'Startseitenansicht der Website juro-fotografie.de mit großformatiger Fotografie und klarem Portfolio-Layout',
-    imageDescription: 'Screenshot der Startseite mit Fokus auf Bildwirkung, schneller Orientierung und modernem Portfolio-Aufbau.',
     image: '/images/juro-fotografie.webp',
     url: 'https://juro-fotografie.de',
     tags: ['Portfolio', 'Fotografie', 'Branding'],
@@ -34,9 +28,6 @@ const projects: Project[] = [
     title: 'grundschule-spreenhagen.de',
     category: 'bildung',
     description: 'Informations-Website für Schule mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.',
-    imageTitle: 'Startseiten-Preview von grundschule-spreenhagen.de',
-    imageAlt: 'Startseitenansicht der Website grundschule-spreenhagen.de mit übersichtlicher Schulnavigation und Informationsbereichen',
-    imageDescription: 'Screenshot der Schulwebsite mit klarer Struktur für Elterninformationen, Termine und wichtige Schnellzugriffe.',
     image: '/images/grundschule-spreenhagen.webp',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Bildung', 'Informationsarchitektur', 'CMS'],
@@ -122,11 +113,8 @@ export default function PortfolioPage() {
                     {imageError !== project.id ? (
                       <img
                         src={project.image}
-                        alt={project.imageAlt}
-                        title={project.imageTitle}
+                        alt={`Website-Preview von ${project.title}`}
                         className="portfolio-image"
-                        loading="lazy"
-                        decoding="async"
                         onError={() => setImageError(project.id)}
                       />
                     ) : (
@@ -141,7 +129,6 @@ export default function PortfolioPage() {
                       <div className="portfolio-info">
                         <h3>{project.title}</h3>
                         <p>{project.description}</p>
-                        <p className="portfolio-image-description">{project.imageDescription}</p>
                         <div className="portfolio-tags">
                           {project.tags.map((tag) => (
                             <span key={tag} className="portfolio-tag">
@@ -192,11 +179,8 @@ export default function PortfolioPage() {
 
             <img
               src={lightboxProject.image}
-              alt={`${lightboxProject.imageAlt} (vergrößerte Ansicht)`}
-              title={`${lightboxProject.imageTitle} (vergrößerte Ansicht)`}
+              alt={`Vergrößerte Preview von ${lightboxProject.title}`}
               className="lightbox-image"
-              loading="lazy"
-              decoding="async"
             />
 
             <div className="lightbox-meta">

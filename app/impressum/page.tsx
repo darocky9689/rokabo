@@ -26,14 +26,14 @@ export default function ImpressumPage() {
           <p>
             Telefon: <a href="tel:+491756240804">+49 175 624 0804</a><br />
             E-Mail: <a href="mailto:info@rokabo.de">info@rokabo.de</a><br />
-            Website: <a href="https://www.rokabo.de">www.rokabo.de</a>
+            Website: <a href="https://www.rokabo.de">rokabo.de</a>
           </p>
         </article>
 
         <article className="card">
           <h2>Geschäftsmodell</h2>
           <p>
-            rokabo bietet professionelle Webseiten im Abo-Modell für kleine Unternehmen an. Leistungen umfassen Erstellung,
+            rokabo bietet professionelle Websites im Abo-Modell für kleine Unternehmen an. Leistungen umfassen Erstellung,
             Hosting, Wartung und Updates gegen eine monatliche Pauschale.
           </p>
         </article>
