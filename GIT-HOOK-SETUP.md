@@ -7,9 +7,8 @@ Ziel: Immer erst lokal testen, dann erst pushen.
 Der lokale `pre-push` Hook prüft automatisch:
 
 1. `npm run build:dist` läuft erfolgreich
-2. `dist-site/` ist nach dem Build aktuell und sauber
 
-Wenn der Hook Änderungen in `dist-site/` erkennt, wird der Push blockiert.
+Wenn der Build fehlschlägt, wird der Push blockiert.
 
 ## Täglicher Ablauf
 
@@ -29,7 +28,7 @@ git commit -m "deine änderungen"
 git push origin main
 ```
 
-Beim Push läuft der Hook automatisch. Falls `dist-site/` nicht aktuell ist, bekommst du eine Meldung und der Push stoppt.
+Beim Push läuft der Hook automatisch. Falls der Build fehlschlägt, stoppt der Push.
 
 ## Falls Push blockiert wird
 

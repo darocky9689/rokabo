@@ -59,7 +59,9 @@ Im Feld **"Additional deployment actions"** trage folgendes ein:
 
 ```bash
 # SICHERES Deployment - kopiert nur, löscht nichts!
-cp -rfp dist-site/* httpdocs/
+cd /rokabo/repo || exit 1
+[ -d dist-site ] || { echo "dist-site fehlt"; exit 1; }
+cp -a dist-site/. /rokabo.de/httpdocs/
 ```
 
 **WICHTIG:** Kein `rm -rf` verwenden! Das ist zu gefährlich in Plesk.
