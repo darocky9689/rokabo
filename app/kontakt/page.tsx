@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function KontaktPage() {
   return (
     <main id="main-content" className="section">
-      <div className="container contact-grid">
+      <div className="container">
         <article className="form">
           <h1 className="section-title">Kostenloses Erstgespräch anfragen</h1>
           <p className="form-note">
@@ -21,7 +21,7 @@ export default function KontaktPage() {
           <ContactForm />
         </article>
 
-        <aside className="card" aria-label="Kontaktdaten">
+        <aside className="card contact-aside" aria-label="Kontaktdaten">
           <h2 className="section-title">Direktkontakt</h2>
           <ul className="check-list">
             <li>E-Mail: <a href="mailto:info@rokabo.de">info@rokabo.de</a></li>

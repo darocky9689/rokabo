@@ -28,7 +28,7 @@ export const metadata: Metadata = {
         url: '/images/ROKABO.png',
         width: 512,
         height: 512,
-        alt: 'rokabo Logo'
+        alt: 'Logo von rokabo, Anbieter für moderne Websites im Abo'
       }
     ]
   },
@@ -36,7 +36,12 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'rokabo | Websites im Abo',
     description: 'Websites im Abo: WordPress oder individuell mit Next.js und TypeScript.',
-    images: ['/images/ROKABO.png']
+    images: [
+      {
+        url: '/images/ROKABO.png',
+        alt: 'Logo von rokabo, Anbieter für moderne Websites im Abo'
+      }
+    ]
   },
   icons: {
     icon: '/images/ROKABO.png',

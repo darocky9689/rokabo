@@ -24,7 +24,15 @@ export function SiteHeader() {
     <header className="header">
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Zur Startseite">
-          <Image className="brand-logo" src="/images/ROKABO.png" alt="rokabo Logo" width={90} height={90} priority />
+          <Image
+            className="brand-logo"
+            src="/images/ROKABO.png"
+            alt="Logo von rokabo"
+            title="rokabo Logo"
+            width={90}
+            height={90}
+            priority
+          />
           rokabo
         </Link>
 

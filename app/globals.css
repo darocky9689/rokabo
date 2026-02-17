@@ -82,6 +82,14 @@ p, li {
   line-height: var(--line-height-body);
 }
 
+a {
+  color: #40e0d0;
+}
+
+a:hover {
+  color: #6fffef;
+}
+
 /* ===== LAYOUT ===== */
 .container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
 .section { padding: var(--space-4) 0; }
@@ -308,6 +316,10 @@ p, li {
 }
 .check-list li { 
   color: var(--text-secondary); 
+}
+
+.contact-aside {
+  margin-top: var(--space-2);
 }
 
 .services-grid .service-card {
