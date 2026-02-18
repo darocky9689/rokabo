@@ -13,6 +13,11 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <section className="hero">
+        <div className="hero-video" aria-hidden="true">
+          <video autoPlay muted loop playsInline preload="metadata">
+            <source src="/vid/hero.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div className="container hero-inner">
           <div>
             <p className="kicker">Websites im Abo</p>
