@@ -19,7 +19,7 @@ const leistungen: Leistung[] = [
     description: 'Der klare Einstieg für professionelles E-Mailing mit eigener Domain - weg von gmail.com oder web.de, Hosting und Einrichtung komplett durch uns.',
     audience: 'Für Unternehmen, die E-Mail und Domain zuverlässig aus einer Hand betreuen lassen wollen',
     pages: 'Mail-Hosting & Einrichtung',
-    seo: 'Basis',
+    seo: 'Nein',
     careCoins: '–',
     highlights: ['Professionelle E-Mail-Postfächer statt gmail.com/web.de', 'Einrichtung mit eigener Domain', 'Domain- und Hosting-Verwaltung durch uns'],
   },

@@ -4,8 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "preview:local": "npm run dev",
     "build": "next build",
     "build:dist": "rm -rf dist-site && npm run build && mv out dist-site",
+    "release:check": "npm run build:dist",
+    "release:live": "bash scripts/release-live.sh",
+    "release:live:seo": "RUN_SEO_AUDIT=1 bash scripts/release-live.sh",
     "check:prepush": "npm run build:dist",
     "seo:audit": "npm run build:dist && node scripts/seo-content-audit.mjs website && node scripts/seo-broken-links.mjs && node scripts/seo-image-audit.mjs",
     "seo:content": "node scripts/seo-content-audit.mjs",

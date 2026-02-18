@@ -20,6 +20,20 @@ Diese Website wurde auf eine moderne Next.js-Basis mit TypeScript umgestellt.
 4. Produktionsstart lokal
    - `npm run start`
 
+## Fester Prozess (einfach, ohne OneDrive)
+
+1. Entwickeln + lokal prüfen
+   - `npm run preview:local`
+2. Release-Check lokal
+   - `npm run release:check`
+3. Go Live (nur wenn alles passt)
+   - `npm run release:live -- "Kurze Release-Nachricht"`
+
+Optional mit SEO-Check:
+- `npm run release:live:seo -- "Kurze Release-Nachricht"`
+
+Damit gilt immer: **Build, Test (lokal), Go Live (rokabo.de & git)**.
+
 ## Wichtige Struktur
 
 - `app/layout.tsx` globales Layout
