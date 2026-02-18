@@ -1158,6 +1158,8 @@ footer p, .site-footer p {
   padding: var(--space-2);
   display: grid;
   gap: var(--space-2);
+  position: relative;
+  isolation: isolate;
 }
 
 .process-track {
@@ -1166,6 +1168,7 @@ footer p, .site-footer p {
   width: 2px;
   background: var(--card-border);
   margin-left: 1.1rem;
+  pointer-events: none;
 }
 
 .process-track-fill {
@@ -1176,25 +1179,47 @@ footer p, .site-footer p {
   height: var(--process-progress, 0%);
   background: linear-gradient(180deg, var(--link-color), rgba(64, 224, 208, 0.35));
   transition: width 280ms ease, height 280ms ease;
+  pointer-events: none;
 }
 
 .process-steps {
   display: grid;
   gap: var(--space-1);
-  margin-top: calc(var(--space-1) * -1.8);
+  margin-top: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .process-step {
-  text-align: left;
+  position: relative;
+  z-index: 1;
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   background: var(--card-bg);
   color: var(--text-primary);
+  overflow: hidden;
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+}
+
+.process-step-toggle {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  text-align: left;
   padding: var(--space-1) var(--space-2);
   display: grid;
   gap: 0.35rem;
   cursor: pointer;
-  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease, background 220ms ease;
+  pointer-events: auto;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 2;
+}
+
+.process-step-toggle:focus-visible {
+  outline: 2px solid var(--link-color);
+  outline-offset: -2px;
 }
 
 .process-step.is-active {
@@ -1299,6 +1324,22 @@ footer p, .site-footer p {
   font-size: 0.92rem;
 }
 
+.process-step-panel {
+  display: none;
+  padding: 0 var(--space-2) var(--space-2);
+  border-top: 1px solid var(--card-border);
+}
+
+.process-step.is-active .process-step-panel {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.process-step-details {
+  margin: var(--space-1) 0 0;
+  color: var(--text-secondary);
+}
+
 .process-accordion-kicker {
   margin: 0 0 0.45rem;
   color: var(--link-color);
@@ -1309,6 +1350,7 @@ footer p, .site-footer p {
 }
 
 .process-accordion {
+  display: none;
   border: 1px solid var(--card-border);
   border-radius: var(--radius-md);
   padding: var(--space-2);
@@ -1501,6 +1543,12 @@ footer p, .site-footer p {
   }
   .process-step {
     height: 100%;
+  }
+  .process-step-panel {
+    display: none !important;
+  }
+  .process-accordion {
+    display: block;
   }
   .services-horizontal-scroll {
     overflow-y: visible;

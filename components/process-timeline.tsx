@@ -100,26 +100,35 @@ export default function ProcessTimeline() {
         <span className="process-track-fill" />
       </div>
 
-      <div className="process-steps" role="tablist" aria-label="Ablaufphasen">
+      <div className="process-steps" aria-label="Ablaufphasen">
         {processSteps.map((step, index) => {
           const isActive = index === activeIndex;
 
           return (
-            <button
-              key={step.title}
-              type="button"
-              role="tab"
-              aria-selected={isActive}
-              className={`process-step ${isActive ? 'is-active' : ''}`}
-              onClick={() => setActiveIndex(index)}
-            >
-              <span className={`process-icon process-icon-${step.icon}`} aria-hidden="true">
-                <TimelineIcon icon={step.icon} />
-              </span>
-              <span className="process-title">{step.title}</span>
-              <span className="process-desc">{step.description}</span>
-              <span className="process-cta">{step.cta}</span>
-            </button>
+            <article key={step.title} className={`process-step ${isActive ? 'is-active' : ''}`}>
+              <button
+                type="button"
+                aria-pressed={isActive}
+                className="process-step-toggle"
+                onClick={() => setActiveIndex(index)}
+                onPointerDown={() => setActiveIndex(index)}
+                onTouchStart={() => setActiveIndex(index)}
+              >
+                <span className={`process-icon process-icon-${step.icon}`} aria-hidden="true">
+                  <TimelineIcon icon={step.icon} />
+                </span>
+                <span className="process-title">{step.title}</span>
+                <span className="process-desc">{step.description}</span>
+                <span className="process-cta">{step.cta}</span>
+              </button>
+
+              <div className="process-step-panel" aria-hidden={!isActive}>
+                <p className="process-step-details">{step.details}</p>
+                <Link className="btn btn-secondary" href={step.href}>
+                  {step.cta}
+                </Link>
+              </div>
+            </article>
           );
         })}
       </div>
