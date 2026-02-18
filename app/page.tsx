@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ProcessTimeline from '@/components/process-timeline';
 
 export const metadata: Metadata = {
   title: 'rokabo | Website im Abo für mehr Anfragen',
@@ -36,6 +37,18 @@ export default function HomePage() {
               <li>Hosting, Sicherheit und Updates inklusive</li>
             </ul>
           </aside>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container process-section" aria-label="Projektablauf in vier Phasen">
+          <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
+            So einfach kommst du mit rokabo zu deiner Website
+          </h2>
+          <p className="section-subtitle">
+            Klarer 4-Schritte-Ablauf, persönliche Begleitung und schnelle Umsetzung - damit deine Website ohne Stress live geht.
+          </p>
+          <ProcessTimeline />
         </div>
       </section>
 

@@ -3,6 +3,12 @@ import Link from 'next/link';
 
 const faqs = [
   {
+    id: 'ablauf',
+    question: 'Wie läuft ein Projekt mit rokabo ab?',
+    answer:
+      'In vier klaren Schritten: Erstgespräch, Planung & Design, Entwicklung, Go-Live & Pflege. Du bekommst in jeder Phase einen festen Ansprechpartner und klare nächste Schritte.'
+  },
+  {
     id: 'care-coins',
     question: 'Was sind Care Coins?',
     answer:
@@ -33,16 +39,40 @@ const faqs = [
       'Meist 2 bis 4 Wochen. Es hängt davon ab, wie groß das Projekt ist und wie schnell Texte, Bilder und Freigaben vorliegen.'
   },
   {
+    id: 'mitarbeit',
+    question: 'Was braucht rokabo von mir, damit es schnell geht?',
+    answer:
+      'Vor allem deine Ziele, Basisinformationen zu deinem Angebot sowie Freigaben auf Entwürfe. Wenn Inhalte fehlen, unterstützen wir dich bei Struktur und Texten.'
+  },
+  {
     id: 'aenderungen',
     question: 'Kann ich später Inhalte ändern lassen?',
     answer:
       'Ja. Laufende Änderungen sind Teil unserer Betreuung. So bleibt deine Website immer aktuell.'
   },
   {
+    id: 'basic-seo',
+    question: 'Ist im Basic-Paket SEO enthalten?',
+    answer:
+      'Nein. Basic ist auf Mail-Hosting und E-Mail-Einrichtung mit eigener Domain fokussiert. SEO ist erst in den Website-Paketen ab Professional enthalten.'
+  },
+  {
     id: 'hosting',
     question: 'Ist Hosting und Sicherheit inklusive?',
     answer:
       'Ja. Hosting, Updates, Wartung und Sicherheit sind inklusive.'
+  },
+  {
+    id: 'email-domain',
+    question: 'Kümmert ihr euch um E-Mail und eigene Domain?',
+    answer:
+      'Ja. Wir richten professionelle Postfächer mit deiner eigenen Domain ein und übernehmen die technische Verwaltung, damit du weg von gmail.com oder web.de kommst.'
+  },
+  {
+    id: 'paketwechsel',
+    question: 'Kann ich später in ein größeres Paket wechseln?',
+    answer:
+      'Ja. Wenn dein Unternehmen wächst, wechseln wir gemeinsam in das passende Paket. So bleibt deine Website flexibel und kann sauber mitwachsen.'
   },
   {
     id: 'wordpress-nextjs',
