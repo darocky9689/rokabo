@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import HeroVideo from '@/components/hero-video';
 import ProcessTimeline from '@/components/process-timeline';
 
 export const metadata: Metadata = {
@@ -13,11 +14,7 @@ export default function HomePage() {
   return (
     <main id="main-content">
       <section className="hero">
-        <div className="hero-video" aria-hidden="true">
-          <video autoPlay muted loop playsInline preload="metadata">
-            <source src="/vid/hero.mp4" type="video/mp4" />
-          </video>
-        </div>
+        <HeroVideo />
         <div className="container hero-inner">
           <div>
             <p className="kicker">Websites im Abo</p>
