@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import type { CSSProperties } from 'react';
+import type { CSSProperties, ReactNode } from 'react';
 import { useMemo, useState } from 'react';
 
 type StepIcon = 'call' | 'design' | 'build' | 'launch';
@@ -11,7 +11,7 @@ interface ProcessStep {
   title: string;
   description: string;
   cta: string;
-  details: string;
+  details: ReactNode;
   href: string;
 }
 
@@ -20,7 +20,7 @@ const processSteps: ProcessStep[] = [
     icon: 'call',
     title: 'Erstgespräch',
     description: 'Kurz kennenlernen · Angebot in 48h.',
-    cta: 'Termin buchen',
+    cta: 'Termin anfragen',
     details: 'In einem kurzen Video-Call klären wir Ziel, Inhalte und Prioritäten - du bekommst einen klaren Fahrplan.',
     href: '/kontakt',
   },
@@ -45,7 +45,13 @@ const processSteps: ProcessStep[] = [
     title: 'Go-Live & Pflege',
     description: 'Livegang + laufende Betreuung.',
     cta: 'Jetzt starten',
-    details: 'Nach dem Launch bleiben wir an deiner Seite - mit Care Coins und regelmäßiger Pflege für dauerhaft starke Ergebnisse.',
+    details: (
+      <>
+        Nach dem Launch bleiben wir an deiner Seite - mit{' '}
+        <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> und regelmäßiger
+        Pflege für dauerhaft starke Ergebnisse.
+      </>
+    ),
     href: '/kontakt',
   },
 ];
@@ -90,15 +96,18 @@ export default function ProcessTimeline() {
   const activeStep = processSteps[activeIndex];
   const phaseLabel = `Phase ${activeIndex + 1} von ${processSteps.length}`;
   const progress = useMemo(() => {
-    if (processSteps.length === 1) return 100;
-    return (activeIndex / (processSteps.length - 1)) * 100;
+    return ((activeIndex + 1) / processSteps.length) * 100;
   }, [activeIndex]);
 
   return (
-    <section className="process-timeline" aria-label="ProcessTimeline" style={{ '--process-progress': `${progress}%` } as CSSProperties}>
+    <section className="process-timeline" aria-label="Ablauf in vier Phasen" style={{ '--process-progress': `${progress}%` } as CSSProperties}>
       <div className="process-track" aria-hidden="true">
         <span className="process-track-fill" />
       </div>
+
+      <p className="sr-only" aria-live="polite">
+        {phaseLabel}: {activeStep.title}
+      </p>
 
       <div className="process-steps" aria-label="Ablaufphasen">
         {processSteps.map((step, index) => {
@@ -108,21 +117,24 @@ export default function ProcessTimeline() {
             <article key={step.title} className={`process-step ${isActive ? 'is-active' : ''}`}>
               <button
                 type="button"
-                aria-pressed={isActive}
+                aria-expanded={isActive}
+                aria-controls={`process-step-panel-${index}`}
                 className="process-step-toggle"
                 onClick={() => setActiveIndex(index)}
-                onPointerDown={() => setActiveIndex(index)}
-                onTouchStart={() => setActiveIndex(index)}
               >
                 <span className={`process-icon process-icon-${step.icon}`} aria-hidden="true">
                   <TimelineIcon icon={step.icon} />
                 </span>
                 <span className="process-title">{step.title}</span>
                 <span className="process-desc">{step.description}</span>
-                <span className="process-cta">{step.cta}</span>
+                <span className="process-cta">Details ansehen</span>
               </button>
 
-              <div className="process-step-panel" aria-hidden={!isActive}>
+              <div
+                className="process-step-panel"
+                id={`process-step-panel-${index}`}
+                aria-hidden={!isActive}
+              >
                 <p className="process-step-details">{step.details}</p>
                 <Link className="btn btn-secondary" href={step.href}>
                   {step.cta}
@@ -133,16 +145,18 @@ export default function ProcessTimeline() {
         })}
       </div>
 
-      <article className="process-accordion" role="region" aria-live="polite" id="process-details">
-        <p className="process-accordion-kicker">{phaseLabel}</p>
-        <div className="process-accordion-head">
+      <article className="process-accordion" role="region" aria-label="Details zur aktiven Phase" id="process-details">
+        <div className="process-accordion-text">
+          <p className="process-accordion-kicker">{phaseLabel}</p>
           <h3>{activeStep.title}</h3>
+          <p className="process-accordion-desc">{activeStep.description}</p>
+          <p>{activeStep.details}</p>
+        </div>
+        <div className="process-accordion-actions">
           <Link className="btn btn-secondary" href={activeStep.href}>
             {activeStep.cta}
           </Link>
         </div>
-        <p className="process-accordion-desc">{activeStep.description}</p>
-        <p>{activeStep.details}</p>
        </article>
      </section>
    );

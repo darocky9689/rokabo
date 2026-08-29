@@ -30,8 +30,8 @@ export function ContactForm() {
       `Name: ${name}\nUnternehmen: ${company}\nE-Mail: ${email}\nGewünschtes Paket: ${packageName}\n\nNachricht:\n${message}`
     );
 
+    // Kein form.reset(): oeffnet sich kein Mailprogramm, waere die Eingabe sonst verloren.
     window.location.href = `mailto:info@rokabo.de?subject=${subject}&body=${body}`;
-    form.reset();
   }
 
   return (
@@ -70,7 +70,14 @@ export function ContactForm() {
 
       <button className="btn btn-primary" type="submit">Anfrage senden</button>
       {error ? <p className="error">{error}</p> : null}
-      {submitted ? <p className="success-message" style={{ display: 'block' }}>Danke. Dein E-Mail-Programm öffnet sich jetzt.</p> : null}
+      {submitted ? (
+        <p className="success-message" style={{ display: 'block' }}>
+          Danke. Dein E-Mail-Programm öffnet sich jetzt - deine Eingaben bleiben hier stehen.
+          Falls sich nichts öffnet, schreib uns direkt an{' '}
+          <a href="mailto:info@rokabo.de">info@rokabo.de</a> oder ruf an:{' '}
+          <a href="tel:+491756240804">+49 175 624 0804</a>.
+        </p>
+      ) : null}
     </form>
   );
 }

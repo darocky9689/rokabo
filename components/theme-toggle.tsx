@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<'light' | 'dark'>('dark');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Gleiche Default-Logik wie das Inline-Skript in app/layout.tsx:
+    // ohne gespeicherte Wahl bleibt es bei Dark Mode. Zwei Defaults
+    // hatten zuvor ein sichtbares Umspringen beim Erstbesuch erzeugt.
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+    const initialTheme = savedTheme || 'dark';
     setTheme(initialTheme);
     document.documentElement.setAttribute('data-theme', initialTheme);
   }, []);
@@ -26,9 +26,8 @@ export function ThemeToggle() {
     <button
       onClick={toggleTheme}
       className="theme-toggle"
-      aria-label="Toggle theme"
-      title={theme === 'dark' ? 'Light mode' : 'Dark mode'}
-      style={{ opacity: mounted ? 1 : 0.5 }}
+      aria-label={theme === 'dark' ? 'Zu hellem Design wechseln' : 'Zu dunklem Design wechseln'}
+      title={theme === 'dark' ? 'Helles Design' : 'Dunkles Design'}
     >
       {theme === 'dark' ? (
         // Sun icon

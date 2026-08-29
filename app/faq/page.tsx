@@ -84,13 +84,13 @@ const faqs = [
     id: 'laufzeit',
     question: 'Kündigungsfrist und Vertragslaufzeit?',
     answer:
-      'Das hängt vom Paket ab. Alle Laufzeiten und Fristen bekommst du vor Vertragsstart klar genannt.'
+      'Die Mindestlaufzeit beträgt 12 Monate. Danach läuft der Vertrag weiter und ist mit einer Frist von 3 Monaten kündbar.'
   },
   {
     id: 'start',
     question: 'Wie starte ich mit rokabo?',
     answer:
-      'Buche ein kostenloses Erstgespräch. Wir klären dein Ziel und empfehlen dir das passende Paket.'
+      'Frag ein kostenloses Erstgespräch an. Wir klären dein Ziel und empfehlen dir das passende Paket.'
   }
 ];
 
@@ -138,7 +138,7 @@ export default function FaqPage() {
             <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Noch offene Fragen?</h2>
             <p className="muted">Wir beraten dich kostenlos und zeigen dir, wie du mit deiner Website mehr Anfragen bekommst.</p>
             <div className="btn-row">
-              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch buchen</Link>
+              <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch anfragen</Link>
               <Link className="btn btn-secondary" href="/preise">Preise ansehen</Link>
             </div>
           </div>

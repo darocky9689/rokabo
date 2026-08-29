@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ThemeToggle } from './theme-toggle';
 
 const navItems = [
@@ -19,9 +19,29 @@ const navItems = [
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setOpen(false);
+    };
+    const onPointerDown = (event: PointerEvent) => {
+      if (!headerRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    document.addEventListener('pointerdown', onPointerDown);
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown);
+      document.removeEventListener('pointerdown', onPointerDown);
+    };
+  }, [open]);
 
   return (
-    <header className="header">
+    <header className="header" ref={headerRef}>
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Zur Startseite">
           <Image
@@ -39,7 +59,7 @@ export function SiteHeader() {
         <button
           className="menu-toggle"
           type="button"
-          aria-label="Menü öffnen"
+          aria-label={open ? 'Menü schließen' : 'Menü öffnen'}
           aria-expanded={open}
           onClick={() => setOpen((state) => !state)}
         >

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { Viewport } from 'next';
+import { Fraunces, IBM_Plex_Sans } from 'next/font/google';
 import { AnalyticsScripts } from '@/components/seo/analytics';
 import { JsonLdScript } from '@/components/seo/json-ld';
 import { WebVitalsMonitor } from '@/components/seo/web-vitals-monitor';
@@ -9,6 +10,22 @@ import { siteConfig } from '@/lib/seo/site';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import './globals.css';
+
+/* Selbst gehostet über next/font (Build-Zeit-Download, keine Google-Requests
+   zur Laufzeit - wichtig wegen DSGVO und weil der Export statisch ist). */
+const displayFont = Fraunces({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-display',
+  axes: ['opsz'],
+});
+
+const bodyFont = IBM_Plex_Sans({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '600'],
+  variable: '--font-body',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.baseUrl),
@@ -47,8 +64,8 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/images/ROKABO.png',
-        width: 1200,
-        height: 630,
+        width: 500,
+        height: 500,
         alt: 'Logo von rokabo, Anbieter für moderne Websites im Abo'
       }
     ]
@@ -85,10 +102,8 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de">
+    <html lang="de" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <head>
-        <link rel="preconnect" href="https://www.rokabo.de" />
-        <link rel="dns-prefetch" href="https://www.rokabo.de" />
         <link rel="preload" as="image" href="/images/ROKABO.png" />
         <script
           dangerouslySetInnerHTML={{

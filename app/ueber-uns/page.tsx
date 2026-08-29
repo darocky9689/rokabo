@@ -39,7 +39,7 @@ export default function UeberUnsPage() {
               Je nach Ziel setzen wir auf WordPress oder eine individuelle Lösung.
               So bleibt deine Website schnell und kann mit deinem Unternehmen wachsen.
             </p>
-            <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch buchen</Link>
+            <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch anfragen</Link>
           </article>
         </div>
 
