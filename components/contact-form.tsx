@@ -12,8 +12,15 @@ export function ContactForm() {
   const [status, setStatus] = useState<Status>('bereit');
   const [meldung, setMeldung] = useState('');
   const [fehlerFelder, setFehlerFelder] = useState<string[]>([]);
-  const geladenAm = useRef(Date.now());
+  const geladenAm = useRef(0);
   const statusRef = useRef<HTMLDivElement | null>(null);
+
+  /* Date.now() gehoert nicht in den Render-Durchlauf - es ist unrein und
+     wuerde bei jedem Rendern neu ausgewertet. Der Startzeitpunkt wird
+     deshalb einmal nach dem Mounten gesetzt. */
+  useEffect(() => {
+    geladenAm.current = Date.now();
+  }, []);
 
   /* Nach jeder Rueckmeldung den Fokus dorthin setzen. Ohne das erfaehrt
      niemand, der die Seite mit der Tastatur oder einem Screenreader

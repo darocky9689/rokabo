@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 import { readdirSync, statSync } from 'node:fs';
 import { join, extname, relative } from 'node:path';
 

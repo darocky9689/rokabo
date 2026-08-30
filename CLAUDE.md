@@ -14,7 +14,7 @@ zeigen Canonical, `og:url`, `sitemap.xml`, `robots.txt` und JSON-LD auf eine URL
 zurück auf die Seite leitet – genau das war schon einmal die Ursache von rund 18
 gemeldeten Canonical-Fehlern.
 
-Stack: **Next.js 14.2.32 (App Router) + React 18 + TypeScript 5.8**, `output: 'export'`
+Stack: **Next.js 16.3.3 (App Router, Turbopack) + React 19 + TypeScript 5.8**, `output: 'export'`
 (rein statischer Export, kein Node-Prozess auf dem Server). **Kein Tailwind, keine
 UI-Library, keine State-Library** – eine einzige handgeschriebene CSS-Datei
 ([app/globals.css](app/globals.css), ~1900 Zeilen) mit CSS Custom Properties.
@@ -63,15 +63,16 @@ Drei Stufen, alle aktiv:
 - **`core.hooksPath` ist auf `.githooks` gesetzt.** Der pre-push-Hook läuft also und
   ruft `check:prepush` (= `build:dist && check:dist`). Ein Push mit vergessenem Rebuild
   wird lokal blockiert.
-- **[scripts/check-dist-drift.mjs](scripts/check-dist-drift.mjs)** vergleicht die gebauten
-  HTML-Dateien mit der Fassung aus `HEAD`. Ein byte-genauer Vergleich ist **nicht** möglich:
-  webpack sortiert die Chunk-ID-Liste pro Build unterschiedlich, wodurch einzelne
-  Chunk-Dateinamen ohne inhaltliche Änderung wechseln. Das Skript vereinheitlicht die
-  Hashes und prüft nur die HTML-Ausgabe. Die `.js`-Chunks bleiben bewusst ungeprüft.
-- **`generateBuildId: () => 'rokabo'`** in [next.config.js](next.config.js). Ohne feste
-  Build-ID wechselt der Ordner unter `_next/static/` bei jedem Build und der Abgleich
-  wäre wertlos. Einzelne Chunk-Dateinamen wechseln weiterhin – „gelöscht/neu"-Einträge
-  in `git status` sind für die Chunks normal, für den `rokabo/`-Ordner nicht.
+- **[scripts/check-dist-drift.mjs](scripts/check-dist-drift.mjs)** vergleicht `dist-site/`
+  **byte-genau** gegen den committeten Stand. Unter webpack ging das nicht – dort wechselte
+  die Chunk-Reihenfolge pro Build, weshalb das Skript lange nur normalisiertes HTML prüfte.
+  Turbopack baut reproduzierbar: gemessen über drei Builds, davon einer nach gelöschtem
+  `.next`-Cache, waren alle 112 Ausgabedateien identisch. Schlägt die Prüfung eines Tages
+  bei jedem Build fehl, obwohl nichts geändert wurde, ist diese Reproduzierbarkeit weg –
+  dann gehört der Vergleich auf die HTML-Ebene zurück, **nicht** abgeschaltet.
+- **`generateBuildId: () => 'rokabo'`** in [next.config.js](next.config.js). Hält den Ordner
+  unter `_next/static/` stabil. Seit Turbopack sind auch die Chunk-Dateinamen stabil –
+  „gelöscht/neu"-Einträge in `git status` sind jetzt ein echtes Signal, kein Rauschen.
 
 Doku: [DEPLOYMENT_SETUP.md](DEPLOYMENT_SETUP.md), [PLESK-GIT-SETUP.md](PLESK-GIT-SETUP.md),
 [PLESK-SETUP.md](PLESK-SETUP.md), [GIT-HOOK-SETUP.md](GIT-HOOK-SETUP.md).
@@ -260,9 +261,26 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
   gesetzt. Gemessen wird über Search Console und später über ein serverseitiges Anfrage-Log.
   Kein Consent-Banner nötig, solange das so bleibt.
 - **Nur `next.config.js`** – keine parallele `next.config.mjs` anlegen.
+- **`next lint` gibt es nicht mehr.** Mit Next 16 ist das Kommando entfallen; `npm run lint`
+  ruft ESLint direkt. Konfiguration ist [eslint.config.mjs](eslint.config.mjs) im
+  Flat-Format – die alte `.eslintrc.json` ist kein gültiges Format mehr.
+  **ESLint 10 funktioniert nicht**: Das in `eslint-config-next` gebündelte
+  `eslint-plugin-react` nutzt eine API, die dort entfallen ist, und der Lauf bricht mit
+  `contextOrFilename.getFilename is not a function` ab. Die Peer-Angabe `>=9.0.0` ist zu
+  optimistisch – auf ESLint 9 bleiben.
+- **Metadata-Routen brauchen `export const dynamic = 'force-static'`.** Seit Next 16 gelten
+  [app/sitemap.ts](app/sitemap.ts) und [app/robots.ts](app/robots.ts) sonst als dynamisch,
+  und der Build bricht bei `output: 'export'` ab.
+- **Node ≥ 20.9** wird von Next 16 verlangt; die CI läuft auf 22.
 - Es gibt **keine Tests**. Verifikation = `npm run lint`, `npx tsc --noEmit`,
   `npm run build:dist`, `npm run check:dist`, optional `npm run seo:audit`, und lokal
   im Browser anschauen.
+- **`npx tsc --noEmit` braucht einen vorherigen Build.** Seit Next 16 verweist
+  `next-env.d.ts` auf Typdateien unter `.next/types/`, und `.next` ist ignoriert. Nach
+  einem frischen Klon also erst `npm run build:dist`, dann typprüfen.
+- **Nach einem Major-Upgrade `.next` löschen.** Ein alter Cache erzeugt sonst irreführende
+  Fehler wie `Cannot find module for page: /impressum`. `build:dist` räumt nur `dist-site`
+  auf, nicht `.next`.
 - Der Quellordner liegt beim Nutzer teils in OneDrive; `scripts/deploy-without-onedrive.sh`
   synct nach `~/dev/rokabo-website-github` und pusht von dort. Dieses Repo *ist* das Ziel-Repo.
 - Push nutzt `http.version=HTTP/1.1` und großen `postBuffer` – dist-site macht die Pushes groß.
@@ -278,5 +296,4 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
   bewusst eng gefasst: „an den Anforderungen der BITV 2.0 ausgerichtet", ausdrücklich
   **ohne** Zusage einer förmlichen Konformitätsprüfung. Diese Grenze nicht aufweichen,
   ohne dass die Prüfung auch geliefert werden kann.
-- **Framework-Upgrade** auf Next 16 / React 19 ist bewusst zurückgestellt, bis der
-  inhaltliche Backlog steht – dann als eigener Commit ohne Feature-Änderung.
+- **OG-Bild** in 1200 × 630 fehlt weiterhin (siehe oben).

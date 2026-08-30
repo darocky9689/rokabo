@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 /*
  * Meldet Farbliterale (#hex, rgb(), rgba()) in globals.css, die ausserhalb
  * der :root-Bloecke stehen.

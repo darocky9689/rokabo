@@ -1,30 +1,52 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useSyncExternalStore } from 'react';
+
+type Theme = 'light' | 'dark';
+
+const EREIGNIS = 'rokabo:theme';
+
+/*
+ * Die Quelle der Wahrheit ist das data-theme-Attribut auf <html>, das
+ * das Inline-Skript in app/layout.tsx schon vor dem ersten Frame setzt.
+ *
+ * Vorher las diese Komponente localStorage in einem Effect und rief dort
+ * setState - React 19 beanstandet das zu Recht, weil es einen zweiten
+ * Render ausloest. useSyncExternalStore liest stattdessen direkt aus dem
+ * DOM und kennt einen eigenen Wert fuer das Prerendering: 'dark', genau
+ * die Vorgabe des Layouts. Damit gibt es kein Umspringen beim Erstbesuch.
+ */
+function abonnieren(melden: () => void) {
+  window.addEventListener(EREIGNIS, melden);
+  return () => window.removeEventListener(EREIGNIS, melden);
+}
+
+function ausDem(): Theme {
+  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+}
+
+function beimPrerender(): Theme {
+  return 'dark';
+}
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const theme = useSyncExternalStore(abonnieren, ausDem, beimPrerender);
 
-  useEffect(() => {
-    // Gleiche Default-Logik wie das Inline-Skript in app/layout.tsx:
-    // ohne gespeicherte Wahl bleibt es bei Dark Mode. Zwei Defaults
-    // hatten zuvor ein sichtbares Umspringen beim Erstbesuch erzeugt.
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
-    const initialTheme = savedTheme || 'dark';
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
+  const umschalten = useCallback(() => {
+    const neu: Theme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', neu);
+    try {
+      localStorage.setItem('theme', neu);
+    } catch {
+      /* Privater Modus oder gesperrte Website-Daten: die Wahl gilt dann
+         nur fuer diesen Besuch. Kein Grund, den Wechsel zu verweigern. */
+    }
+    window.dispatchEvent(new Event(EREIGNIS));
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute('data-theme', newTheme);
-  };
 
   return (
     <button
-      onClick={toggleTheme}
+      onClick={umschalten}
       className="theme-toggle"
       aria-label={theme === 'dark' ? 'Zu hellem Design wechseln' : 'Zu dunklem Design wechseln'}
       title={theme === 'dark' ? 'Helles Design' : 'Dunkles Design'}

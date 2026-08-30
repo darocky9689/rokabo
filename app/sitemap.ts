@@ -1,6 +1,11 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig, siteRoutes } from '@/lib/seo/site';
 
+/* Next 16 verlangt bei output: 'export' die ausdrueckliche Kennzeichnung
+   als statisch - Metadata-Routen gelten sonst als dynamisch und der Build
+   bricht ab. */
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const priorityByRoute: Record<string, number> = {
     '/': 1,
