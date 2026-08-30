@@ -75,7 +75,7 @@ export default function LeistungenTabelle() {
                 onMouseEnter={() => setActiveIndex(index)}
               >
                 <h3>{item.title}</h3>
-                <div className="services-tile-extra">
+                <div className="services-tile-extra text">
                   <p>{item.description}</p>
                   <ul className="services-tile-meta">
                     <li>{item.pages}</li>
@@ -90,7 +90,7 @@ export default function LeistungenTabelle() {
       </div>
 
       <article className="services-details" aria-live="polite">
-        <p className="services-details-kicker">Aktives Paket</p>
+        <p className="services-details-kicker ui">Aktives Paket</p>
         <h3>{active.title}</h3>
         <p>{active.description}</p>
         <ul className="check-list">

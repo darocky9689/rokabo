@@ -12,7 +12,7 @@
   --brand-logo-size: 5.625rem;
   --header-height: var(--brand-logo-size);
   --header-offset: calc(var(--header-height) + 1px);
-  --line-height-body: 1.6;
+  --line-height-body: 1.65;
   --line-height-heading: 1.3;
   --line-height-ui: 1.45;
   --space-1: clamp(0.5rem, 0.3rem + 1vw, 0.9rem);
@@ -69,7 +69,7 @@ body {
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
-  font-family: var(--font-body), system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family: var(--font-body), serif;
   color: var(--text-primary);
   line-height: var(--line-height-body);
   background: var(--bg-gradient);
@@ -79,16 +79,49 @@ body {
 }
 body > main { flex: 1; }
 
+/* ===== SCHRIFTROLLEN =====
+   Lesetext (Lora) steht auf body und ist damit der Standard. Interface
+   (Montserrat) ist der Opt-in: Ueberschriften, native Bedienelemente, die
+   drei stabilen Navigationsklassen - und alles, was ausdruecklich .ui traegt.
+
+   Entscheidend ist die Richtung: Wer eine neue Klasse anlegt und nichts
+   weiter tut, bekommt Lesetext. Das ist die harmlose Variante. Vorher stand
+   hier eine Erlaubnisliste aus 21 Selektoren plus 5 Rueckausnahmen - dort
+   bekam jedes vergessene Element die falsche Schrift. */
+h1, h2, h3, h4, h5, h6,
+button, input, select, textarea, label, th,
+.brand, .nav-link, .btn,
+.ui {
+  font-family: var(--font-heading), sans-serif;
+}
+
+/* Gegenstueck zu .ui: holt den Lesetext zurueck. Noetig, wo Fliesstext in
+   einem Interface-Element steht - zwei Buttons dienen hier als Inhaltskachel
+   und tragen ganze Beschreibungen (Timeline-Schritt, Paketkachel). */
+.text {
+  font-family: var(--font-body), serif;
+}
+
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-display), Georgia, "Times New Roman", serif;
   font-weight: 600;
+}
+
+h1 {
+  font-weight: 700;
   line-height: var(--line-height-heading);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
 p, li {
   line-height: var(--line-height-body);
+}
+
+/* Geladen sind nur 400 und 600. Ohne diese Regel faellt der Browser bei
+   strong/b auf 700 zurueck und rechnet die Fettung selbst - das sieht
+   anders aus als der echte Schnitt. */
+strong, b {
+  font-weight: 600;
 }
 
 a {
@@ -237,7 +270,7 @@ a {
   align-items: center; 
   gap: .6rem; 
   color: var(--text-primary); 
-  font-weight: 700; 
+  font-weight: 600; 
   text-decoration: none; 
   text-shadow: 0 2px 8px rgba(0,0,0,0.2); 
 }
@@ -286,7 +319,7 @@ a {
   border-radius: var(--radius-sm); 
   text-decoration: none; 
   color: #ffffff;
-  font-weight: 500;
+  font-weight: 600;
   transition: background 200ms ease, color 200ms ease; 
 }
 :root[data-theme="light"] .nav-link {
@@ -412,7 +445,6 @@ a {
 }
 .check-list li { 
   color: var(--text-primary);
-  font-weight: 500;
   line-height: 1.7;
   letter-spacing: 0.01em;
   text-wrap: pretty;
@@ -861,7 +893,7 @@ th {
 label { 
   display: block; 
   margin-bottom: .3rem; 
-  font-weight: 500; 
+  font-weight: 600; 
   line-height: var(--line-height-ui);
   color: var(--text-primary); 
 }
@@ -1552,7 +1584,7 @@ footer p, .site-footer p {
 }
 
 .process-title {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
@@ -1562,7 +1594,7 @@ footer p, .site-footer p {
 
 .process-cta {
   color: var(--text-muted);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.92rem;
 }
 .process-cta::after {
@@ -1592,7 +1624,7 @@ footer p, .site-footer p {
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .process-accordion {
@@ -1724,7 +1756,7 @@ footer p, .site-footer p {
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .services-details h3 {

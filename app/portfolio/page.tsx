@@ -131,7 +131,7 @@ export default function PortfolioPage() {
                         <p>{project.description}</p>
                         <div className="portfolio-tags">
                           {project.tags.map((tag) => (
-                            <span key={tag} className="portfolio-tag">
+                            <span key={tag} className="portfolio-tag ui">
                               {tag}
                             </span>
                           ))}
@@ -144,7 +144,7 @@ export default function PortfolioPage() {
                             href={project.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="portfolio-btn btn-visit"
+                            className="portfolio-btn btn-visit ui"
                           >
                             Besuchen
                           </a>

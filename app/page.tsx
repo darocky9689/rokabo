@@ -22,7 +22,7 @@ export default function HomePage() {
               Mit rokabo bekommst du eine klare Website, die Vertrauen schafft und neue Kunden anspricht.
               Du zahlst monatlich, wir kümmern uns um Technik, Pflege und Sichtbarkeit bei Google.
             </p>
-            <p className="hero-price">
+            <p className="hero-price ui">
               <strong>ab 49 € im Monat</strong>
               <span className="hero-price-note">ohne hohe Einmalzahlung zum Start</span>
             </p>
@@ -47,15 +47,15 @@ export default function HomePage() {
         <div className="container">
           <div className="trust-strip">
             <p>
-              <strong>12 Monate feste Betreuung</strong>
+              <strong className="ui">12 Monate feste Betreuung</strong>
               danach 3 Monate Kündigungsfrist.
             </p>
             <p>
-              <strong>Keine hohe Einmalzahlung</strong>
+              <strong className="ui">Keine hohe Einmalzahlung</strong>
               Du startest mit der Monatsrate, nicht mit einer Rechnung über Tausende.
             </p>
             <p>
-              <strong>Hosting, Sicherheit und Updates inklusive</strong>
+              <strong className="ui">Hosting, Sicherheit und Updates inklusive</strong>
               Ohne Zusatzrechnung, ohne dass du dich darum kümmern musst.
             </p>
           </div>
@@ -76,24 +76,27 @@ export default function HomePage() {
 
       <section className="section">
         <div className="container">
-          <h2 className="section-title">Passt das auch zu deinem Betrieb?</h2>
+          <h2 className="section-title">Klein starten oder gleich das volle Programm</h2>
           <p className="section-subtitle">
-            Zwei typische Ausgangslagen - die passende technische Umsetzung suchen wir dir aus,
-            das musst du nicht entscheiden.
+            Beides bauen wir - mit demselben Anspruch: sauber umgesetzt, schnell geladen,
+            bei Google auffindbar. Und festlegen musst du dich heute nicht für immer, denn
+            was klein anfängt, wird später erweitert statt neu gebaut.
           </p>
           <div className="grid grid-2">
             <article className="card">
-              <h3 className="card-title">Du brauchst schnell eine erste Seite</h3>
+              <h3 className="card-title">Schnell und schlank starten</h3>
               <p className="muted">
-                Klare Struktur, einfache Pflege und eine solide Basis, damit dich Kunden
-                in der Region bei Google finden. In der Regel in wenigen Wochen online.
+                Eine Seite, die das Wichtigste zeigt: was du machst, für wen und wie dich
+                Kunden erreichen. Wenig Aufwand auf beiden Seiten, in der Regel in wenigen
+                Wochen online - und trotzdem kein Provisorium.
               </p>
             </article>
             <article className="card">
-              <h3 className="card-title">Dein Angebot ist erklärungsbedürftig</h3>
+              <h3 className="card-title">Gleich mit dem ganzen Angebot</h3>
               <p className="muted">
-                Wenn Standard nicht reicht: individuelle Umsetzung, hohe Geschwindigkeit
-                und später erweiterbar, ohne dass alles neu gebaut werden muss.
+                Wenn Leistungen, Referenzen und Details von Anfang an Platz brauchen:
+                mehrseitig aufgebaut und auf deinen Betrieb zugeschnitten, individuell
+                statt Vorlage von der Stange.
               </p>
             </article>
           </div>
@@ -116,7 +119,7 @@ export default function HomePage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place">Fotografie</p>
+                <p className="proof-place ui">Fotografie</p>
                 <h3>juro-fotografie.de</h3>
                 <p>Portfolio-Website mit klarer Bildsprache und schneller Navigation.</p>
                 <a className="proof-link" href="https://juro-fotografie.de" target="_blank" rel="noopener noreferrer">
@@ -133,7 +136,7 @@ export default function HomePage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place">Bildung · Spreenhagen</p>
+                <p className="proof-place ui">Bildung · Spreenhagen</p>
                 <h3>grundschule-spreenhagen.de</h3>
                 <p>Informations-Website mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.</p>
                 <a className="proof-link" href="https://grundschule-spreenhagen.de" target="_blank" rel="noopener noreferrer">
@@ -163,10 +166,14 @@ export default function HomePage() {
       <section className="section">
         <div className="container cta-banner">
           <h2>Lass uns über deine neue Website sprechen</h2>
-          <p>In 20 Minuten klären wir, wie du mehr passende Anfragen bekommst.</p>
           <p>
-            Hinter rokabo steht Thomas Rockstroh aus Steinhöfel - du sprichst direkt
-            mit der Person, die deine Website baut und betreut.
+            In 20 Minuten klären wir, wie du mehr passende Anfragen bekommst -
+            unverbindlich, ohne Verkaufsdruck.
+          </p>
+          <p>
+            Du bekommst einen festen Ansprechpartner, klare Absprachen und eine
+            Antwort in der Regel innerhalb eines Werktags - je früher wir sprechen,
+            desto eher ist deine Seite online.
           </p>
           <div className="btn-row cta-actions">
             <Link className="btn btn-accent" href="/kontakt">Kostenloses Gespräch anfragen</Link>

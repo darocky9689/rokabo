@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { Viewport } from 'next';
-import { Fraunces, IBM_Plex_Sans } from 'next/font/google';
+import { Lora, Montserrat } from 'next/font/google';
 import { AnalyticsScripts } from '@/components/seo/analytics';
 import { JsonLdScript } from '@/components/seo/json-ld';
 import { buildAlternates } from '@/lib/seo/metadata';
@@ -10,16 +10,21 @@ import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import './globals.css';
 
-/* Selbst gehostet über next/font (Build-Zeit-Download, keine Google-Requests
-   zur Laufzeit - wichtig wegen DSGVO und weil der Export statisch ist). */
-const displayFont = Fraunces({
+/* Google Fonts über next/font: zur Build-Zeit heruntergeladen und aus dem
+   eigenen Export ausgeliefert. Kein Laufzeit-Request an Google (DSGVO), und
+   der statische Export bleibt ohne externe Abhaengigkeit.
+
+   Montserrat = Interface: Ueberschriften, Navigation, Buttons, Formulare,
+   Labels und hervorgehobene UI-Texte.
+   Lora = Lesetext: Absaetze, Listen und laengere beschreibende Inhalte. */
+const headingFont = Montserrat({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-display',
-  axes: ['opsz'],
+  weight: ['600', '700'],
+  variable: '--font-heading',
 });
 
-const bodyFont = IBM_Plex_Sans({
+const bodyFont = Lora({
   subsets: ['latin'],
   display: 'swap',
   weight: ['400', '600'],
@@ -101,7 +106,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${displayFont.variable} ${bodyFont.variable}`}>
+    <html lang="de" className={`${headingFont.variable} ${bodyFont.variable}`}>
       <head>
         <link rel="preload" as="image" href="/images/ROKABO.png" />
         <script
