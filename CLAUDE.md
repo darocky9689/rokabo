@@ -45,7 +45,7 @@ Plesk (Shared Hosting, `shared49.cloud86-host.nl`) hat **kein Node/npm**. Deshal
 
 1. Build läuft **lokal**, Ergebnis `dist-site/` wird **ins Git committed**
    (`.gitignore` ignoriert nur `out`/`dist`, **nicht** `dist-site`).
-2. Plesk zieht per Git-Checkout nach `rokabo/repo` und kopiert `dist-site/` nach `rokabo/httpdocs`.
+2. Plesk zieht per Git-Checkout nach `rokabo/repo` und kopiert `dist-site/` nach `rokabo.de/httpdocs`.
 3. GitHub Actions ([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) lintet, baut
    und ruft `npm run check:dist` – deployt aber nichts.
 
@@ -81,7 +81,10 @@ Doku: [DEPLOYMENT_SETUP.md](DEPLOYMENT_SETUP.md), [PLESK-GIT-SETUP.md](PLESK-GIT
 `grundschule-spreenhagen.de` (WordPress) liegt im gleichen Plesk-Space:
 
 - `grundschule-spreenhagen.de` → Docroot `httpdocs`
-- `rokabo.de` → Docroot `rokabo/httpdocs`, Git-Checkout `rokabo/repo`
+- `rokabo.de` → Docroot **`rokabo.de/httpdocs`** (mit Punkt-de! Der Pfad stand hier
+  lange falsch als `rokabo/httpdocs` und hat schon einmal eine Fehlersuche gekostet)
+- Git-Checkout-Ziel: `rokabo/repo` – **nicht verifiziert**, vermutlich ebenfalls mit
+  Punkt-de. Vor der nächsten Nutzung in Plesk nachsehen.
 - Deployment-Aktionen **nur** bei `rokabo.de` eintragen, nie eine gemeinsame Action.
 
 ## Architektur
@@ -216,7 +219,7 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
 
 - liegt in `public/muster/` und wird beim Build unverändert nach `dist-site/muster/` kopiert
 - erreichbar über `rokabo.de/muster/` und über eine Subdomain, deren Docroot in Plesk auf
-  `rokabo/httpdocs/muster` zeigt
+  `rokabo.de/httpdocs/muster` zeigt
 - **`noindex, nofollow`** in jeder Seite plus `X-Robots-Tag` in `public/muster/.htaccess`
 - keine Rewrite-Regeln in dieser `.htaccess` – die Seiten verlinken sich mit expliziter
   `.html`-Endung, damit nichts mit den Regeln der Hauptdomain kollidiert

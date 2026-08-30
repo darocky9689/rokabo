@@ -77,8 +77,8 @@ Wenn auf Plesk kein `npm` verfügbar ist, wird die statische Version lokal gebau
 Wenn `grundschule-spreenhagen.de` als WordPress in `httpdocs` läuft, muss `rokabo.de` zwingend getrennt werden:
 
 - `grundschule-spreenhagen.de` Dokumentenstamm: `httpdocs`
-- `rokabo.de` Dokumentenstamm: `rokabo/httpdocs`
-- `rokabo.de` Git-Checkout-Ziel: `rokabo/repo` (nicht `rokabo/httpdocs`)
+- `rokabo.de` Dokumentenstamm: `rokabo.de/httpdocs`
+- `rokabo.de` Git-Checkout-Ziel: `rokabo/repo` (nicht `rokabo.de/httpdocs`)
 
 #### Lokal vor jedem Push
 
@@ -108,5 +108,5 @@ Wenn `dist-site` nicht in den Live-Ordner von `rokabo.de` kopiert wird, liefert 
 ### Niemals tun
 
 - Kein Deployment mit absoluten Pfaden auf `grundschule-spreenhagen.de/httpdocs`
-- Kein Git-Checkout von Rokabo direkt in `rokabo/httpdocs`
+- Kein Git-Checkout von Rokabo direkt in `rokabo.de/httpdocs`
 - Keine gemeinsame Deploy-Action für beide Domains
