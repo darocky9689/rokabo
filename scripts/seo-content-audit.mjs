@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { join, extname, relative, sep } from 'node:path';
 
 const distDir = join(process.cwd(), 'dist-site');
 const keyword = (process.argv[2] || 'website').toLowerCase();
@@ -85,7 +85,13 @@ if (!statSync(distDir, { throwIfNoEntry: false })) {
   process.exit(1);
 }
 
-const htmlFiles = walkHtmlFiles(distDir);
+/* Das Musterprojekt unter /muster/ traegt noindex und ist nicht Teil der
+   eigenen SEO. Keyword-Dichte und Lesbarkeit eines erfundenen
+   Elektrobetriebs zu bewerten, erzeugt nur Rauschen, das echte Warnungen
+   zudeckt. */
+const htmlFiles = walkHtmlFiles(distDir).filter(
+  (pfad) => !relative(distDir, pfad).split(sep).includes('muster')
+);
 let hasFailures = false;
 
 console.log(`SEO Content Audit für ${htmlFiles.length} HTML-Dateien (Keyword: ${keyword})`);

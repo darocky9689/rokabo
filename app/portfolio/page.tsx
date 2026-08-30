@@ -6,7 +6,7 @@ import { buildPageMetadata } from '@/lib/seo/metadata';
 export const metadata: Metadata = buildPageMetadata({
   title: 'Referenzen: Websites, die du ansehen kannst',
   description:
-    'Websites, die du dir direkt ansehen kannst: juro-fotografie.de und die Grundschule Spreenhagen - beide gebaut und bis heute betreut.',
+    'Websites, die du dir direkt ansehen kannst: ein Musterprojekt für einen Elektrobetrieb, juro-fotografie.de und die Grundschule Spreenhagen.',
   keyword: 'Website Referenzen',
   path: '/portfolio'
 });
@@ -17,6 +17,9 @@ interface Projekt {
   bild: string;
   url: string;
   merkmale: string[];
+  /* Gesetzt, wenn es kein echter Kundenauftrag ist. Wird als Marke ueber
+     dem Titel ausgegeben, damit ein Muster nie wie eine Referenz wirkt. */
+  hinweis?: string;
 }
 
 interface Segment {
@@ -26,11 +29,22 @@ interface Segment {
 
 /* Gruppiert nach den drei Segmenten. Leere Gruppen werden nicht gerendert -
    eine Ueberschrift ohne Projekte darunter macht die Luecke sichtbarer als
-   ihr Fehlen. Handwerk kommt dazu, sobald das Musterprojekt steht. */
+   ihr Fehlen. Wer ein "hinweis"-Feld setzt, markiert das Projekt als Muster:
+   es bekommt eine Marke ueber dem Titel und oeffnet nicht im neuen Tab. */
 const segmente: Segment[] = [
   {
     titel: 'Handwerk und Bau',
-    projekte: [],
+    projekte: [
+      {
+        titel: 'Elektro Musterhand',
+        beschreibung:
+          'Vierseitiger Auftritt für einen Elektromeisterbetrieb: Leistungen, Ablauf, Notdienst und Kontakt. Ein Musterprojekt ohne realen Auftraggeber - gebaut, um zu zeigen, wie so eine Seite aussieht.',
+        bild: '/images/muster-elektro.png',
+        url: '/muster/',
+        merkmale: ['Vier Seiten', 'Notdienst-Anker', 'Ohne Fotos gebaut'],
+        hinweis: 'Musterprojekt',
+      },
+    ],
   },
   {
     titel: 'Fotografie und Kreative',
@@ -86,6 +100,9 @@ export default function PortfolioPage() {
                       height={1800}
                     />
                     <div className="proof-body">
+                      {projekt.hinweis ? (
+                        <p className="proof-place ui">{projekt.hinweis}</p>
+                      ) : null}
                       <h3>{projekt.titel}</h3>
                       <p>{projekt.beschreibung}</p>
                       <div className="portfolio-tags">
@@ -93,14 +110,18 @@ export default function PortfolioPage() {
                           <span className="portfolio-tag ui" key={merkmal}>{merkmal}</span>
                         ))}
                       </div>
-                      <a
-                        className="proof-link"
-                        href={projekt.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Seite ansehen<span className="sr-only"> (öffnet in neuem Tab)</span>
-                      </a>
+                      {projekt.hinweis ? (
+                        <a className="proof-link" href={projekt.url}>Muster ansehen</a>
+                      ) : (
+                        <a
+                          className="proof-link"
+                          href={projekt.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Seite ansehen<span className="sr-only"> (öffnet in neuem Tab)</span>
+                        </a>
+                      )}
                     </div>
                   </article>
                 ))}
