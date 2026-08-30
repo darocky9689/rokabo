@@ -1,84 +1,67 @@
-'use client';
-
+import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
-interface Project {
-  id: number;
-  title: string;
-  category: string;
-  description: string;
-  image: string;
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Referenzen: Websites, die du ansehen kannst',
+  description:
+    'Websites, die du dir direkt ansehen kannst: juro-fotografie.de und die Grundschule Spreenhagen - beide gebaut und bis heute betreut.',
+  keyword: 'Website Referenzen',
+  path: '/portfolio'
+});
+
+interface Projekt {
+  titel: string;
+  beschreibung: string;
+  bild: string;
   url: string;
-  tags: string[];
+  merkmale: string[];
 }
 
-const projects: Project[] = [
+interface Segment {
+  titel: string;
+  projekte: Projekt[];
+}
+
+/* Gruppiert nach den drei Segmenten. Leere Gruppen werden nicht gerendert -
+   eine Ueberschrift ohne Projekte darunter macht die Luecke sichtbarer als
+   ihr Fehlen. Handwerk kommt dazu, sobald das Musterprojekt steht. */
+const segmente: Segment[] = [
   {
-    id: 1,
-    title: 'juro-fotografie.de',
-    category: 'fotografie',
-    description: 'Portfolio für Fotografie mit klarer Bildsprache und schneller Navigation.',
-    image: '/images/juro-fotografie.webp',
-    url: 'https://juro-fotografie.de',
-    tags: ['Portfolio', 'Fotografie', 'Branding'],
+    titel: 'Handwerk und Bau',
+    projekte: [],
   },
   {
-    id: 2,
-    title: 'grundschule-spreenhagen.de',
-    category: 'bildung',
-    description: 'Informationsseite einer Schule mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.',
-    image: '/images/grundschule-spreenhagen.webp',
-    url: 'https://grundschule-spreenhagen.de',
-    tags: ['Bildung', 'Informationsarchitektur', 'CMS'],
+    titel: 'Fotografie und Kreative',
+    projekte: [
+      {
+        titel: 'juro-fotografie.de',
+        beschreibung:
+          'Portfolio für Fotografie mit klarer Bildsprache und schneller Navigation.',
+        bild: '/images/juro-fotografie.webp',
+        url: 'https://juro-fotografie.de',
+        merkmale: ['Portfolio', 'Bildsprache', 'Branding'],
+      },
+    ],
+  },
+  {
+    titel: 'Schulen und Einrichtungen',
+    projekte: [
+      {
+        titel: 'grundschule-spreenhagen.de',
+        beschreibung:
+          'Informationsseite einer Schule mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.',
+        bild: '/images/grundschule-spreenhagen.webp',
+        url: 'https://grundschule-spreenhagen.de',
+        merkmale: ['Informationsarchitektur', 'Redaktion', 'CMS'],
+      },
+    ],
   },
 ];
 
-const categories = ['alle', 'fotografie', 'bildung'];
-
 export default function PortfolioPage() {
-  const [activeCategory, setActiveCategory] = useState('alle');
-  const [imageError, setImageError] = useState<number | null>(null);
-  const [lightboxProject, setLightboxProject] = useState<Project | null>(null);
-  const [gridHeight, setGridHeight] = useState<number | null>(null);
-  const gridRef = useRef<HTMLDivElement | null>(null);
-
-  const filteredProjects =
-    activeCategory === 'alle' ? projects : projects.filter((p) => p.category === activeCategory);
-
-  useLayoutEffect(() => {
-    if (!gridRef.current) return;
-
-    const updateHeight = () => {
-      if (!gridRef.current) return;
-      setGridHeight(gridRef.current.scrollHeight);
-    };
-
-    updateHeight();
-
-    const observer = new ResizeObserver(updateHeight);
-    observer.observe(gridRef.current);
-    window.addEventListener('resize', updateHeight);
-
-    return () => {
-      observer.disconnect();
-      window.removeEventListener('resize', updateHeight);
-    };
-  }, [filteredProjects]);
-
-  useEffect(() => {
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setLightboxProject(null);
-      }
-    };
-
-    window.addEventListener('keydown', onKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', onKeyDown);
-    };
-  }, []);
+  const gefuellt = segmente.filter((segment) => segment.projekte.length > 0);
 
   return (
     <main id="main-content">
@@ -89,130 +72,53 @@ export default function PortfolioPage() {
             Websites, die du dir direkt ansehen kannst - gebaut und bis heute betreut.
           </p>
 
-          <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Aktuelle Projekte</h2>
-
-          {/* Category Filter */}
-          <div className="filter-container">
-            <div className="filter-buttons">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`filter-btn ${activeCategory === cat ? 'active' : ''}`}
-                  onClick={() => setActiveCategory(cat)}
-                >
-                  {cat === 'alle' ? 'Alle Projekte' : cat === 'fotografie' ? 'Fotografie' : 'Bildung'}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Portfolio Grid */}
-          <div className="portfolio-grid-outer" style={gridHeight !== null ? { height: `${gridHeight}px` } : undefined}>
-            <div className="portfolio-grid" ref={gridRef}>
-              {filteredProjects.map((project) => (
-                <article key={project.id} className="portfolio-item">
-                  <div className="portfolio-image-wrapper">
-                    {imageError !== project.id ? (
-                      <img
-                        src={project.image}
-                        alt={`Vorschau von ${project.title}`}
-                        className="portfolio-image"
-                        onError={() => setImageError(project.id)}
-                      />
-                    ) : (
-                      <div className="portfolio-placeholder">
-                        <div className="placeholder-content">
-                          <div className="placeholder-icon">🌐</div>
-                          <p>{project.title}</p>
-                        </div>
+          {gefuellt.map((segment) => (
+            <section className="section-tight" key={segment.titel}>
+              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>{segment.titel}</h2>
+              <div className="proof-grid">
+                {segment.projekte.map((projekt) => (
+                  <article className="proof-item" key={projekt.url}>
+                    <Image
+                      className="proof-image"
+                      src={projekt.bild}
+                      alt={`Vorschau von ${projekt.titel}`}
+                      width={2880}
+                      height={1800}
+                    />
+                    <div className="proof-body">
+                      <h3>{projekt.titel}</h3>
+                      <p>{projekt.beschreibung}</p>
+                      <div className="portfolio-tags">
+                        {projekt.merkmale.map((merkmal) => (
+                          <span className="portfolio-tag ui" key={merkmal}>{merkmal}</span>
+                        ))}
                       </div>
-                    )}
-                    <div className="portfolio-overlay">
-                      <div className="portfolio-info">
-                        <h3>{project.title}</h3>
-                        <p>{project.description}</p>
-                        <div className="portfolio-tags">
-                          {project.tags.map((tag) => (
-                            <span key={tag} className="portfolio-tag ui">
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-                        <div className="portfolio-links">
-                          <button type="button" className="portfolio-btn btn-preview" onClick={() => setLightboxProject(project)}>
-                            Preview
-                          </button>
-                          <a
-                            href={project.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="portfolio-btn btn-visit ui"
-                          >
-                            Besuchen
-                          </a>
-                        </div>
-                      </div>
+                      <a
+                        className="proof-link"
+                        href={projekt.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Seite ansehen<span className="sr-only"> (öffnet in neuem Tab)</span>
+                      </a>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-
-          {filteredProjects.length === 0 && (
-            <div className="empty-state">
-              <p>Keine Projekte in dieser Kategorie gefunden.</p>
-            </div>
-          )}
+                  </article>
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       </section>
 
-      {lightboxProject && (
-        <div className="lightbox-backdrop" onClick={() => setLightboxProject(null)} role="dialog" aria-modal="true" aria-label="Vorschau">
-          <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
-            <button
-              type="button"
-              className="lightbox-close"
-              onClick={() => setLightboxProject(null)}
-              aria-label="Lightbox schließen"
-            >
-              ×
-            </button>
-
-            <img
-              src={lightboxProject.image}
-              alt={`Vergrößerte Preview von ${lightboxProject.title}`}
-              className="lightbox-image"
-            />
-
-            <div className="lightbox-meta">
-              <h3>{lightboxProject.title}</h3>
-              <a href={lightboxProject.url} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
-                Seite öffnen
-              </a>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* CTA Section */}
       <section className="section">
-        <div className="container">
-          <div className="card cta-banner" style={{ marginTop: 'var(--space-3)' }}>
-            <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
-              Wird deine Website die nächste hier?
-            </h2>
-            <p className="section-subtitle">
-              Erzähl kurz, worum es geht. Das Erstgespräch kostet nichts und dauert 20 Minuten.
-            </p>
-            <div className="btn-row">
-              <Link className="btn btn-primary" href="/kontakt">
-                Kostenlos beraten
-              </Link>
-              <Link className="btn btn-secondary" href="/leistungen">
-                Unsere Leistungen
-              </Link>
-            </div>
+        <div className="container cta-banner">
+          <h2>Wird deine Website die nächste hier?</h2>
+          <p>
+            Erzähl kurz, worum es geht. Das Erstgespräch kostet nichts und dauert 20 Minuten.
+          </p>
+          <div className="btn-row cta-actions">
+            <Link className="btn btn-accent" href="/kontakt">Kostenloses Erstgespräch</Link>
+            <Link className="btn btn-quiet" href="/leistungen">Leistungen ansehen</Link>
           </div>
         </div>
       </section>
