@@ -11,7 +11,17 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^ - [L]
 
-# Verzeichnisse mit eigener index.html (z. B. das Musterprojekt)
+# Verzeichnisse MIT eigener index.html an mod_dir durchreichen. Zwingend
+# fuer die Wurzel einer Subdomain, deren Docroot genau so ein Verzeichnis
+# ist: dort ist der angefragte Pfad leer, und keine der Regeln darunter
+# kann greifen, weil ihr Muster mindestens ein Zeichen verlangt.
+# Verzeichnisse OHNE index.html - also die Prefetch-Ordner von Next 16 -
+# laufen bewusst nicht hier hinein, sonst leitet mod_dir wieder um.
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^ - [L]
+
+# /pfad ohne Schraegstrich auf ein Verzeichnis mit index.html
 RewriteCond %{REQUEST_FILENAME}/index.html -f
 RewriteRule ^(.+?)/?$ $1/index.html [L]
 
