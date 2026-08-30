@@ -28,5 +28,8 @@ jobs:
       - name: Build Next.js app
         run: npm run build:dist
 
-      - name: ✅ Build completed successfully
-        run: echo "Ready to deploy! dist-site/ folder is ready."
+      # Vergleicht die gebauten HTML-Dateien mit der Fassung aus HEAD.
+      # Faengt den dokumentierten Hauptfehler: Quelle geaendert, Rebuild
+      # vergessen - dann ist die Live-Seite veraltet oder liefert 404.
+      - name: dist-site gegen Quellstand pruefen
+        run: npm run check:dist

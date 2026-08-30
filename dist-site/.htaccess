@@ -14,3 +14,41 @@ RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
 
 DirectoryIndex index.html
+
+# ============================================================
+# Kompression
+# ============================================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ============================================================
+# Cache
+# Alles unter /_next/static/ traegt einen Inhaltshash im Dateinamen und
+# kann daher unbegrenzt gecacht werden. HTML dagegen nie, sonst wirkt ein
+# Deploy erst nach Ablauf des Caches.
+# ============================================================
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Bilder liegen unter /images/ ohne Hash im Namen - deshalb begrenzt,
+  # nicht "immutable".
+  <FilesMatch "\.(png|jpe?g|webp|avif|svg|ico)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # ==========================================================
+  # Security-Header
+  # ==========================================================
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

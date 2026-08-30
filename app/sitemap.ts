@@ -2,8 +2,6 @@ import type { MetadataRoute } from 'next';
 import { siteConfig, siteRoutes } from '@/lib/seo/site';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const now = new Date();
-
   const priorityByRoute: Record<string, number> = {
     '/': 1,
     '/leistungen': 0.9,
@@ -32,7 +30,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return siteRoutes.map((route) => ({
     url: `${siteConfig.baseUrl}${route}`,
-    lastModified: now,
     changeFrequency: frequencyByRoute[route] ?? 'monthly',
     priority: priorityByRoute[route] ?? 0.5
   }));

@@ -3,7 +3,6 @@ import type { Viewport } from 'next';
 import { Fraunces, IBM_Plex_Sans } from 'next/font/google';
 import { AnalyticsScripts } from '@/components/seo/analytics';
 import { JsonLdScript } from '@/components/seo/json-ld';
-import { WebVitalsMonitor } from '@/components/seo/web-vitals-monitor';
 import { buildAlternates } from '@/lib/seo/metadata';
 import { localBusinessSchema, organizationSchema, webSiteSchema } from '@/lib/seo/schema';
 import { siteConfig } from '@/lib/seo/site';
@@ -122,7 +121,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLdScript id="localbusiness-schema" schema={localBusinessSchema()} />
         <JsonLdScript id="website-schema" schema={webSiteSchema()} />
         <AnalyticsScripts />
-        <WebVitalsMonitor />
         <SiteHeader />
         {children}
         <SiteFooter />
