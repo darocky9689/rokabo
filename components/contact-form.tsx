@@ -1,59 +1,164 @@
 'use client';
 
-import { FormEvent, useState } from 'react';
+import Link from 'next/link';
+import { FormEvent, useEffect, useRef, useState } from 'react';
+
+type Status = 'bereit' | 'sendet' | 'gesendet' | 'fehler';
+
+const MAILTO = 'mailto:info@rokabo.de';
+const TELEFON = 'tel:+491756240804';
 
 export function ContactForm() {
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [status, setStatus] = useState<Status>('bereit');
+  const [meldung, setMeldung] = useState('');
+  const [fehlerFelder, setFehlerFelder] = useState<string[]>([]);
+  const geladenAm = useRef(Date.now());
+  const statusRef = useRef<HTMLDivElement | null>(null);
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  /* Nach jeder Rueckmeldung den Fokus dorthin setzen. Ohne das erfaehrt
+     niemand, der die Seite mit der Tastatur oder einem Screenreader
+     bedient, ob das Absenden geklappt hat. */
+  useEffect(() => {
+    if (status === 'gesendet' || status === 'fehler') {
+      statusRef.current?.focus();
+    }
+  }, [status]);
+
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === 'sendet') return;
+
     const form = event.currentTarget;
     const data = new FormData(form);
 
-    const name = String(data.get('name') || '').trim();
-    const email = String(data.get('email') || '').trim();
-    const company = String(data.get('company') || '').trim();
-    const packageName = String(data.get('package') || '').trim();
-    const message = String(data.get('message') || '').trim();
+    const pflicht: Array<[string, string]> = [
+      ['name', 'Name'],
+      ['email', 'E-Mail'],
+      ['company', 'Betrieb oder Organisation'],
+      ['package', 'Gewünschtes Paket'],
+      ['bestehend', 'Bestehende Website'],
+    ];
 
-    if (!name || !email || !company || !packageName || message.length < 20) {
-      setError('Bitte alle Felder ausfüllen, Nachricht mindestens 20 Zeichen.');
+    const leer = pflicht.filter(([feld]) => String(data.get(feld) || '').trim() === '');
+    const nachricht = String(data.get('message') || '').trim();
+
+    if (leer.length > 0 || nachricht.length < 20) {
+      const felder = leer.map(([feld]) => feld);
+      if (nachricht.length < 20) felder.push('message');
+      setFehlerFelder(felder);
+      setStatus('fehler');
+      setMeldung(
+        leer.length > 0
+          ? `Bitte ausfüllen: ${leer.map(([, label]) => label).join(', ')}.`
+          : 'Bitte beschreibe dein Vorhaben in mindestens 20 Zeichen.'
+      );
       return;
     }
 
-    setError('');
-    setSubmitted(true);
+    setFehlerFelder([]);
+    setStatus('sendet');
+    setMeldung('');
 
-    const subject = encodeURIComponent('Neue Anfrage über rokabo Website');
-    const body = encodeURIComponent(
-      `Name: ${name}\nBetrieb/Organisation: ${company}\nE-Mail: ${email}\nGewünschtes Paket: ${packageName}\n\nNachricht:\n${message}`
+    data.set('vergangen', String(Math.round((Date.now() - geladenAm.current) / 1000)));
+
+    try {
+      const antwort = await fetch('/kontakt.php', { method: 'POST', body: data });
+      const ergebnis = await antwort.json().catch(() => null);
+
+      if (antwort.ok && ergebnis?.ok) {
+        form.reset();
+        geladenAm.current = Date.now();
+        setStatus('gesendet');
+        setMeldung('');
+        return;
+      }
+
+      setStatus('fehler');
+      setMeldung(ergebnis?.error ?? 'Das Senden hat nicht geklappt.');
+    } catch {
+      setStatus('fehler');
+      setMeldung('Die Verbindung kam nicht zustande.');
+    }
+  }
+
+  const fehlerhaft = (feld: string) => fehlerFelder.includes(feld);
+
+  if (status === 'gesendet') {
+    return (
+      <div className="form-status form-status-ok" role="status" tabIndex={-1} ref={statusRef}>
+        <p className="ui">Danke, die Anfrage ist angekommen.</p>
+        <p>
+          Du bekommst in der Regel innerhalb eines Werktags eine Antwort. Wenn es eilt,
+          geht auch ein Anruf: <a href={TELEFON}>+49 175 624 0804</a>.
+        </p>
+      </div>
     );
-
-    // Kein form.reset(): oeffnet sich kein Mailprogramm, waere die Eingabe sonst verloren.
-    window.location.href = `mailto:info@rokabo.de?subject=${subject}&body=${body}`;
   }
 
   return (
     <form onSubmit={onSubmit} noValidate>
       <div className="form-group">
         <label htmlFor="name">Name</label>
-        <input className="form-input" type="text" id="name" name="name" required />
+        <input
+          className="form-input"
+          type="text"
+          id="name"
+          name="name"
+          autoComplete="name"
+          required
+          aria-invalid={fehlerhaft('name') || undefined}
+        />
       </div>
 
       <div className="form-group">
         <label htmlFor="email">E-Mail</label>
-        <input className="form-input" type="email" id="email" name="email" required />
+        <input
+          className="form-input"
+          type="email"
+          id="email"
+          name="email"
+          autoComplete="email"
+          required
+          aria-invalid={fehlerhaft('email') || undefined}
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="telefon">Telefon <span className="form-optional">optional</span></label>
+        <input
+          className="form-input"
+          type="tel"
+          id="telefon"
+          name="telefon"
+          autoComplete="tel"
+          aria-describedby="telefon-hinweis"
+        />
+        <p className="form-hint" id="telefon-hinweis">Falls dir ein Rückruf lieber ist.</p>
       </div>
 
       <div className="form-group">
         <label htmlFor="company">Betrieb oder Organisation</label>
-        <input className="form-input" type="text" id="company" name="company" required />
+        <input
+          className="form-input"
+          type="text"
+          id="company"
+          name="company"
+          autoComplete="organization"
+          required
+          aria-invalid={fehlerhaft('company') || undefined}
+        />
       </div>
 
       <div className="form-group">
         <label htmlFor="package">Gewünschtes Paket</label>
-        <select className="form-select" id="package" name="package" required>
+        <select
+          className="form-select"
+          id="package"
+          name="package"
+          required
+          aria-invalid={fehlerhaft('package') || undefined}
+          defaultValue=""
+        >
           <option value="">Bitte wählen</option>
           <option value="Unsicher">Ich bin noch unsicher</option>
           <option value="Starter - Single Page">Starter - Single Page</option>
@@ -64,20 +169,70 @@ export function ContactForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="message">Nachricht</label>
-        <textarea className="form-textarea" id="message" name="message" required />
+        <label htmlFor="bestehend">Hast du schon eine Website?</label>
+        <select
+          className="form-select"
+          id="bestehend"
+          name="bestehend"
+          required
+          aria-invalid={fehlerhaft('bestehend') || undefined}
+          defaultValue=""
+        >
+          <option value="">Bitte wählen</option>
+          <option value="Nein, noch keine">Nein, noch keine</option>
+          <option value="Ja, soll ersetzt werden">Ja, soll ersetzt werden</option>
+          <option value="Ja, soll nur betreut werden">Ja, soll nur betreut werden</option>
+        </select>
       </div>
 
-      <button className="btn btn-primary" type="submit">Anfrage senden</button>
-      {error ? <p className="error">{error}</p> : null}
-      {submitted ? (
-        <p className="success-message" style={{ display: 'block' }}>
-          Danke. Dein E-Mail-Programm öffnet sich jetzt - deine Eingaben bleiben hier stehen.
-          Falls sich nichts öffnet, schreib direkt an{' '}
-          <a href="mailto:info@rokabo.de">info@rokabo.de</a> oder ruf an:{' '}
-          <a href="tel:+491756240804">+49 175 624 0804</a>.
+      <div className="form-group">
+        <label htmlFor="message">Nachricht</label>
+        <textarea
+          className="form-textarea"
+          id="message"
+          name="message"
+          required
+          aria-invalid={fehlerhaft('message') || undefined}
+          aria-describedby="message-hinweis"
+        />
+        <p className="form-hint" id="message-hinweis">
+          Was machst du, und was soll die Website leisten? Mindestens 20 Zeichen.
         </p>
-      ) : null}
+      </div>
+
+      {/* Honeypot: fuer Menschen unsichtbar, Bots fuellen ihn aus. */}
+      <div className="form-honeypot" aria-hidden="true">
+        <label htmlFor="fax">Fax</label>
+        <input type="text" id="fax" name="fax" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      <button className="btn btn-primary" type="submit" disabled={status === 'sendet'}>
+        {status === 'sendet' ? 'Wird gesendet …' : 'Anfrage senden'}
+      </button>
+
+      <p className="form-hint">
+        Mit dem Absenden werden deine Angaben zur Bearbeitung der Anfrage verarbeitet.
+        Näheres in der <Link className="inline-link" href="/datenschutz">Datenschutzerklärung</Link>.
+      </p>
+
+      <div
+        className={`form-status${status === 'fehler' ? ' form-status-fehler' : ''}`}
+        role="status"
+        aria-live="polite"
+        tabIndex={-1}
+        ref={statusRef}
+      >
+        {status === 'fehler' ? (
+          <>
+            <p className="ui">{meldung}</p>
+            <p>
+              Klappt es weiterhin nicht? Schreib direkt an{' '}
+              <a href={MAILTO}>info@rokabo.de</a> oder ruf an:{' '}
+              <a href={TELEFON}>+49 175 624 0804</a>.
+            </p>
+          </>
+        ) : null}
+      </div>
     </form>
   );
 }

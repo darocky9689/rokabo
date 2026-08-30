@@ -98,14 +98,14 @@ components/             'use client' nur wo Interaktivität nötig ist
   theme-toggle.tsx      schreibt localStorage['theme'] + data-theme auf <html>
   process-timeline.tsx  4-Schritte-Ablauf auf der Startseite
   leistungen-tabelle.tsx Paketvergleich
-  contact-form.tsx      Validierung + mailto:-Absprung (kein Backend!)
+  contact-form.tsx      Validierung + POST an /kontakt.php, mailto nur als Fallback
   seo/                  json-ld, analytics (GA4/GTM)
 lib/seo/
   site.ts               siteConfig (Firmendaten, Schema-Bausteine) + siteRoutes
   metadata.ts           buildPageMetadata(): Titel ≤60, Description ≤160, OG/Twitter, canonical
   schema.ts             JSON-LD-Builder mit safeSchema()-Validierung
 scripts/                release-live.sh, deploy-without-onedrive.sh, check-dist-drift.mjs, seo-*.mjs
-public/                 images/, .htaccess
+public/                 images/, .htaccess, kontakt.php (PHP-Endpoint des Formulars)
 ```
 
 Import-Alias: `@/*` → Projektwurzel (z. B. `@/components/site-header`).
@@ -195,10 +195,16 @@ Preise und Paketangaben stehen an mehreren Stellen ([app/preise/page.tsx](app/pr
 
 ## Stolperfallen
 
-- **Kontaktformular hat kein Backend**: es öffnet `mailto:info@rokabo.de` und meldet Erfolg,
-  ohne einen zu kennen. Ein PHP-Endpoint unter `public/kontakt.php` ist beschlossen, aber
-  noch nicht gebaut – PHP läuft auf Plesk (Beleg: [httpdocs-deploy.php](httpdocs-deploy.php)),
-  der Static Export bleibt davon unberührt. Keine Next-API-Route vorschlagen.
+- **Das Kontaktformular hat ein Backend, aber keine Next-API-Route**:
+  [public/kontakt.php](public/kontakt.php) wandert beim Build nach `dist-site/` und wird von
+  LiteSpeed direkt an PHP übergeben. Der Static Export bleibt unberührt – **keine
+  Next-API-Route vorschlagen**, die würde `output: 'export'` brechen.
+  Absender ist `info@rokabo.de` (muss eine Adresse der eigenen Domain sein, sonst scheitert
+  SPF), der Besucher steht im `Reply-To`. Schlägt `mail()` fehl, zeigt das Formular einen
+  echten Fehler samt Telefonnummer statt einer falschen Erfolgsmeldung.
+- **Anfrage-Log**: `kontakt.php` schreibt eine Zeile nach `../rokabo-anfragen.log`, also
+  **oberhalb** des Docroots. Bewusst ohne Name, E-Mail und IP – nur Zeitstempel, Paket,
+  Website-Status und Referrer. Das ist die Konversionsmessung; Browser-Analytics gibt es nicht.
 - **Kein Browser-Analytics gewollt.** [components/seo/analytics.tsx](components/seo/analytics.tsx)
   existiert und bindet GA4/GTM nur mit gesetzten Env-Variablen ein – die sind bewusst nicht
   gesetzt. Gemessen wird über Search Console und später über ein serverseitiges Anfrage-Log.

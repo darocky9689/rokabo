@@ -19,6 +19,12 @@ DirectoryIndex index.html
 # Fehlerseite statt der gestalteten 404-Seite aus dem Export.
 ErrorDocument 404 /404.html
 
+# Guertel und Hosentraeger: das Anfrage-Log wird ausserhalb des Docroots
+# geschrieben. Falls es doch einmal hier landet, ist es nicht abrufbar.
+<FilesMatch "\.log$">
+  Require all denied
+</FilesMatch>
+
 # ============================================================
 # Kompression
 # ============================================================
