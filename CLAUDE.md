@@ -176,9 +176,17 @@ Erlaubnisliste mit Einzelselektoren wieder aufbauen.
 
 ## Ansprache und Positionierung
 
-- **Zielgruppe: bundesweit**, keine regionale Zuspitzung. Drei gleichrangige Segmente –
-  Handwerk, Fotografen und Kreative, Schulen und Einrichtungen. Segmentseiten unter
-  flachen URLs (`/website-fuer-handwerker` usw.) sind geplant, aber noch nicht gebaut.
+- **Zielgruppe: bundesweit**, keine regionale Zuspitzung. Drei gleichrangige Segmente mit
+  je einer eigenen Seite unter flacher URL: `/website-fuer-handwerker`,
+  `/website-fuer-fotografen`, `/website-fuer-schulen` (letztere deckt Schulen, Kitas und
+  Vereine ab). Sie stehen **nicht** in der Hauptnavigation – erreichbar über die
+  Orientierungszeile auf der Startseite, den Footer-Block „Für wen" und die Sitemap.
+
+  **Jede Segmentseite muss substanziell eigenständig sein**, sonst sind es Doorway Pages:
+  eigenes Versprechen, eigene Problembeschreibung in der Sprache des Segments, eigener
+  Beweis, eigenes empfohlenes Paket, eigene FAQ mit eigenem `faqSchema()`. Gemessen liegt
+  die Wortüberlappung zwischen je zwei Seiten bei 23–26 %, wortgleich ist nur die
+  CTA-Zeile. Wer eine vierte Seite ergänzt, hält diesen Abstand ein.
 - **Die Klammer ist das Betriebsmodell**, nicht ein Ergebnisversprechen: gebaut, betreut,
   dauerhaft aktuell. **„Mehr Anfragen" gehört nicht aufs Dach** – es schließt Schulen und
   Vereine aus. Auf den Segmentseiten, wo es zutrifft, ist es richtig.
@@ -266,6 +274,9 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
 - **`/preise`, `/preise.html` und `/preise/`** liefern alle 200. Der Canonical löst das
   für Google auf; 301-Weiterleitungen auf die kurze Form wären sauberer, bergen aber
   Schleifenrisiko in den Rewrite-Regeln.
-- **Segmentseiten** (Handwerk, Fotografen, Schulen) sind beschlossen, aber nicht gebaut.
+- **Barrierefreiheit** wird auf `/website-fuer-schulen` als Kompetenz benannt, aber
+  bewusst eng gefasst: „an den Anforderungen der BITV 2.0 ausgerichtet", ausdrücklich
+  **ohne** Zusage einer förmlichen Konformitätsprüfung. Diese Grenze nicht aufweichen,
+  ohne dass die Prüfung auch geliefert werden kann.
 - **Framework-Upgrade** auf Next 16 / React 19 ist bewusst zurückgestellt, bis der
   inhaltliche Backlog steht – dann als eigener Commit ohne Feature-Änderung.

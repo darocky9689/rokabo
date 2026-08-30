@@ -43,6 +43,9 @@ export const siteConfig = {
 
 export const siteRoutes = [
   '/',
+  '/website-fuer-handwerker',
+  '/website-fuer-fotografen',
+  '/website-fuer-schulen',
   '/leistungen',
   '/preise',
   '/portfolio',

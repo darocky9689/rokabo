@@ -164,6 +164,16 @@ a:hover {
   }
 }
 
+/* Orientierungszeile auf der Startseite: drei leise Tueren zu den
+   Segmentseiten. Bewusst Textlinks statt Buttons - sie duerfen nicht mit
+   der einen lauten Aktion konkurrieren. */
+.segment-zeile {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem var(--space-2);
+  margin-top: var(--space-1);
+}
+
 /* ===== LAYOUT ===== */
 .container { width: min(100% - 2rem, var(--container)); margin-inline: auto; }
 .section { padding: var(--space-4) 0; }

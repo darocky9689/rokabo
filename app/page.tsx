@@ -105,6 +105,20 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="section-tight">
+        <div className="container">
+          <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wofür soll die Website arbeiten?</h2>
+          <p className="section-subtitle">
+            Drei Ausgangslagen, drei Wege. Such dir den aus, der zu dir passt.
+          </p>
+          <p className="segment-zeile">
+            <Link className="inline-link" href="/website-fuer-handwerker">Handwerk und Bau</Link>
+            <Link className="inline-link" href="/website-fuer-fotografen">Fotografie und Kreative</Link>
+            <Link className="inline-link" href="/website-fuer-schulen">Schulen, Kitas und Vereine</Link>
+          </p>
+        </div>
+      </section>
+
       <section className="section section-band">
         <div className="container">
           <h2 className="section-title">Schon live: Websites, die du dir ansehen kannst</h2>

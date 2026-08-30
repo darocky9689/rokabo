@@ -4,6 +4,9 @@ import { siteConfig, siteRoutes } from '@/lib/seo/site';
 export default function sitemap(): MetadataRoute.Sitemap {
   const priorityByRoute: Record<string, number> = {
     '/': 1,
+    '/website-fuer-handwerker': 0.9,
+    '/website-fuer-fotografen': 0.9,
+    '/website-fuer-schulen': 0.9,
     '/leistungen': 0.9,
     '/preise': 0.9,
     '/portfolio': 0.85,
@@ -17,6 +20,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const frequencyByRoute: Record<string, MetadataRoute.Sitemap[number]['changeFrequency']> = {
     '/': 'weekly',
+    '/website-fuer-handwerker': 'monthly',
+    '/website-fuer-fotografen': 'monthly',
+    '/website-fuer-schulen': 'monthly',
     '/leistungen': 'monthly',
     '/preise': 'weekly',
     '/portfolio': 'monthly',

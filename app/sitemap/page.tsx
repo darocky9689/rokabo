@@ -12,6 +12,9 @@ export const metadata: Metadata = buildPageMetadata({
 
 const routeLabels: Record<string, string> = {
   '/': 'Startseite',
+  '/website-fuer-handwerker': 'Handwerk und Bau',
+  '/website-fuer-fotografen': 'Fotografie und Kreative',
+  '/website-fuer-schulen': 'Schulen, Kitas und Vereine',
   '/leistungen': 'Leistungen',
   '/preise': 'Preise',
   '/portfolio': 'Portfolio',
