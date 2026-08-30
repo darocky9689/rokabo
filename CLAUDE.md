@@ -81,10 +81,14 @@ Doku: [DEPLOYMENT_SETUP.md](DEPLOYMENT_SETUP.md), [PLESK-GIT-SETUP.md](PLESK-GIT
 `grundschule-spreenhagen.de` (WordPress) liegt im gleichen Plesk-Space:
 
 - `grundschule-spreenhagen.de` → Docroot `httpdocs`
-- `rokabo.de` → Docroot **`rokabo.de/httpdocs`** (mit Punkt-de! Der Pfad stand hier
-  lange falsch als `rokabo/httpdocs` und hat schon einmal eine Fehlersuche gekostet)
-- Git-Checkout-Ziel: `rokabo/repo` – **nicht verifiziert**, vermutlich ebenfalls mit
-  Punkt-de. Vor der nächsten Nutzung in Plesk nachsehen.
+- `rokabo.de` → Docroot **`rokabo.de/httpdocs`** – mit Punkt-de
+- Git-Checkout-Ziel: **`/rokabo/repo`** – ohne Punkt-de
+
+  **Die beiden Pfade folgen verschiedenen Schemata, das ist kein Tippfehler.** Der
+  Docroot heißt nach der Domain, das Git-Verzeichnis nicht. In der Doku stand der
+  Docroot lange fälschlich als `rokabo/httpdocs`; das hat beim Einrichten der
+  Musterprojekt-Subdomain eine Fehlersuche gekostet, weil dieser Pfad schlicht nicht
+  existiert. Beide Angaben sind in Plesk verifiziert.
 - Deployment-Aktionen **nur** bei `rokabo.de` eintragen, nie eine gemeinsame Action.
 
 ## Architektur
