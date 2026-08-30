@@ -21,6 +21,7 @@ export default function UeberUnsPage() {
           wechselnde Ansprechpartner.
         </p>
 
+        <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Was dich erwartet</h2>
         <div className="grid grid-2">
           <article className="card">
             <h3>Warum rokabo?</h3>
@@ -48,7 +49,8 @@ export default function UeberUnsPage() {
           </article>
         </div>
 
-        <section className="section" aria-label="Arbeitsweise">
+        <section className="section">
+          <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Zusammenarbeit</h2>
           <div className="grid grid-2">
             <article className="card">
               <h3>So läuft es ab</h3>

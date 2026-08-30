@@ -5,11 +5,11 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <h3>rokabo</h3>
+          <h2>rokabo</h2>
           <p>Websites im Abo - gebaut, betreut und dauerhaft aktuell. Für Betriebe, Selbstständige und Einrichtungen.</p>
         </div>
         <div>
-          <h3>Seiten</h3>
+          <h2>Seiten</h2>
           <ul className="footer-links">
             <li><Link href="/">Start</Link></li>
             <li><Link href="/leistungen">Leistungen</Link></li>
@@ -21,7 +21,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h3>Kontakt & Rechtliches</h3>
+          <h2>Kontakt & Rechtliches</h2>
           <ul className="footer-links">
             <li><a href="mailto:info@rokabo.de">info@rokabo.de</a></li>
             <li><a href="tel:+491756240804">+49 175 624 0804</a></li>

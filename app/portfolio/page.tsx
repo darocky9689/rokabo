@@ -18,7 +18,7 @@ const projects: Project[] = [
     id: 1,
     title: 'juro-fotografie.de',
     category: 'fotografie',
-    description: 'Moderne Portfolio-Website für Fotografie mit klarer Bildsprache und schneller Navigation.',
+    description: 'Portfolio für Fotografie mit klarer Bildsprache und schneller Navigation.',
     image: '/images/juro-fotografie.webp',
     url: 'https://juro-fotografie.de',
     tags: ['Portfolio', 'Fotografie', 'Branding'],
@@ -27,7 +27,7 @@ const projects: Project[] = [
     id: 2,
     title: 'grundschule-spreenhagen.de',
     category: 'bildung',
-    description: 'Informations-Website für Schule mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.',
+    description: 'Informationsseite einer Schule mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.',
     image: '/images/grundschule-spreenhagen.webp',
     url: 'https://grundschule-spreenhagen.de',
     tags: ['Bildung', 'Informationsarchitektur', 'CMS'],
@@ -89,6 +89,8 @@ export default function PortfolioPage() {
             Websites, die du dir direkt ansehen kannst - gebaut und bis heute betreut.
           </p>
 
+          <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Aktuelle Projekte</h2>
+
           {/* Category Filter */}
           <div className="filter-container">
             <div className="filter-buttons">
@@ -113,7 +115,7 @@ export default function PortfolioPage() {
                     {imageError !== project.id ? (
                       <img
                         src={project.image}
-                        alt={`Website-Preview von ${project.title}`}
+                        alt={`Vorschau von ${project.title}`}
                         className="portfolio-image"
                         onError={() => setImageError(project.id)}
                       />
@@ -166,7 +168,7 @@ export default function PortfolioPage() {
       </section>
 
       {lightboxProject && (
-        <div className="lightbox-backdrop" onClick={() => setLightboxProject(null)} role="dialog" aria-modal="true" aria-label="Website-Preview">
+        <div className="lightbox-backdrop" onClick={() => setLightboxProject(null)} role="dialog" aria-modal="true" aria-label="Vorschau">
           <div className="lightbox-content" onClick={(event) => event.stopPropagation()}>
             <button
               type="button"
@@ -186,7 +188,7 @@ export default function PortfolioPage() {
             <div className="lightbox-meta">
               <h3>{lightboxProject.title}</h3>
               <a href={lightboxProject.url} target="_blank" rel="noopener noreferrer" className="btn btn-accent">
-                Website öffnen
+                Seite öffnen
               </a>
             </div>
           </div>
