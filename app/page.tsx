@@ -4,7 +4,7 @@ import Link from 'next/link';
 import ProcessTimeline from '@/components/process-timeline';
 
 export const metadata: Metadata = {
-  title: 'rokabo | Website im Abo für mehr Anfragen',
+  title: 'rokabo | Eine Website, um die sich jemand kümmert',
   description:
     'Mehr Kundenanfragen mit einer klaren Website im Abo: ohne hohe Startkosten, mit festen Monatskosten und laufender Betreuung.',
   alternates: { canonical: '/' }
@@ -16,11 +16,11 @@ export default function HomePage() {
       <section className="hero">
         <div className="container hero-inner">
           <div>
-            <h1>Mehr Anfragen über deine Website. Einfach, planbar und ohne hohe Startkosten.</h1>
+            <h1>Eine Website, um die sich jemand kümmert.</h1>
             <p>
-              Deine Website soll verkaufen, nicht nur gut aussehen.
-              Mit rokabo bekommst du eine klare Website, die Vertrauen schafft und neue Kunden anspricht.
-              Du zahlst monatlich, wir kümmern uns um Technik, Pflege und Sichtbarkeit bei Google.
+              Ich baue sie, halte sie aktuell und bin erreichbar, wenn etwas ist.
+              Du zahlst monatlich - ohne hohe Startkosten und ohne dass du dich
+              um Technik, Updates oder Sicherheit kümmern musst.
             </p>
             <p className="hero-price ui">
               <strong>ab 49 € im Monat</strong>
@@ -32,11 +32,11 @@ export default function HomePage() {
             </div>
           </div>
           <aside className="hero-card" aria-label="Vorteile auf einen Blick">
-            <h2 className="card-title">Dein Vorteil mit rokabo</h2>
+            <h2 className="card-title">Was du bekommst</h2>
             <ul className="check-list">
               <li>Feste Monatskosten, klar planbar</li>
-              <li>Persönliche Betreuung statt Alleingang</li>
-              <li>Texte und Aufbau mit Fokus auf Anfragen</li>
+              <li>Eine feste Ansprechperson, kein Ticketsystem</li>
+              <li>Aufbau und Texte auf dein Ziel ausgerichtet</li>
               <li>Hosting, Sicherheit und Updates inklusive</li>
             </ul>
           </aside>
@@ -78,7 +78,7 @@ export default function HomePage() {
         <div className="container">
           <h2 className="section-title">Klein starten oder gleich das volle Programm</h2>
           <p className="section-subtitle">
-            Beides bauen wir - mit demselben Anspruch: sauber umgesetzt, schnell geladen,
+            Beides baue ich - mit demselben Anspruch: sauber umgesetzt, schnell geladen,
             bei Google auffindbar. Und festlegen musst du dich heute nicht für immer, denn
             was klein anfängt, wird später erweitert statt neu gebaut.
           </p>
@@ -105,9 +105,9 @@ export default function HomePage() {
 
       <section className="section section-band">
         <div className="container">
-          <h2 className="section-title">Schon live: echte Projekte aus der Region</h2>
+          <h2 className="section-title">Schon live: Websites, die du dir ansehen kannst</h2>
           <p className="section-subtitle">
-            Zwei Beispiele, die du dir direkt ansehen kannst - beide von rokabo umgesetzt und betreut.
+            Zwei sehr verschiedene Aufgaben - beide von mir umgesetzt und bis heute betreut.
           </p>
           <div className="proof-grid">
             <article className="proof-item">
@@ -155,7 +155,7 @@ export default function HomePage() {
         <div className="container card">
           <h2 className="card-title">Offene Fragen zu Kosten, Laufzeit und Ablauf?</h2>
           <p className="section-subtitle">
-            Im FAQ stehen die Antworten - inklusive Laufzeit, Kündigungsfrist und Betreuung.
+            Im FAQ stehen die Antworten - inklusive Laufzeit, Kündigungsfrist, Care Coins und Betreuung.
           </p>
           <div className="btn-row">
             <Link className="btn btn-quiet" href="/faq">FAQ ansehen</Link>
@@ -167,13 +167,12 @@ export default function HomePage() {
         <div className="container cta-banner">
           <h2>Lass uns über deine neue Website sprechen</h2>
           <p>
-            In 20 Minuten klären wir, wie du mehr passende Anfragen bekommst -
-            unverbindlich, ohne Verkaufsdruck.
+            In 20 Minuten klären wir, was deine Website leisten soll und was das
+            kostet - unverbindlich, ohne Verkaufsdruck.
           </p>
           <p>
-            Du bekommst einen festen Ansprechpartner, klare Absprachen und eine
-            Antwort in der Regel innerhalb eines Werktags - je früher wir sprechen,
-            desto eher ist deine Seite online.
+            Du sprichst direkt mit der Person, die deine Website baut und betreut.
+            Klare Absprachen, Antwort in der Regel innerhalb eines Werktags.
           </p>
           <div className="btn-row cta-actions">
             <Link className="btn btn-accent" href="/kontakt">Kostenloses Gespräch anfragen</Link>

@@ -19,9 +19,9 @@ const processSteps: ProcessStep[] = [
   {
     icon: 'call',
     title: 'Erstgespräch',
-    description: 'Kurz kennenlernen · Angebot in 48h.',
+    description: 'Kurz kennenlernen · Angebot in 2 Werktagen.',
     cta: 'Termin anfragen',
-    details: 'In einem kurzen Video-Call klären wir Ziel, Inhalte und Prioritäten - du bekommst einen klaren Fahrplan.',
+    details: 'In einem kurzen Gespräch klären wir Ziel, Inhalte und Prioritäten - du bekommst einen klaren Fahrplan.',
     href: '/kontakt',
   },
   {
@@ -37,7 +37,7 @@ const processSteps: ProcessStep[] = [
     title: 'Entwicklung',
     description: 'Umsetzen + prüfen.',
     cta: 'Paket wählen',
-    details: 'Wir bauen deine Website sauber in einer Testumgebung und prüfen alles, bevor sie live geht.',
+    details: 'Ich baue deine Website in einer Testumgebung und prüfe alles, bevor sie live geht.',
     href: '/preise',
   },
   {
@@ -47,9 +47,9 @@ const processSteps: ProcessStep[] = [
     cta: 'Jetzt starten',
     details: (
       <>
-        Nach dem Launch bleiben wir an deiner Seite - mit{' '}
+        Nach dem Launch bleibe ich an deiner Seite - mit{' '}
         <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> und regelmäßiger
-        Pflege für dauerhaft starke Ergebnisse.
+        Pflege, damit die Seite aktuell bleibt.
       </>
     ),
     href: '/kontakt',

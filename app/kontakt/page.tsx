@@ -4,7 +4,7 @@ import { ContactForm } from '@/components/contact-form';
 export const metadata: Metadata = {
   title: 'Kontakt | rokabo',
   description:
-    'Kontaktiere uns für ein kostenloses Erstgespräch und finde das passende Website-Paket für dein Ziel.',
+    'Kostenloses Erstgespräch anfragen: 20 Minuten, unverbindlich, Angebot innerhalb von zwei Werktagen.',
   alternates: { canonical: '/kontakt' }
 };
 
@@ -15,8 +15,8 @@ export default function KontaktPage() {
         <article className="form">
           <h1 className="section-title">Kostenloses Erstgespräch</h1>
           <p className="form-note">
-            Erzähle uns kurz, was du erreichen willst.
-            Wir melden uns meist innerhalb eines Werktags und zeigen dir, welches Paket am besten passt.
+            Erzähl mir kurz, was du erreichen willst. Ich melde mich in der Regel innerhalb
+            eines Werktags und sage dir, welches Paket passt - oder ob ich der Falsche dafür bin.
           </p>
           <ContactForm />
         </article>

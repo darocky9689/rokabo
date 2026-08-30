@@ -5,7 +5,7 @@ import LeistungenTabelle from '@/components/leistungen-tabelle';
 export const metadata: Metadata = {
   title: 'Leistungen | rokabo',
   description:
-    'Unsere Leistungen für deine Website im Abo: klare Pakete, feste Monatskosten und Betreuung aus einer Hand.',
+    'Die Leistungen im Website-Abo: klare Pakete, feste Monatskosten und Betreuung aus einer Hand.',
   alternates: { canonical: '/leistungen' }
 };
 
@@ -15,8 +15,8 @@ export default function LeistungenPage() {
       <div className="container">
         <h1 className="section-title">Leistungen</h1>
         <p className="section-subtitle">
-          Du bekommst alles, was du für eine Website brauchst, die Vertrauen schafft und Anfragen bringt.
-          Klar im Paket, klar im Preis.
+          Alles, was eine Website braucht, um zu funktionieren und zu bleiben:
+          Aufbau, Inhalte, Technik und laufende Pflege. Klar im Paket, klar im Preis.
         </p>
 
         <section className="services-table-section" aria-label="Dynamische Leistungenstabelle">
@@ -24,7 +24,7 @@ export default function LeistungenPage() {
             Leistungen im Vergleich
           </h2>
           <p className="section-subtitle">
-            Klicke ein Paket an, um Details zu sehen. Reihenfolge: Basic, Starter, Professional, Premium.
+            Klick ein Paket an, um Details zu sehen.
           </p>
           <LeistungenTabelle />
         </section>
@@ -32,9 +32,9 @@ export default function LeistungenPage() {
         <section className="section" aria-label="Technologien und individuelle Möglichkeiten">
           <div className="grid grid-2">
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>So setzen wir deine Website um</h2>
+              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Womit ich deine Website baue</h2>
               <ul className="check-list">
-                <li>WordPress, wenn du schnell online sein willst</li>
+                <li>WordPress, wenn du selbst Inhalte pflegen willst</li>
                 <li>Individuelle Entwicklung, wenn du mehr brauchst</li>
                 <li>Schnelle Ladezeiten für bessere Nutzererfahrung</li>
                 <li>SEO je nach Paket inklusive</li>
@@ -43,8 +43,8 @@ export default function LeistungenPage() {
             <article className="card">
               <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wenn du etwas Besonderes brauchst</h2>
               <p className="muted">
-                Ob spezielle Funktionen, Anbindungen oder eigene Abläufe:
-                Wir bauen die Lösung, die zu deinem Angebot und deinen Kunden passt.
+                Ob spezielle Funktionen, Anbindungen oder eigene Abläufe: Sag mir, was
+                gebraucht wird - ich sage dir ehrlich, ob und wie es sich lohnt.
               </p>
             </article>
           </div>

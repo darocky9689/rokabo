@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Portfolio mit realen Website-Referenzen | rokabo',
+  title: 'Referenzen: gebaute und betreute Websites | rokabo',
   description:
-    'Entdecke unsere Referenzen: Professionelle Websites für Fotografen, Schulen und Unternehmen. Von juro-fotografie.de bis zur Grundschule Spreenhagen.',
+    'Websites, die du dir direkt ansehen kannst: juro-fotografie.de und die Grundschule Spreenhagen - beide gebaut und bis heute betreut.',
   keyword: 'Website Referenzen',
   path: '/portfolio'
 });

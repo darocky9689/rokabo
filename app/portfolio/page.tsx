@@ -86,7 +86,7 @@ export default function PortfolioPage() {
         <div className="container">
           <h1 className="section-title">Portfolio</h1>
           <p className="section-subtitle">
-            Entdecke, welche beeindruckenden Websites wir für unsere Kunden realisiert haben.
+            Websites, die du dir direkt ansehen kannst - gebaut und bis heute betreut.
           </p>
 
           {/* Category Filter */}
@@ -198,10 +198,10 @@ export default function PortfolioPage() {
         <div className="container">
           <div className="card cta-banner" style={{ marginTop: 'var(--space-3)' }}>
             <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
-              Dein Projekt ist das nächste in unserem Portfolio
+              Wird deine Website die nächste hier?
             </h2>
             <p className="section-subtitle">
-              Starte deine Website-Reise zusammen mit uns. Kostenlose Beratung - von der Idee zur Live-Website.
+              Erzähl mir kurz, worum es geht. Das Erstgespräch kostet nichts und dauert 20 Minuten.
             </p>
             <div className="btn-row">
               <Link className="btn btn-primary" href="/kontakt">

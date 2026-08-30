@@ -42,10 +42,10 @@ export const metadata: Metadata = {
   category: 'technology',
   keywords: [
     'Website im Abo',
+    'Website erstellen lassen',
+    'Website Betreuung',
     'WordPress Website',
-    'Next.js Agentur',
-    'Technische SEO',
-    'Webentwicklung für kleine Unternehmen'
+    'Website für Handwerker'
   ],
   robots: {
     index: true,
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
         url: '/images/ROKABO.png',
         width: 500,
         height: 500,
-        alt: 'Logo von rokabo, Anbieter für moderne Websites im Abo'
+        alt: 'Logo von rokabo, Websites im Abo'
       }
     ]
   },
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: '/images/ROKABO.png',
-        alt: 'Logo von rokabo, Anbieter für moderne Websites im Abo'
+        alt: 'Logo von rokabo, Websites im Abo'
       }
     ]
   },

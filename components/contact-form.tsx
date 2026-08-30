@@ -27,7 +27,7 @@ export function ContactForm() {
 
     const subject = encodeURIComponent('Neue Anfrage über rokabo Website');
     const body = encodeURIComponent(
-      `Name: ${name}\nUnternehmen: ${company}\nE-Mail: ${email}\nGewünschtes Paket: ${packageName}\n\nNachricht:\n${message}`
+      `Name: ${name}\nBetrieb/Organisation: ${company}\nE-Mail: ${email}\nGewünschtes Paket: ${packageName}\n\nNachricht:\n${message}`
     );
 
     // Kein form.reset(): oeffnet sich kein Mailprogramm, waere die Eingabe sonst verloren.
@@ -47,7 +47,7 @@ export function ContactForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="company">Unternehmen</label>
+        <label htmlFor="company">Betrieb oder Organisation</label>
         <input className="form-input" type="text" id="company" name="company" required />
       </div>
 
@@ -55,11 +55,11 @@ export function ContactForm() {
         <label htmlFor="package">Gewünschtes Paket</label>
         <select className="form-select" id="package" name="package" required>
           <option value="">Bitte wählen</option>
+          <option value="Unsicher">Ich bin noch unsicher</option>
           <option value="Starter - Single Page">Starter - Single Page</option>
           <option value="Professional">Professional</option>
           <option value="Premium">Premium</option>
-          <option value="Basic">Basic</option>
-          <option value="Unsicher">Ich bin noch unsicher</option>
+          <option value="Nur E-Mail und Domain">Nur E-Mail und Domain</option>
         </select>
       </div>
 
@@ -73,7 +73,7 @@ export function ContactForm() {
       {submitted ? (
         <p className="success-message" style={{ display: 'block' }}>
           Danke. Dein E-Mail-Programm öffnet sich jetzt - deine Eingaben bleiben hier stehen.
-          Falls sich nichts öffnet, schreib uns direkt an{' '}
+          Falls sich nichts öffnet, schreib mir direkt an{' '}
           <a href="mailto:info@rokabo.de">info@rokabo.de</a> oder ruf an:{' '}
           <a href="tel:+491756240804">+49 175 624 0804</a>.
         </p>

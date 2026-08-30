@@ -5,7 +5,7 @@ import { siteRoutes } from '@/lib/seo/site';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'HTML Sitemap für Nutzer und Suchmaschinen | rokabo',
-  description: 'Übersicht aller wichtigen Seiten von rokabo für Nutzerführung und bessere Crawlability.',
+  description: 'Übersicht aller Seiten von rokabo - für schnelle Orientierung und bessere Auffindbarkeit.',
   keyword: 'HTML Sitemap',
   path: '/sitemap'
 });
@@ -16,7 +16,7 @@ const routeLabels: Record<string, string> = {
   '/preise': 'Preise',
   '/portfolio': 'Portfolio',
   '/faq': 'FAQ',
-  '/ueber-uns': 'Über uns',
+  '/ueber-uns': 'Über rokabo',
   '/kontakt': 'Kontakt',
   '/impressum': 'Impressum',
   '/datenschutz': 'Datenschutz',

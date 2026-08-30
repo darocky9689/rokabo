@@ -4,9 +4,9 @@ export const siteConfig = {
   baseUrl: 'https://rokabo.de',
   defaultLocale: 'de-DE',
   locales: ['de-DE'] as const,
-  defaultTitle: 'rokabo | Websites im Abo mit WordPress und Next.js',
+  defaultTitle: 'rokabo | Website im Abo - gebaut und dauerhaft betreut',
   defaultDescription:
-    'rokabo erstellt moderne Websites im Abo für kleine Unternehmen: WordPress-Lösungen und individuelle Webentwicklung mit Next.js und TypeScript.',
+    'Website im Abo: Ich baue deine Website, halte sie aktuell und bin erreichbar, wenn etwas ist. Fester Monatsbeitrag statt hoher Einmalzahlung.',
   organization: {
     '@type': 'Organization',
     name: 'rokabo',
