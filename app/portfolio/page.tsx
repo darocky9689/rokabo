@@ -30,7 +30,7 @@ interface Segment {
 /* Gruppiert nach den drei Segmenten. Leere Gruppen werden nicht gerendert -
    eine Ueberschrift ohne Projekte darunter macht die Luecke sichtbarer als
    ihr Fehlen. Wer ein "hinweis"-Feld setzt, markiert das Projekt als Muster:
-   es bekommt eine Marke ueber dem Titel und oeffnet nicht im neuen Tab. */
+   es bekommt eine Marke ueber dem Titel und einen eigenen Linktext. */
 const segmente: Segment[] = [
   {
     titel: 'Handwerk und Bau',
@@ -40,7 +40,7 @@ const segmente: Segment[] = [
         beschreibung:
           'Vierseitiger Auftritt für einen Elektromeisterbetrieb: Leistungen, Ablauf, Notdienst und Kontakt. Ein Musterprojekt ohne realen Auftraggeber - gebaut, um zu zeigen, wie so eine Seite aussieht.',
         bild: '/images/muster-elektro.png',
-        url: '/muster/',
+        url: 'https://muster.rokabo.de/',
         merkmale: ['Vier Seiten', 'Notdienst-Anker', 'Ohne Fotos gebaut'],
         hinweis: 'Musterprojekt',
       },
@@ -110,18 +110,15 @@ export default function PortfolioPage() {
                           <span className="portfolio-tag ui" key={merkmal}>{merkmal}</span>
                         ))}
                       </div>
-                      {projekt.hinweis ? (
-                        <a className="proof-link" href={projekt.url}>Muster ansehen</a>
-                      ) : (
-                        <a
-                          className="proof-link"
-                          href={projekt.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Seite ansehen<span className="sr-only"> (öffnet in neuem Tab)</span>
-                        </a>
-                      )}
+                      <a
+                        className="proof-link"
+                        href={projekt.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {projekt.hinweis ? 'Muster ansehen' : 'Seite ansehen'}
+                        <span className="sr-only"> (öffnet in neuem Tab)</span>
+                      </a>
                     </div>
                   </article>
                 ))}

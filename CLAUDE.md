@@ -222,8 +222,10 @@ wie rokabo – Pflaume, Türkis, Dark Mode – und beweist damit nichts. Es hat 
 Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen Requests.
 
 - liegt in `public/muster/` und wird beim Build unverändert nach `dist-site/muster/` kopiert
-- erreichbar über `rokabo.de/muster/` und über eine Subdomain, deren Docroot in Plesk auf
-  `rokabo.de/httpdocs/muster` zeigt
+- erreichbar über **`https://muster.rokabo.de/`** (Plesk-Subdomain, Docroot
+  `rokabo.de/httpdocs/muster`, Let's-Encrypt-Zertifikat, 301 von http auf https) und
+  weiterhin über `rokabo.de/muster/`. Beide zeigen auf denselben Ordner, das Portfolio
+  verlinkt die Subdomain.
 - **`noindex, nofollow`** in jeder Seite plus `X-Robots-Tag` in `public/muster/.htaccess`
 - keine Rewrite-Regeln in dieser `.htaccess` – die Seiten verlinken sich mit expliziter
   `.html`-Endung, damit nichts mit den Regeln der Hauptdomain kollidiert
