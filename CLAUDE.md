@@ -126,7 +126,19 @@ Import-Alias: `@/*` → Projektwurzel (z. B. `@/components/site-header`).
   `--radius-*`). Keine Inline-Styles außer für Einzelfälle, wie sie im Code schon vorkommen.
 - **Dark Mode ist Default.** Light Mode = `:root[data-theme="light"]`. Jede neue
   farbige Regel braucht ihr Light-Mode-Pendant, sonst wird sie im Light Mode unlesbar –
-  das war schon mehrfach Ursache für Nacharbeit.
+  das war schon mehrfach Ursache für Nacharbeit. **`npm run lint` prüft das mit**:
+  [scripts/check-farbliterale.mjs](scripts/check-farbliterale.mjs) meldet jede Farbe, die
+  ausserhalb der `:root`-Blöcke steht. Der Altbestand (85 Literale) ist in
+  `scripts/farbliterale-baseline.json` eingefroren – neue schlagen fehl. Wird es weniger,
+  meldet der Check das und die Basislinie gehört mit `--update` nachgezogen.
+- **Drei Flächenebenen, nicht eine Formel.** Jede Ebene fügt genau eine Sache hinzu:
+  **1 ruhig** = nur Hintergrund (`.trust-strip`, `.faq-item`, `.process-accordion`);
+  **2 gehoben** = + Rahmen + `--shadow-1` (`.card`, `.form`, `.hero-card`, `.proof-item`);
+  **3 Akzent** = + getönter Grund + `--border-accent` + `--shadow-2`. Ebene 3 trägt
+  **genau eine Fläche pro Seite** (`.cta-banner`) – das ist der Mechanismus, der den einen
+  Weg sichtbar macht. Keine weiteren `box-shadow`-Literale für Flächen anlegen.
+  Die Interaktions-Glows (türkis, pflaume) sind davon unberührt: das sind Farbeffekte,
+  keine Ebenen.
 - **Überschriften-Ebenen nie überspringen.** Der Footer nutzt `h2`, weil seine Spalten
   die oberste Ebene im `footer`-Landmark sind. Kartenüberschriften sind `h3` und brauchen
   über sich ein `h2` im selben Abschnitt. `h2` und `h3` haben **keine eigene Schriftgröße**
@@ -200,7 +212,8 @@ Preise und Paketangaben stehen an mehreren Stellen ([app/preise/page.tsx](app/pr
   LiteSpeed direkt an PHP übergeben. Der Static Export bleibt unberührt – **keine
   Next-API-Route vorschlagen**, die würde `output: 'export'` brechen.
   Absender ist `info@rokabo.de` (muss eine Adresse der eigenen Domain sein, sonst scheitert
-  SPF), der Besucher steht im `Reply-To`. Schlägt `mail()` fehl, zeigt das Formular einen
+  SPF), der Besucher steht im `Reply-To`. **`mail()` stellt auf diesem Server nachweislich
+  zu** – am 30.08.2026 end-to-end geprüft, kein SMTP nötig. Schlägt `mail()` fehl, zeigt das Formular einen
   echten Fehler samt Telefonnummer statt einer falschen Erfolgsmeldung.
 - **Anfrage-Log**: `kontakt.php` schreibt eine Zeile nach `../rokabo-anfragen.log`, also
   **oberhalb** des Docroots. Bewusst ohne Name, E-Mail und IP – nur Zeitstempel, Paket,
