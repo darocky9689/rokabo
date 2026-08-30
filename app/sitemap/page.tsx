@@ -4,7 +4,7 @@ import { buildPageMetadata } from '@/lib/seo/metadata';
 import { siteRoutes } from '@/lib/seo/site';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'HTML Sitemap für Nutzer und Suchmaschinen | rokabo',
+  title: 'Sitemap: alle Seiten im Überblick',
   description: 'Übersicht aller Seiten von rokabo - für schnelle Orientierung und bessere Auffindbarkeit.',
   keyword: 'HTML Sitemap',
   path: '/sitemap'

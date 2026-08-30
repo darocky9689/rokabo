@@ -62,7 +62,7 @@ export function buildPageMetadata(input: SeoMetadataInput): Metadata {
       url: absoluteUrl(normalizedPath),
       title: pageTitle,
       description: pageDescription,
-      images: [{ url: imageUrl, width: 1200, height: 630, alt: `${pageTitle} – ${siteConfig.name}` }]
+      images: [{ url: imageUrl, width: 500, height: 500, alt: `${pageTitle} – ${siteConfig.name}` }]
     },
     twitter: {
       card: 'summary_large_image',

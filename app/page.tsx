@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProcessTimeline from '@/components/process-timeline';
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: 'rokabo | Eine Website, um die sich jemand kümmert',
   description:
-    'Mehr Kundenanfragen mit einer klaren Website im Abo: ohne hohe Startkosten, mit festen Monatskosten und laufender Betreuung.',
-  alternates: { canonical: '/' }
-};
+    'Website im Abo: rokabo baut deine Website, hält sie aktuell und ist erreichbar, wenn etwas ist. Fester Monatsbeitrag statt hoher Einmalzahlung.',
+  keyword: 'Website im Abo',
+  path: '/'
+});
 
 export default function HomePage() {
   return (
@@ -18,7 +20,7 @@ export default function HomePage() {
           <div>
             <h1>Eine Website, um die sich jemand kümmert.</h1>
             <p>
-              Ich baue sie, halte sie aktuell und bin erreichbar, wenn etwas ist.
+              rokabo baut sie, hält sie aktuell und ist erreichbar, wenn etwas ist.
               Du zahlst monatlich - ohne hohe Startkosten und ohne dass du dich
               um Technik, Updates oder Sicherheit kümmern musst.
             </p>
@@ -78,7 +80,7 @@ export default function HomePage() {
         <div className="container">
           <h2 className="section-title">Klein starten oder gleich das volle Programm</h2>
           <p className="section-subtitle">
-            Beides baue ich - mit demselben Anspruch: sauber umgesetzt, schnell geladen,
+            Beides gibt es bei rokabo - mit demselben Anspruch: sauber umgesetzt, schnell geladen,
             bei Google auffindbar. Und festlegen musst du dich heute nicht für immer, denn
             was klein anfängt, wird später erweitert statt neu gebaut.
           </p>
@@ -107,7 +109,7 @@ export default function HomePage() {
         <div className="container">
           <h2 className="section-title">Schon live: Websites, die du dir ansehen kannst</h2>
           <p className="section-subtitle">
-            Zwei sehr verschiedene Aufgaben - beide von mir umgesetzt und bis heute betreut.
+            Zwei sehr verschiedene Aufgaben - beide von rokabo umgesetzt und bis heute betreut.
           </p>
           <div className="proof-grid">
             <article className="proof-item">

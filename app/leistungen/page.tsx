@@ -1,13 +1,15 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 import LeistungenTabelle from '@/components/leistungen-tabelle';
 
-export const metadata: Metadata = {
-  title: 'Leistungen | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Leistungen: was im Website-Abo steckt',
   description:
     'Die Leistungen im Website-Abo: klare Pakete, feste Monatskosten und Betreuung aus einer Hand.',
-  alternates: { canonical: '/leistungen' }
-};
+  keyword: 'Website Leistungen',
+  path: '/leistungen'
+});
 
 export default function LeistungenPage() {
   return (
@@ -32,7 +34,7 @@ export default function LeistungenPage() {
         <section className="section" aria-label="Technologien und individuelle Möglichkeiten">
           <div className="grid grid-2">
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Womit ich deine Website baue</h2>
+              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Womit rokabo deine Website baut</h2>
               <ul className="check-list">
                 <li>WordPress, wenn du selbst Inhalte pflegen willst</li>
                 <li>Individuelle Entwicklung, wenn du mehr brauchst</li>
@@ -43,8 +45,9 @@ export default function LeistungenPage() {
             <article className="card">
               <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wenn du etwas Besonderes brauchst</h2>
               <p className="muted">
-                Ob spezielle Funktionen, Anbindungen oder eigene Abläufe: Sag mir, was
-                gebraucht wird - ich sage dir ehrlich, ob und wie es sich lohnt.
+                Ob spezielle Funktionen, Anbindungen oder eigene Abläufe: Sag, was
+                gebraucht wird - du bekommst eine ehrliche Einschätzung, ob und wie
+                es sich lohnt.
               </p>
             </article>
           </div>

@@ -37,7 +37,7 @@ const processSteps: ProcessStep[] = [
     title: 'Entwicklung',
     description: 'Umsetzen + prüfen.',
     cta: 'Paket wählen',
-    details: 'Ich baue deine Website in einer Testumgebung und prüfe alles, bevor sie live geht.',
+    details: 'Deine Website entsteht in einer Testumgebung - dort wird alles geprüft, bevor sie live geht.',
     href: '/preise',
   },
   {
@@ -47,7 +47,7 @@ const processSteps: ProcessStep[] = [
     cta: 'Jetzt starten',
     details: (
       <>
-        Nach dem Launch bleibe ich an deiner Seite - mit{' '}
+        Nach dem Launch bleibt rokabo an deiner Seite - mit{' '}
         <Link className="inline-link" href="/faq#care-coins">Care Coins</Link> und regelmäßiger
         Pflege, damit die Seite aktuell bleibt.
       </>

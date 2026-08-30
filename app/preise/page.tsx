@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Preise | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Preise: Website im Abo ab 49 € im Monat',
   description:
     'Feste Monatskosten für deine Website im Abo: drei Pakete, klare Leistungen, keine hohe Einmalzahlung zum Start.',
-  alternates: { canonical: '/preise' }
-};
+  keyword: 'Website im Abo Preise',
+  path: '/preise'
+});
 
 export default function PreisePage() {
   return (
@@ -15,7 +17,7 @@ export default function PreisePage() {
         <h1 className="section-title">Preise</h1>
         <p className="section-subtitle">
           Drei Pakete mit festen Monatskosten. Du zahlst monatlich, ohne hohe Startkosten -
-          und ich kümmere mich um Technik, Pflege und Sichtbarkeit.
+          rokabo kümmert sich um Technik, Pflege und Sichtbarkeit.
         </p>
         <p className="muted">
           Starter für den schnellen Start mit einer Seite. Professional ist die Empfehlung für

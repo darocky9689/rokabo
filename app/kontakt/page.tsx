@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import { ContactForm } from '@/components/contact-form';
 
-export const metadata: Metadata = {
-  title: 'Kontakt | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Kontakt: kostenloses Erstgespräch',
   description:
     'Kostenloses Erstgespräch anfragen: 20 Minuten, unverbindlich, Angebot innerhalb von zwei Werktagen.',
-  alternates: { canonical: '/kontakt' }
-};
+  keyword: 'Erstgespräch',
+  path: '/kontakt'
+});
 
 export default function KontaktPage() {
   return (
@@ -15,8 +17,9 @@ export default function KontaktPage() {
         <article className="form">
           <h1 className="section-title">Kostenloses Erstgespräch</h1>
           <p className="form-note">
-            Erzähl mir kurz, was du erreichen willst. Ich melde mich in der Regel innerhalb
-            eines Werktags und sage dir, welches Paket passt - oder ob ich der Falsche dafür bin.
+            Erzähl kurz, was du erreichen willst. Du bekommst in der Regel innerhalb eines
+            Werktags eine Antwort - mit einer Empfehlung, welches Paket passt, oder dem
+            ehrlichen Hinweis, dass rokabo nicht das Richtige für dein Vorhaben ist.
           </p>
           <ContactForm />
         </article>

@@ -15,6 +15,10 @@ RewriteRule ^(.+?)/?$ $1.html [L]
 
 DirectoryIndex index.html
 
+# Ohne diese Zeile liefert Apache bei unbekannten URLs seine eigene nackte
+# Fehlerseite statt der gestalteten 404-Seite aus dem Export.
+ErrorDocument 404 /404.html
+
 # ============================================================
 # Kompression
 # ============================================================

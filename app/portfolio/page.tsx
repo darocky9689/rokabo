@@ -201,7 +201,7 @@ export default function PortfolioPage() {
               Wird deine Website die nächste hier?
             </h2>
             <p className="section-subtitle">
-              Erzähl mir kurz, worum es geht. Das Erstgespräch kostet nichts und dauert 20 Minuten.
+              Erzähl kurz, worum es geht. Das Erstgespräch kostet nichts und dauert 20 Minuten.
             </p>
             <div className="btn-row">
               <Link className="btn btn-primary" href="/kontakt">

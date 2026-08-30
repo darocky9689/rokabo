@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
 const faqs = [
@@ -12,7 +13,7 @@ const faqs = [
     id: 'care-coins',
     question: 'Was sind Care Coins?',
     answer:
-      'Ein Care Coin ist eine Änderung bis 30 Minuten: Text anpassen, Bild tauschen, Öffnungszeiten ändern, eine Kleinigkeit am Layout. Mehrere Wünsche zählen einzeln. Professional enthält 6 Coins pro Jahr, Premium 12; nicht genutzte Coins verfallen zum Jahresende. Größere Änderungen rechne ich vorher ab, damit es keine Überraschung gibt.'
+      'Ein Care Coin ist eine Änderung bis 30 Minuten: Text anpassen, Bild tauschen, Öffnungszeiten ändern, eine Kleinigkeit am Layout. Mehrere Wünsche zählen einzeln. Professional enthält 6 Coins pro Jahr, Premium 12; nicht genutzte Coins verfallen zum Jahresende. Größere Änderungen werden vorher abgestimmt und abgerechnet, damit es keine Überraschung gibt.'
   },
   {
     id: 'zielgruppe',
@@ -40,15 +41,15 @@ const faqs = [
   },
   {
     id: 'mitarbeit',
-    question: 'Was brauchst du von mir, damit es schnell geht?',
+    question: 'Was braucht rokabo von mir, damit es schnell geht?',
     answer:
-      'Deine Ziele, ein paar Basisinformationen zu deinem Angebot und Rückmeldung auf die Entwürfe. Wenn Texte oder Bilder fehlen, helfe ich bei Struktur und Formulierung.'
+      'Deine Ziele, ein paar Basisinformationen zu deinem Angebot und Rückmeldung auf die Entwürfe. Wenn Texte oder Bilder fehlen, hilft rokabo bei Struktur und Formulierung.'
   },
   {
     id: 'aenderungen',
     question: 'Kann ich später Inhalte ändern lassen?',
     answer:
-      'Ja. Kleine Änderungen laufen über deine Care Coins, größere bespreche ich vorher mit dir. Die Seite bleibt aktuell, ohne dass du selbst etwas tun musst.'
+      'Ja. Kleine Änderungen laufen über deine Care Coins, größere werden vorher besprochen. Die Seite bleibt aktuell, ohne dass du selbst etwas tun musst.'
   },
   {
     id: 'seo-paket',
@@ -64,9 +65,9 @@ const faqs = [
   },
   {
     id: 'email-domain',
-    question: 'Kümmerst du dich auch um E-Mail und Domain?',
+    question: 'Kümmert sich rokabo auch um E-Mail und Domain?',
     answer:
-      'Ja. Ich richte Postfächer mit deiner eigenen Domain ein und übernehme die technische Verwaltung - weg von gmail.com oder web.de. Das gibt es auch ohne Website ab 15 € im Monat.'
+      'Ja. rokabo richtet Postfächer mit deiner eigenen Domain ein und übernimmt die technische Verwaltung - weg von gmail.com oder web.de. Das gibt es auch ohne Website ab 15 € im Monat.'
   },
   {
     id: 'paketwechsel',
@@ -76,9 +77,9 @@ const faqs = [
   },
   {
     id: 'wordpress-nextjs',
-    question: 'Arbeitest du nur mit WordPress?',
+    question: 'Arbeitet rokabo nur mit WordPress?',
     answer:
-      'Nein. WordPress, wenn du selbst Inhalte pflegen willst; eine individuelle Umsetzung, wenn Tempo und Flexibilität wichtiger sind. Ich entscheide das nicht nach Vorliebe, sondern nach deinem Fall.'
+      'Nein. WordPress, wenn du selbst Inhalte pflegen willst; eine individuelle Umsetzung, wenn Tempo und Flexibilität wichtiger sind. Entschieden wird nach deinem Fall, nicht nach Vorliebe.'
   },
   {
     id: 'laufzeit',
@@ -94,12 +95,13 @@ const faqs = [
   }
 ];
 
-export const metadata: Metadata = {
-  title: 'FAQ | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Häufige Fragen zur Website im Abo',
   description:
     'Antworten zur Website im Abo: Preise, Laufzeit, Care Coins, SEO und Betreuung - kurz und ohne Kleingedrucktes.',
-  alternates: { canonical: '/faq' }
-};
+  keyword: 'Website im Abo FAQ',
+  path: '/faq'
+});
 
 export default function FaqPage() {
   const faqSchema = {
@@ -122,7 +124,7 @@ export default function FaqPage() {
           <h1 className="section-title">Häufige Fragen (FAQ)</h1>
           <p className="section-subtitle">
             Kurze, klare Antworten zum Website-Abo. Wenn etwas offen bleibt,
-            melde dich direkt - ich antworte in der Regel innerhalb eines Werktags.
+            melde dich direkt - du bekommst in der Regel innerhalb eines Werktags eine Antwort.
           </p>
 
           <div className="faq-list" aria-label="Häufige Fragen und Antworten">

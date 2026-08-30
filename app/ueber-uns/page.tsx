@@ -1,12 +1,14 @@
 import type { Metadata } from 'next';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 import Link from 'next/link';
 
-export const metadata: Metadata = {
-  title: 'Über rokabo | rokabo',
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Wer hinter rokabo steckt',
   description:
-    'Hinter rokabo steht eine Person, nicht eine Agentur. Websites im Abo: gebaut, betreut und dauerhaft aktuell gehalten.',
-  alternates: { canonical: '/ueber-uns' }
-};
+    'Hinter rokabo steht eine Person, keine Agentur. Websites im Abo: gebaut, betreut und dauerhaft aktuell gehalten.',
+  keyword: 'Über rokabo',
+  path: '/ueber-uns'
+});
 
 export default function UeberUnsPage() {
   return (
@@ -38,9 +40,9 @@ export default function UeberUnsPage() {
               danach fragst.
             </p>
             <p className="muted">
-              Ob WordPress oder eine individuelle Umsetzung, entscheide ich nach deinem Fall,
-              nicht nach Vorliebe. So bleibt die Seite schnell und lässt sich später
-              erweitern, statt neu gebaut zu werden.
+              Ob WordPress oder eine individuelle Umsetzung, entscheidet sich nach deinem
+              Fall und nicht nach Vorliebe. So bleibt die Seite schnell und lässt sich
+              später erweitern, statt neu gebaut zu werden.
             </p>
             <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch anfragen</Link>
           </article>
@@ -49,7 +51,7 @@ export default function UeberUnsPage() {
         <section className="section" aria-label="Arbeitsweise">
           <div className="grid grid-2">
             <article className="card">
-              <h3>So arbeite ich</h3>
+              <h3>So läuft es ab</h3>
               <ul className="check-list">
                 <li>Kurz sprechen, Ziel festlegen - danach Angebot in zwei Werktagen</li>
                 <li>Entwürfe früh zeigen und gemeinsam abstimmen</li>
@@ -59,12 +61,12 @@ export default function UeberUnsPage() {
             <article className="card">
               <h3>Warum die Kundenzahl begrenzt ist</h3>
               <p className="muted">
-                Ich betreue bewusst nur eine begrenzte Zahl laufender Websites. Das ist die
-                Voraussetzung dafür, dass „feste Ansprechperson“ mehr ist als ein Satz auf
-                einer Website.
+                rokabo betreut bewusst nur eine begrenzte Zahl laufender Websites. Das ist
+                die Voraussetzung dafür, dass „feste Ansprechperson“ mehr ist als ein Satz
+                auf einer Website.
               </p>
               <p className="muted">
-                Wenn es gerade nicht passt, sage ich das im Erstgespräch - lieber ein
+                Wenn es gerade nicht passt, erfährst du das im Erstgespräch - lieber ein
                 ehrliches Nein als eine Betreuung, die nach drei Monaten einschläft.
               </p>
               <Link className="btn btn-secondary" href="/preise">Pakete vergleichen</Link>

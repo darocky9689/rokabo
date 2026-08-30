@@ -1,4 +1,15 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo/metadata';
+
+/* Ohne eigene Metadata erbt die 404-Seite das Canonical der Startseite und
+   erklaert damit jede nicht existierende URL zur Startseite. */
+export const metadata: Metadata = buildPageMetadata({
+  title: 'Seite nicht gefunden',
+  description: 'Diese Seite existiert nicht oder wurde verschoben.',
+  path: '/404',
+  noindex: true
+});
 
 export default function NotFound() {
   return (

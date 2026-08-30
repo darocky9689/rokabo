@@ -28,7 +28,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sitemap': 'monthly'
   };
 
-  return siteRoutes.map((route) => ({
+  /* Impressum und Datenschutz tragen noindex - sie gehoeren nicht in eine
+     Sitemap, die dem Crawler sagt "bitte indexieren". */
+  const indexableRoutes = siteRoutes.filter(
+    (route) => route !== '/impressum' && route !== '/datenschutz'
+  );
+
+  return indexableRoutes.map((route) => ({
     url: `${siteConfig.baseUrl}${route}`,
     changeFrequency: frequencyByRoute[route] ?? 'monthly',
     priority: priorityByRoute[route] ?? 0.5

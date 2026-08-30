@@ -73,7 +73,7 @@ export function ContactForm() {
       {submitted ? (
         <p className="success-message" style={{ display: 'block' }}>
           Danke. Dein E-Mail-Programm öffnet sich jetzt - deine Eingaben bleiben hier stehen.
-          Falls sich nichts öffnet, schreib mir direkt an{' '}
+          Falls sich nichts öffnet, schreib direkt an{' '}
           <a href="mailto:info@rokabo.de">info@rokabo.de</a> oder ruf an:{' '}
           <a href="tel:+491756240804">+49 175 624 0804</a>.
         </p>

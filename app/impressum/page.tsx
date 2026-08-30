@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Impressum und Anbieterkennzeichnung | rokabo',
+  title: 'Impressum',
   description: 'Impressum nach § 5 TMG und § 55 RStV für rokabo.',
   keyword: 'Impressum',
   path: '/impressum',

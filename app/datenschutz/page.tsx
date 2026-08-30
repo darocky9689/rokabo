@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = buildPageMetadata({
-  title: 'Datenschutz und DSGVO-Informationen | rokabo',
+  title: 'Datenschutz',
   description: 'Datenschutzerklärung gemäß Art. 13 und 14 DSGVO für rokabo.',
   keyword: 'Datenschutz',
   path: '/datenschutz',
