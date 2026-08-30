@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* eslint-disable no-console */
 import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname, relative } from 'node:path';
+import { join, extname, relative, posix, sep } from 'node:path';
 
 const distDir = join(process.cwd(), 'dist-site');
 
@@ -24,11 +24,30 @@ function walkHtmlFiles(dir) {
   return files;
 }
 
-function normalizeInternalHref(href) {
+/*
+ * Loest einen Link auf den Pfad der Zieldatei im Export auf.
+ *
+ * Zwei Faelle, die vorher falsch behandelt wurden:
+ * - Links mit vorhandener .html-Endung bekamen trotzdem noch eine angehaengt
+ *   ("index.html" wurde zu "index.html.html")
+ * - relative Links galten als wurzel-relativ, obwohl sie vom Verzeichnis der
+ *   verlinkenden Datei aus zaehlen
+ */
+function normalizeInternalHref(href, quellePfad) {
   const pathOnly = href.split('#')[0].split('?')[0];
-  if (!pathOnly || pathOnly === '/') return '/index.html';
-  const normalized = pathOnly.endsWith('/') ? `${pathOnly}index.html` : `${pathOnly}.html`;
-  return normalized.replace(/^\//, '/');
+  if (!pathOnly) return null;
+  if (pathOnly === '/') return '/index.html';
+
+  const basis = posix.dirname(`/${quellePfad.split(sep).join('/')}`);
+  let ziel = pathOnly.startsWith('/') ? pathOnly : posix.join(basis, pathOnly);
+
+  if (ziel.endsWith('/')) {
+    ziel += 'index.html';
+  } else if (!ziel.endsWith('.html')) {
+    ziel += '.html';
+  }
+
+  return posix.normalize(ziel);
 }
 
 if (!statSync(distDir, { throwIfNoEntry: false })) {
@@ -49,7 +68,8 @@ for (const filePath of htmlFiles) {
       continue;
     }
 
-    const target = normalizeInternalHref(href);
+    const target = normalizeInternalHref(href, relative(distDir, filePath));
+    if (target === null) continue;
     if (!existingPaths.has(target)) {
       brokenCount += 1;
       console.log(`[BROKEN] ${relative(distDir, filePath)} -> ${href} (erwartet: ${target})`);

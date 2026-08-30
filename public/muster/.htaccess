@@ -1,0 +1,23 @@
+# Musterprojekt. Liegt unter dist-site/muster/ und ist damit sowohl ueber
+# rokabo.de/muster/ als auch ueber eine Subdomain erreichbar, deren Docroot
+# in Plesk auf rokabo/httpdocs/muster zeigt.
+#
+# Bewusst keine Rewrite-Regeln: die Seiten verlinken sich mit expliziter
+# .html-Endung, also gibt es nichts umzuschreiben - und nichts, was mit den
+# Regeln der Hauptdomain kollidieren koennte.
+
+DirectoryIndex index.html
+
+<IfModule mod_headers.c>
+  # Zweiter Riegel neben dem Meta-Tag. Ein Muster gehoert in keinen Index,
+  # auch nicht, wenn irgendwo ein Link darauf auftaucht.
+  Header always set X-Robots-Tag "noindex, nofollow"
+  Header always set X-Content-Type-Options "nosniff"
+
+  <FilesMatch "\.css$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>

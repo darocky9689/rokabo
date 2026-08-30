@@ -205,6 +205,26 @@ Preise und Paketangaben stehen an mehreren Stellen ([app/preise/page.tsx](app/pr
 [components/leistungen-tabelle.tsx](components/leistungen-tabelle.tsx), FAQ) – bei Änderungen
 **alle** Vorkommen prüfen. Die drei Quellen haben sich schon zweimal widersprochen.
 
+## Musterprojekt unter public/muster/
+
+Ein erfundener Elektrobetrieb („Elektro Musterhand") als Verkaufswerkzeug fürs
+Erstgespräch – vier Seiten, ausschließlich handgeschriebenes HTML und eigenes CSS.
+
+**Bewusst nicht Teil der Next-App.** Ein Muster, das `globals.css` benutzt, sieht aus
+wie rokabo – Pflaume, Türkis, Dark Mode – und beweist damit nichts. Es hat ein eigenes
+Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen Requests.
+
+- liegt in `public/muster/` und wird beim Build unverändert nach `dist-site/muster/` kopiert
+- erreichbar über `rokabo.de/muster/` und über eine Subdomain, deren Docroot in Plesk auf
+  `rokabo/httpdocs/muster` zeigt
+- **`noindex, nofollow`** in jeder Seite plus `X-Robots-Tag` in `public/muster/.htaccess`
+- keine Rewrite-Regeln in dieser `.htaccess` – die Seiten verlinken sich mit expliziter
+  `.html`-Endung, damit nichts mit den Regeln der Hauptdomain kollidiert
+- steht **nicht** in `siteRoutes` und taucht deshalb weder in `sitemap.xml` noch in der
+  Navigation auf. Das soll so bleiben.
+- alle Angaben sind erfunden (Name, Anschrift, Telefonnummer). Jede Seite trägt oben und
+  unten einen sichtbaren Hinweis darauf – der darf nicht entfernt werden.
+
 ## Stolperfallen
 
 - **Das Kontaktformular hat ein Backend, aber keine Next-API-Route**:
@@ -237,7 +257,6 @@ Preise und Paketangaben stehen an mehreren Stellen ([app/preise/page.tsx](app/pr
 - **`/preise`, `/preise.html` und `/preise/`** liefern alle 200. Der Canonical löst das
   für Google auf; 301-Weiterleitungen auf die kurze Form wären sauberer, bergen aber
   Schleifenrisiko in den Rewrite-Regeln.
-- **Segmentseiten** (Handwerk, Fotografen, Schulen) und ein **Musterprojekt** als
-  Handwerks-Referenz sind beschlossen, aber nicht gebaut.
+- **Segmentseiten** (Handwerk, Fotografen, Schulen) sind beschlossen, aber nicht gebaut.
 - **Framework-Upgrade** auf Next 16 / React 19 ist bewusst zurückgestellt, bis der
   inhaltliche Backlog steht – dann als eigener Commit ohne Feature-Änderung.
