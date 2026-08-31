@@ -93,7 +93,7 @@ export function ContactForm() {
   if (status === 'gesendet') {
     return (
       <div className="form-status form-status-ok" role="status" tabIndex={-1} ref={statusRef}>
-        <p className="ui">Danke, die Anfrage ist angekommen.</p>
+        <p>Danke, die Anfrage ist angekommen.</p>
         <p>
           Du bekommst in der Regel innerhalb eines Werktags eine Antwort. Wenn es eilt,
           geht auch ein Anruf: <a href={TELEFON}>+49 175 624 0804</a>.
@@ -231,7 +231,7 @@ export function ContactForm() {
       >
         {status === 'fehler' ? (
           <>
-            <p className="ui">{meldung}</p>
+            <p>{meldung}</p>
             <p>
               Klappt es weiterhin nicht? Schreib direkt an{' '}
               <a href={MAILTO}>info@rokabo.de</a> oder ruf an:{' '}

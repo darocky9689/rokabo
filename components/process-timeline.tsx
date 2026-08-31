@@ -125,9 +125,9 @@ export default function ProcessTimeline() {
                 <span className={`process-icon process-icon-${step.icon}`} aria-hidden="true">
                   <TimelineIcon icon={step.icon} />
                 </span>
-                <span className="process-title ui">{step.title}</span>
+                <span className="process-title">{step.title}</span>
                 <span className="process-desc text">{step.description}</span>
-                <span className="process-cta ui">Details ansehen</span>
+                <span className="process-cta">Details ansehen</span>
               </button>
 
               <div
@@ -147,7 +147,7 @@ export default function ProcessTimeline() {
 
       <article className="process-accordion" role="region" aria-label="Details zur aktiven Phase" id="process-details">
         <div className="process-accordion-text">
-          <p className="process-accordion-kicker ui">{phaseLabel}</p>
+          <p className="process-accordion-kicker">{phaseLabel}</p>
           <h3>{activeStep.title}</h3>
           <p className="process-accordion-desc">{activeStep.description}</p>
           <p>{activeStep.details}</p>

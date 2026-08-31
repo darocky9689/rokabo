@@ -88,7 +88,7 @@ export default function PortfolioPage() {
 
           {gefuellt.map((segment) => (
             <section className="section-tight" key={segment.titel}>
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>{segment.titel}</h2>
+              <h2 className="section-title section-title-sm">{segment.titel}</h2>
               <div className="proof-grid">
                 {segment.projekte.map((projekt) => (
                   <article className="proof-item" key={projekt.url}>
@@ -101,13 +101,13 @@ export default function PortfolioPage() {
                     />
                     <div className="proof-body">
                       {projekt.hinweis ? (
-                        <p className="proof-place ui">{projekt.hinweis}</p>
+                        <p className="proof-place">{projekt.hinweis}</p>
                       ) : null}
                       <h3>{projekt.titel}</h3>
                       <p>{projekt.beschreibung}</p>
                       <div className="portfolio-tags">
                         {projekt.merkmale.map((merkmal) => (
-                          <span className="portfolio-tag ui" key={merkmal}>{merkmal}</span>
+                          <span className="portfolio-tag" key={merkmal}>{merkmal}</span>
                         ))}
                       </div>
                       <a

@@ -16,12 +16,12 @@ export default function ImpressumPage() {
         <h1 className="section-title">Impressum</h1>
         <p className="section-subtitle">Impressum nach § 5 TMG und § 55 RStV</p>
 
-        <article className="card" style={{ marginBottom: '1rem' }}>
+        <article className="card">
           <h2>Anbieterkennzeichnung</h2>
           <p>Thomas Rockstroh<br />Am Anger 35<br />15518 Steinhöfel</p>
         </article>
 
-        <article className="card" style={{ marginBottom: '1rem' }}>
+        <article className="card">
           <h2>Kontakt</h2>
           <p>
             Telefon: <a href="tel:+491756240804">+49 175 624 0804</a><br />

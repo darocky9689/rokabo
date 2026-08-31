@@ -24,7 +24,7 @@ export default function HomePage() {
               Du zahlst monatlich - ohne hohe Startkosten und ohne dass du dich
               um Technik, Updates oder Sicherheit kümmern musst.
             </p>
-            <p className="hero-price ui">
+            <p className="hero-price">
               <strong>ab 49 € im Monat</strong>
               <span className="hero-price-note">ohne hohe Einmalzahlung zum Start</span>
             </p>
@@ -49,15 +49,15 @@ export default function HomePage() {
         <div className="container">
           <div className="trust-strip">
             <p>
-              <strong className="ui">12 Monate feste Betreuung</strong>
+              <strong>12 Monate feste Betreuung</strong>
               danach 3 Monate Kündigungsfrist.
             </p>
             <p>
-              <strong className="ui">Keine hohe Einmalzahlung</strong>
+              <strong>Keine hohe Einmalzahlung</strong>
               Du startest mit der Monatsrate, nicht mit einer Rechnung über Tausende.
             </p>
             <p>
-              <strong className="ui">Hosting, Sicherheit und Updates inklusive</strong>
+              <strong>Hosting, Sicherheit und Updates inklusive</strong>
               Ohne Zusatzrechnung, ohne dass du dich darum kümmern musst.
             </p>
           </div>
@@ -107,7 +107,7 @@ export default function HomePage() {
 
       <section className="section-tight">
         <div className="container">
-          <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wofür soll die Website arbeiten?</h2>
+          <h2 className="section-title section-title-sm">Wofür soll die Website arbeiten?</h2>
           <p className="section-subtitle">
             Drei Ausgangslagen, drei Wege. Such dir den aus, der zu dir passt.
           </p>
@@ -135,7 +135,7 @@ export default function HomePage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place ui">Fotografie</p>
+                <p className="proof-place">Fotografie</p>
                 <h3>juro-fotografie.de</h3>
                 <p>Portfolio-Website mit klarer Bildsprache und schneller Navigation.</p>
                 <a className="proof-link" href="https://juro-fotografie.de" target="_blank" rel="noopener noreferrer">
@@ -152,7 +152,7 @@ export default function HomePage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place ui">Bildung · Spreenhagen</p>
+                <p className="proof-place">Bildung · Spreenhagen</p>
                 <h3>grundschule-spreenhagen.de</h3>
                 <p>Informations-Website mit übersichtlicher Struktur für Eltern, Kinder und Lehrkräfte.</p>
                 <a className="proof-link" href="https://grundschule-spreenhagen.de" target="_blank" rel="noopener noreferrer">
@@ -161,7 +161,7 @@ export default function HomePage() {
               </div>
             </article>
           </div>
-          <div className="btn-row" style={{ marginTop: 'var(--space-2)' }}>
+          <div className="btn-row btn-row-spaced">
             <Link className="btn btn-quiet" href="/portfolio">Alle Projekte ansehen</Link>
           </div>
         </div>

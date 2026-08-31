@@ -124,7 +124,7 @@ export default function SchulenPage() {
               </p>
             </article>
           </div>
-          <p className="muted" style={{ marginTop: 'var(--space-2)' }}>
+          <p className="muted stack-top">
             Ausgerichtet an den Anforderungen der BITV 2.0. Eine förmliche
             Konformitätsprüfung durch eine externe Prüfstelle ist damit nicht abgedeckt -
             wenn euer Träger die verlangt, klären wir das vor dem Angebot.
@@ -145,7 +145,7 @@ export default function SchulenPage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place ui">Grundschule</p>
+                <p className="proof-place">Grundschule</p>
                 <h3>grundschule-spreenhagen.de</h3>
                 <p>
                   Informationsseite mit übersichtlicher Struktur für Eltern, Kinder und

@@ -38,7 +38,7 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="container copyright ui">© {new Date().getFullYear()} rokabo. Alle Rechte vorbehalten.</div>
+      <div className="container copyright">© {new Date().getFullYear()} rokabo. Alle Rechte vorbehalten.</div>
     </footer>
   );
 }

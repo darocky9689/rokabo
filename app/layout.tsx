@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { Viewport } from 'next';
-import { Lora, Montserrat } from 'next/font/google';
+import { Fraunces, Instrument_Sans } from 'next/font/google';
 import { AnalyticsScripts } from '@/components/seo/analytics';
 import { JsonLdScript } from '@/components/seo/json-ld';
 import { buildAlternates } from '@/lib/seo/metadata';
@@ -14,20 +14,25 @@ import './globals.css';
    eigenen Export ausgeliefert. Kein Laufzeit-Request an Google (DSGVO), und
    der statische Export bleibt ohne externe Abhaengigkeit.
 
-   Montserrat = Interface: Ueberschriften, Navigation, Buttons, Formulare,
-   Labels und hervorgehobene UI-Texte.
-   Lora = Lesetext: Absaetze, Listen und laengere beschreibende Inhalte. */
-const headingFont = Montserrat({
+   Fraunces = Display: ausschliesslich die Ueberschriften.
+   Instrument Sans = alles andere: Fliesstext, Navigation, Buttons, Formulare.
+
+   Die Rollen sind gegenueber Montserrat/Lora vertauscht - die Interface-
+   Schrift ist jetzt der Standard, der Serif das Opt-in. Weiterhin vier
+   Schnitte. Hinweis: weight und axes schliessen sich in next/font/google
+   gegenseitig aus; 600 ist bei Fraunces ein statischer Schnitt, die
+   SOFT/WONK-Achsen brauchen wir nicht. */
+const displayFont = Fraunces({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['600', '700'],
-  variable: '--font-heading',
+  weight: ['600'],
+  variable: '--font-display',
 });
 
-const bodyFont = Lora({
+const bodyFont = Instrument_Sans({
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '600'],
+  weight: ['400', '500', '600'],
   variable: '--font-body',
 });
 
@@ -99,22 +104,28 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: 'cover',
   themeColor: [
-    { media: '(prefers-color-scheme: dark)', color: '#3B0A45' },
-    { media: '(prefers-color-scheme: light)', color: '#f5e6f0' }
+    { media: '(prefers-color-scheme: dark)', color: '#141218' },
+    { media: '(prefers-color-scheme: light)', color: '#fbfaf7' }
   ]
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${headingFont.variable} ${bodyFont.variable}`}>
+    <html lang="de" className={`${displayFont.variable} ${bodyFont.variable}`}>
       <head>
-        <link rel="preload" as="image" href="/images/ROKABO.png" />
+        <link rel="preload" as="image" href="/images/rokabo-mark.png" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
               try {
-                const theme = localStorage.getItem('theme') || 'dark';
-                document.documentElement.setAttribute('data-theme', theme);
+                /* Gespeicherte Wahl schlaegt alles. Ohne sie entscheidet die
+                   Systemeinstellung - viewport.themeColor deklariert das
+                   ohnehin schon, die Seite selbst hat es bisher ignoriert.
+                   Ohne Angabe wird es hell: die helle Fassung ist die
+                   durchgestaltete. */
+                var gespeichert = localStorage.getItem('theme');
+                var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                document.documentElement.setAttribute('data-theme', gespeichert || system);
               } catch (e) {}
             `,
           }}

@@ -17,7 +17,7 @@ gemeldeten Canonical-Fehlern.
 Stack: **Next.js 16.3.3 (App Router, Turbopack) + React 19 + TypeScript 5.8**, `output: 'export'`
 (rein statischer Export, kein Node-Prozess auf dem Server). **Kein Tailwind, keine
 UI-Library, keine State-Library** – eine einzige handgeschriebene CSS-Datei
-([app/globals.css](app/globals.css), ~1900 Zeilen) mit CSS Custom Properties.
+([app/globals.css](app/globals.css), ~1200 Zeilen) mit CSS Custom Properties.
 Dependencies bewusst minimal halten (nur `next`, `react`, `react-dom`).
 
 Remote: `https://github.com/darocky9689/rokabo.git`, Branch **`main`** (kein Feature-Branch-Flow).
@@ -129,51 +129,74 @@ Import-Alias: `@/*` → Projektwurzel (z. B. `@/components/site-header`).
   Startseite statt auf die eigene Seite. Das war schon einmal auf sechs Seiten der Fall.
 - **Seitentitel ohne `| rokabo`.** Das Layout hat ein Title-Template, das den Marken-Suffix
   anhängt. Wer ihn selbst mitschreibt, bekommt „Titel | rokabo | rokabo".
-- **Styling**: neue Klassen in `globals.css` ergänzen, Farben/Abstände über die Custom
-  Properties (`--color-primary: #3b0a45`, `--color-accent: #40e0d0`, `--space-1..4`,
-  `--radius-*`). Keine Inline-Styles außer für Einzelfälle, wie sie im Code schon vorkommen.
-- **Dark Mode ist Default.** Light Mode = `:root[data-theme="light"]`. Jede neue
-  farbige Regel braucht ihr Light-Mode-Pendant, sonst wird sie im Light Mode unlesbar –
-  das war schon mehrfach Ursache für Nacharbeit. **`npm run lint` prüft das mit**:
-  [scripts/check-farbliterale.mjs](scripts/check-farbliterale.mjs) meldet jede Farbe, die
-  ausserhalb der `:root`-Blöcke steht. Der Altbestand (85 Literale) ist in
-  `scripts/farbliterale-baseline.json` eingefroren – neue schlagen fehl. Wird es weniger,
-  meldet der Check das und die Basislinie gehört mit `--update` nachgezogen.
-- **Drei Flächenebenen, nicht eine Formel.** Jede Ebene fügt genau eine Sache hinzu:
-  **1 ruhig** = nur Hintergrund (`.trust-strip`, `.faq-item`, `.process-accordion`);
-  **2 gehoben** = + Rahmen + `--shadow-1` (`.card`, `.form`, `.hero-card`, `.proof-item`);
-  **3 Akzent** = + getönter Grund + `--border-accent` + `--shadow-2`. Ebene 3 trägt
-  **genau eine Fläche pro Seite** (`.cta-banner`) – das ist der Mechanismus, der den einen
-  Weg sichtbar macht. Keine weiteren `box-shadow`-Literale für Flächen anlegen.
-  Die Interaktions-Glows (türkis, pflaume) sind davon unberührt: das sind Farbeffekte,
-  keine Ebenen.
+- **Styling**: neue Klassen in `globals.css` ergänzen, Farben/Abstände/Schriftgrößen
+  ausschließlich über die Custom Properties (`--ink`, `--paper`, `--rule`, `--accent`,
+  `--space-1..4`, `--step--1..4`). **Keine Inline-Styles** – es gibt genau einen im
+  Projekt, und der setzt eine dynamische Variable
+  ([process-timeline.tsx:103](components/process-timeline.tsx#L103)).
+- **Die redaktionelle Richtung ist Papier und Tinte, kein Verlauf.** Keine
+  `box-shadow`, keine `backdrop-filter`, keine Flächenverläufe, Radius ist `2px`.
+  Trennung entsteht durch Haarlinien (`--rule`) und Weißraum. Wer einen Schatten
+  anlegt, bricht das System – die Betonung kommt aus Umkehrung, nicht aus Tiefe.
+- **`--mark` ist Fläche, nie Schrift.** Das Logo-Türkis `#40e0d0` darf nur in
+  `background`, `border-color` und `::marker` stehen. Auf Papier hat es 1,6:1
+  Kontrast; als Fläche mit `--on-mark` darauf rund 11:1. Diese Regel wurde beim
+  Umbau schon einmal gebrochen (`.cta-banner .btn-quiet:hover`) – dort wäre es im
+  Dark Mode auf nahezu weißem Grund gelandet.
+- **Light ist Default, Dark die Zweitfassung.** Beim Erstbesuch entscheidet
+  `prefers-color-scheme`, ohne Angabe wird es hell; eine gespeicherte Wahl schlägt
+  beides ([layout.tsx](app/layout.tsx), Inline-Script). **Farben stehen
+  ausschließlich in den zwei `:root`-Blöcken** – es gibt keinen einzigen
+  Theme-Override an einem Selektor mehr. Früher hingen daran rund 20 Stellen, und
+  jede vergessene war im falschen Modus unlesbar. **`npm run lint` prüft das mit**:
+  [scripts/check-farbliterale.mjs](scripts/check-farbliterale.mjs) meldet jede Farbe
+  außerhalb der `:root`-Blöcke. Die Basislinie steht auf **0** – jedes neue Literal
+  schlägt fehl. Das ist Absicht und gehört nicht mit `--update` weggedrückt.
+- **Drei Flächenebenen, keine baut auf Rahmen und Schatten.** **0 Papier** =
+  keine Füllung, `border-top: 1px solid var(--rule)` (`.card`, `.hero-card`,
+  `.trust-strip`, `.proof-item`, `.faq-item`, `.process-step`, `.services-tile`);
+  **1 gedeckt** = `--surface`, kein Rahmen (`.form`, `.services-details`,
+  `.section-band`, `footer`); **2 invertiert** = `--ink` als Grund, `--paper` als
+  Schrift. Ebene 2 trägt **genau eine Fläche pro Seite** (`.cta-banner`) – das ist
+  der Mechanismus, der den einen Weg sichtbar macht. Ebene 0 ist der Standard: wer
+  eine neue Fläche anlegt und nichts tut, bekommt die ruhige.
 - **Überschriften-Ebenen nie überspringen.** Der Footer nutzt `h2`, weil seine Spalten
   die oberste Ebene im `footer`-Landmark sind. Kartenüberschriften sind `h3` und brauchen
-  über sich ein `h2` im selben Abschnitt. `h2` und `h3` haben **keine eigene Schriftgröße**
-  im CSS – ein Umstufen ändert also die Optik. Lieber eine Abschnittsüberschrift ergänzen
-  als eine Karte hochstufen.
+  über sich ein `h2` im selben Abschnitt. `h2` und `h3` haben **global keine eigene
+  Schriftgröße** – die kommt aus Klassen (`.section-title`, `.section-title-sm`,
+  `.card-title`) und aus zwei gescopten Regeln (`.card h2, .card h3`). Ein Umstufen
+  ändert die Optik also nur innerhalb von `.card`. Lieber eine Abschnittsüberschrift
+  ergänzen als eine Karte hochstufen.
 - Server Components sind Standard; `'use client'` nur bei State, Effects oder Event-Handlern.
 - Bilder über `next/image` (Optimierung ist wegen Static Export deaktiviert), Links über
   `next/link`.
 
 ### Schriftsystem
 
-**Montserrat** = Interface, **Lora** = Lesetext. Geladen sind vier Schnitte
-(Montserrat 600/700, Lora 400/600) – keine weiteren ergänzen ohne Grund.
+**Fraunces** = Display, **Instrument Sans** = alles andere. Geladen sind vier Schnitte
+(Fraunces 600, Instrument Sans 400/500/600) – keine weiteren ergänzen ohne Grund.
 
-Die Zuweisung ist **opt-in, nicht opt-out**:
+Die Zuweisung ist **denkbar knapp**:
 
-- **Lesetext ist der Standard** (`body`). Wer eine neue Klasse anlegt und nichts tut,
-  bekommt Lora – die harmlose Variante.
-- **Interface bekommt, wer sich meldet**: `h1–h6`, native Bedienelemente
-  (`button, input, select, textarea, label, th`), die stabilen Klassen
-  `.brand`, `.nav-link`, `.btn` – und alles mit der Utility-Klasse **`.ui`**.
-- **`.text` ist das Gegenstück**: holt Lesetext zurück, wo Fließtext in einem
-  Interface-Element steht. Zwei Buttons dienen als Inhaltskachel und tragen ganze
-  Beschreibungen (Timeline-Schritt, Paketkachel) – sie brauchen `.text`.
+- **Instrument Sans ist der Standard** (`body`) – Fließtext, Navigation, Buttons,
+  Formulare. Bedienelemente holen ihn über `button, input, select, textarea
+  { font: inherit }`; ohne diese Regel fallen sie auf die Systemschrift zurück.
+- **Fraunces bekommen nur `h1–h6`** sowie punktuell `.brand-wort`, `.process-title`,
+  `.faq-item summary`, `.hero-price strong` und `.pricing-mobile-item summary strong`.
 
-Im gebauten Stylesheet stehen dadurch **drei** `font-family`-Deklarationen. Keine
-Erlaubnisliste mit Einzelselektoren wieder aufbauen.
+Gegenüber Montserrat/Lora sind die Rollen **vertauscht**: die Interface-Schrift ist
+jetzt der Standard, der Serif das Opt-in. Damit sind die früheren Utility-Klassen
+`.ui` und `.text` gegenstandslos und **restlos entfernt** – `.ui` stand an 21
+Stellen, darunter Satzanfänge im Fließtext und ganze Statusmeldungen. Keine
+Erlaubnisliste mit Einzelselektoren wieder aufbauen, und keine neue Schrift-Utility.
+
+**Das Logo ist zweiteilig**: `public/images/rokabo-mark.png` (nur der Kreis, aus
+`ROKABO.png` mit `sips -c 384 384 --cropOffset 3 58` geschnitten) plus die Wortmarke
+als **echter Text** in `.brand-wort`. Das alte PNG trug die Wortmarke eingebacken –
+zusammen mit dem Textknoten daneben stand „rokabo" doppelt im Header, und die
+eingebackene Fassung zwang ihn auf 90 px Höhe. `ROKABO.png` bleibt Favicon,
+Apple-Touch-Icon und Schema-Logo. Achtung bei `sips`: eine `0` im `--cropOffset`
+lässt es auf einen zentrierten Schnitt zurückfallen.
 
 ## Ansprache und Positionierung
 
@@ -299,8 +322,6 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
 
 ## Offene Punkte
 
-- **OG-Bild**: `public/images/ROKABO.png` ist 500 × 500 und wird ehrlich als solches
-  deklariert. Für ansprechende Vorschauen fehlt eine echte 1200 × 630-Grafik.
 - **`/preise`, `/preise.html` und `/preise/`** liefern alle 200. Der Canonical löst das
   für Google auf; 301-Weiterleitungen auf die kurze Form wären sauberer, bergen aber
   Schleifenrisiko in den Rewrite-Regeln.

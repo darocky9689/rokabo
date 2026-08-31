@@ -110,7 +110,7 @@ export default function HandwerkerPage() {
                 height={1800}
               />
               <div className="proof-body">
-                <p className="proof-place ui">Musterprojekt</p>
+                <p className="proof-place">Musterprojekt</p>
                 <h3>Elektro Musterhand</h3>
                 <p>
                   Leistungen, Ablauf, Notdienst und Kontakt. Der Notdienst-Kasten steht

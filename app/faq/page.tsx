@@ -136,8 +136,8 @@ export default function FaqPage() {
             ))}
           </div>
 
-          <div className="card" style={{ marginTop: '1rem' }}>
-            <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Noch offene Fragen?</h2>
+          <div className="card stack-top">
+            <h2 className="section-title section-title-sm">Noch offene Fragen?</h2>
             <p className="muted">Frag einfach. Das Erstgespräch kostet nichts und verpflichtet zu nichts.</p>
             <div className="btn-row">
               <Link className="btn btn-primary" href="/kontakt">Kostenloses Erstgespräch anfragen</Link>

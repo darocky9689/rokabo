@@ -11,81 +11,91 @@
   Die Schriften kommen hier von Google Fonts - das ist unbedenklich, weil die
   Datei nur lokal zur Erzeugung gerendert und nie ausgeliefert wird.
 
+  Palette und Schriften folgen der Seite: Papier, Tinte, ein Akzent, und das
+  Logo-Tuerkis ausschliesslich als Flaeche. Wer app/globals.css umfaerbt,
+  zieht die Werte hier nach - sonst sieht die Linkvorschau aus wie die
+  Vorgaengerfassung.
+
   Masse nach jeder Aenderung in lib/seo/metadata.ts und app/layout.tsx
   nachziehen, sonst stimmt die Deklaration nicht mehr mit der Datei ueberein.
 -->
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Lora:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
   body {
-    display: grid;
-    grid-template-columns: 344px 1fr;
-    align-items: center;
-    gap: 60px;
-    padding: 0 76px;
-    background:
-      radial-gradient(900px 620px at 88% 118%, rgba(64,224,208,0.30), transparent 62%),
-      linear-gradient(135deg, #3B0A45 0%, #2f1740 40%, #22303f 100%);
-    color: #fff;
-    font-family: "Lora", Georgia, serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 62px 76px;
+    background: #fbfaf7;
+    color: #17141b;
+    font-family: "Instrument Sans", system-ui, sans-serif;
   }
-  .scheibe {
-    width: 344px; height: 344px;
-    border-radius: 50%;
-    background: #fff;
-    display: grid; place-items: center;
-    box-shadow: 0 30px 80px -30px rgba(0,0,0,.65);
-  }
-  .scheibe img { width: 286px; height: 286px; display: block; }
 
-  .kicker {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 21px;
-    letter-spacing: .17em;
-    text-transform: uppercase;
-    color: #40e0d0;
-    margin-bottom: 22px;
+  .kopf {
+    display: flex; align-items: center; gap: 14px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid #ddd8d0;
   }
+  .kopf img { width: 46px; height: 46px; display: block; }
+  .wort {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600; font-size: 34px; letter-spacing: -.02em;
+  }
+
   h1 {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    font-size: 56px;
-    line-height: 1.13;
-    letter-spacing: -.022em;
-    text-wrap: balance;
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600;
+    font-size: 74px;
+    line-height: 1.0;
+    letter-spacing: -.035em;
+    max-width: 17ch;
   }
   .unter {
-    margin-top: 26px;
-    font-size: 25px;
-    line-height: 1.45;
-    color: #e2cfe9;
+    margin-top: 24px;
+    font-size: 26px;
+    line-height: 1.5;
+    color: #45404d;
+    max-width: 44ch;
   }
+
   .fuss {
-    margin-top: 34px;
-    display: flex; align-items: center; gap: 18px;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    font-size: 23px;
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding-top: 26px;
+    border-top: 1px solid #ddd8d0;
   }
-  .pille {
-    background: #40e0d0; color: #16202a;
-    padding: 9px 20px; border-radius: 999px;
+  /* Tuerkis nur als Flaeche - als Schriftfarbe haette es auf Papier 1,6:1. */
+  .preis {
+    font-family: "Fraunces", Georgia, serif;
+    font-weight: 600; font-size: 34px;
+    background-image: linear-gradient(#40e0d0, #40e0d0);
+    background-size: 100% .3em;
+    background-position: 0 88%;
+    background-repeat: no-repeat;
   }
-  .domain { color: #b79ec3; }
+  .domain {
+    font-size: 22px; font-weight: 500;
+    letter-spacing: .08em; text-transform: uppercase;
+    color: #6f6a77;
+  }
 </style>
 </head>
 <body>
-  <div class="scheibe"><img src="../public/images/ROKABO.png" alt=""></div>
+  <div class="kopf">
+    <img src="../public/images/rokabo-mark.png" alt="">
+    <span class="wort">rokabo</span>
+  </div>
   <div>
-    <p class="kicker">Website im Abo</p>
     <h1>Eine Website, um die sich jemand kümmert.</h1>
     <p class="unter">Gebaut, betreut und dauerhaft aktuell — ohne hohe Startkosten.</p>
-    <p class="fuss"><span class="pille">ab 49 € im Monat</span><span class="domain">rokabo.de</span></p>
+  </div>
+  <div class="fuss">
+    <span class="preis">ab 49 € im Monat</span>
+    <span class="domain">rokabo.de</span>
   </div>
 </body>
 </html>

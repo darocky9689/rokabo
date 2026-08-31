@@ -16,7 +16,7 @@ export default function DatenschutzPage() {
         <h1 className="section-title">Datenschutzerklärung</h1>
         <p className="section-subtitle">Datenschutzerklärung gemäß Art. 13, 14 DSGVO</p>
 
-        <article className="card" style={{ marginBottom: '1rem' }}>
+        <article className="card">
           <h2>Verantwortlicher</h2>
           <p>
             Thomas Rockstroh<br />
@@ -26,13 +26,13 @@ export default function DatenschutzPage() {
           </p>
         </article>
 
-        <article className="card" style={{ marginBottom: '1rem' }}>
+        <article className="card">
           <h2>Erhobene Daten und Zwecke</h2>
           <p>Kontaktformular: Name, E-Mail, Nachricht, IP-Adresse und Zeitstempel zur Bearbeitung Ihrer Anfrage.</p>
           <p>Abo-Kunden: Name, Adresse, E-Mail, Zahlungs- und Vertragsdaten zur Vertragserfüllung.</p>
         </article>
 
-        <article className="card" style={{ marginBottom: '1rem' }}>
+        <article className="card">
           <h2>Hosting</h2>
           <p>Hosting bei cloud86.io in den Niederlanden, mit SSL, AVV, Backups, Malware-Scans und DDoS-Schutz.</p>
         </article>

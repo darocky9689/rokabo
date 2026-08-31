@@ -22,7 +22,7 @@ export default function LeistungenPage() {
         </p>
 
         <section className="services-table-section" aria-label="Dynamische Leistungenstabelle">
-          <h2 className="section-title" style={{ fontSize: '1.5rem' }}>
+          <h2 className="section-title section-title-sm">
             Leistungen im Vergleich
           </h2>
           <p className="section-subtitle">
@@ -34,7 +34,7 @@ export default function LeistungenPage() {
         <section className="section" aria-label="Technologien und individuelle Möglichkeiten">
           <div className="grid grid-2">
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Womit rokabo deine Website baut</h2>
+              <h2 className="section-title section-title-sm">Womit rokabo deine Website baut</h2>
               <ul className="check-list">
                 <li>WordPress, wenn du selbst Inhalte pflegen willst</li>
                 <li>Individuelle Entwicklung, wenn du mehr brauchst</li>
@@ -43,7 +43,7 @@ export default function LeistungenPage() {
               </ul>
             </article>
             <article className="card">
-              <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Wenn du etwas Besonderes brauchst</h2>
+              <h2 className="section-title section-title-sm">Wenn du etwas Besonderes brauchst</h2>
               <p className="muted">
                 Ob spezielle Funktionen, Anbindungen oder eigene Abläufe: Sag, was
                 gebraucht wird - du bekommst eine ehrliche Einschätzung, ob und wie
@@ -53,7 +53,7 @@ export default function LeistungenPage() {
           </div>
         </section>
 
-        <div className="btn-row" style={{ marginTop: '1rem' }}>
+        <div className="btn-row btn-row-spaced">
           <Link className="btn btn-primary" href="/kontakt">Kostenlos beraten lassen</Link>
           <Link className="btn btn-secondary" href="/preise">Preise vergleichen</Link>
         </div>

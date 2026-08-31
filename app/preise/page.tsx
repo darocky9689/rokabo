@@ -91,28 +91,28 @@ export default function PreisePage() {
           ohne Website? Das gibt es weiterhin ab 15 € im Monat - frag im Gespräch danach.
         </p>
 
-        <div className="btn-row" style={{ marginTop: '1rem' }}>
+        <div className="btn-row btn-row-spaced">
           <Link className="btn btn-primary" href="/kontakt">Passendes Paket kostenlos besprechen</Link>
         </div>
 
         <section className="section" aria-label="Laufzeit und Änderungen">
           <div className="card">
-            <h2 className="section-title" style={{ fontSize: '1.3rem' }}>Was du sonst noch wissen willst</h2>
+            <h2 className="section-title section-title-sm">Was du sonst noch wissen willst</h2>
             <ul className="check-list">
               <li>
-                <strong className="ui">Keine hohe Einmalzahlung.</strong> Du startest mit der Monatsrate,
+                <strong>Keine hohe Einmalzahlung.</strong> Du startest mit der Monatsrate,
                 nicht mit einer Rechnung über Tausende.
               </li>
               <li>
-                <strong className="ui">12 Monate feste Betreuung,</strong> danach 3 Monate Kündigungsfrist.
+                <strong>12 Monate feste Betreuung,</strong> danach 3 Monate Kündigungsfrist.
               </li>
               <li>
-                <strong className="ui">Ein Care Coin</strong> ist eine Änderung bis 30 Minuten - Text tauschen,
+                <strong>Ein Care Coin</strong> ist eine Änderung bis 30 Minuten - Text tauschen,
                 Bild ersetzen, Öffnungszeiten anpassen. Mehrere Wünsche zählen einzeln, nicht genutzte
                 Coins verfallen zum Jahresende.
               </li>
               <li>
-                <strong className="ui">Nach oben wechseln geht jederzeit.</strong> Was klein anfängt, wird
+                <strong>Nach oben wechseln geht jederzeit.</strong> Was klein anfängt, wird
                 erweitert statt neu gebaut.
               </li>
             </ul>

@@ -13,8 +13,13 @@ const EREIGNIS = 'rokabo:theme';
  * Vorher las diese Komponente localStorage in einem Effect und rief dort
  * setState - React 19 beanstandet das zu Recht, weil es einen zweiten
  * Render ausloest. useSyncExternalStore liest stattdessen direkt aus dem
- * DOM und kennt einen eigenen Wert fuer das Prerendering: 'dark', genau
- * die Vorgabe des Layouts. Damit gibt es kein Umspringen beim Erstbesuch.
+ * DOM und kennt einen eigenen Wert fuer das Prerendering.
+ *
+ * Der Prerender-Wert ist 'light': das statische HTML traegt kein
+ * data-theme, und hell ist die Grundfassung. Wer die Systemeinstellung
+ * auf dunkel hat, bekommt vom Inline-Skript vor dem ersten Frame 'dark'
+ * gesetzt - useSyncExternalStore liest dann den echten DOM-Wert. Ohne
+ * diese Uebereinstimmung springt das Icon beim Erstbesuch.
  */
 function abonnieren(melden: () => void) {
   window.addEventListener(EREIGNIS, melden);
@@ -22,11 +27,11 @@ function abonnieren(melden: () => void) {
 }
 
 function ausDem(): Theme {
-  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  return document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
 }
 
 function beimPrerender(): Theme {
-  return 'dark';
+  return 'light';
 }
 
 export function ThemeToggle() {

@@ -43,17 +43,21 @@ export function SiteHeader() {
   return (
     <header className="header" ref={headerRef}>
       <div className="container header-inner">
-        <Link className="brand" href="/" aria-label="Zur Startseite">
+        <Link className="brand" href="/">
+          {/* Nur noch die Bildmarke. Das alte PNG trug die Wortmarke
+              eingebacken - zusammen mit dem Textknoten daneben stand
+              "rokabo" zweimal im Header, und die eingebackene Fassung
+              zwang ihn auf 90px Hoehe. alt="" weil der Text die Marke
+              schon nennt. */}
           <Image
-            className="brand-logo"
-            src="/images/ROKABO.png"
-            alt="Logo von rokabo"
-            title="rokabo Logo"
-            width={90}
-            height={90}
+            className="brand-mark"
+            src="/images/rokabo-mark.png"
+            alt=""
+            width={160}
+            height={160}
             priority
           />
-          rokabo
+          <span className="brand-wort">rokabo</span>
         </Link>
 
         <button
