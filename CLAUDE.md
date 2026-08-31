@@ -272,6 +272,18 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
   [app/sitemap.ts](app/sitemap.ts) und [app/robots.ts](app/robots.ts) sonst als dynamisch,
   und der Build bricht bei `output: 'export'` ab.
 - **Node ≥ 20.9** wird von Next 16 verlangt; die CI läuft auf 22.
+- **Next 16 legt neben `preise.html` zusätzlich ein Verzeichnis `preise/` an** – darin
+  liegen die Prefetch-Daten der Client-Navigation. Die Rewrite-Regeln in
+  [public/.htaccess](public/.htaccess) dürfen Verzeichnisse deshalb **nur dann** an
+  `mod_dir` durchreichen, wenn sie eine eigene `index.html` haben. Sonst leitet Apache
+  `/preise` per 301 auf `/preise/` um – und der Canonical zeigt auf die Fassung ohne
+  Schrägstrich. Genau dieses „Canonical zeigt auf eine Weiterleitung" war schon einmal
+  die Ursache von rund 18 gemeldeten SEO-Fehlern.
+
+  Die Bedingung `-d` allein wegzulassen reicht **nicht**: Die Wurzel der
+  Musterprojekt-Subdomain ist selbst ein Verzeichnis mit `index.html`, der angefragte
+  Pfad ist dort leer, und keine Regel mit `^(.+?)` kann greifen. Beide Fälle wurden live
+  gemessen, bevor die Regeln so stehen blieben.
 - Es gibt **keine Tests**. Verifikation = `npm run lint`, `npx tsc --noEmit`,
   `npm run build:dist`, `npm run check:dist`, optional `npm run seo:audit`, und lokal
   im Browser anschauen.
