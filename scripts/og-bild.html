@@ -1,0 +1,91 @@
+<!doctype html>
+<!--
+  Vorlage fuer public/images/og-rokabo.png (1200x630, Linkvorschau).
+
+  Neu erzeugen:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
+      --headless=new --disable-gpu --hide-scrollbars --allow-file-access-from-files \
+      --force-device-scale-factor=1 --window-size=1200,630 --virtual-time-budget=4000 \
+      --screenshot=public/images/og-rokabo.png scripts/og-bild.html
+
+  Die Schriften kommen hier von Google Fonts - das ist unbedenklich, weil die
+  Datei nur lokal zur Erzeugung gerendert und nie ausgeliefert wird.
+
+  Masse nach jeder Aenderung in lib/seo/metadata.ts und app/layout.tsx
+  nachziehen, sonst stimmt die Deklaration nicht mehr mit der Datei ueberein.
+-->
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Lora:wght@400&display=swap">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    display: grid;
+    grid-template-columns: 344px 1fr;
+    align-items: center;
+    gap: 60px;
+    padding: 0 76px;
+    background:
+      radial-gradient(900px 620px at 88% 118%, rgba(64,224,208,0.30), transparent 62%),
+      linear-gradient(135deg, #3B0A45 0%, #2f1740 40%, #22303f 100%);
+    color: #fff;
+    font-family: "Lora", Georgia, serif;
+  }
+  .scheibe {
+    width: 344px; height: 344px;
+    border-radius: 50%;
+    background: #fff;
+    display: grid; place-items: center;
+    box-shadow: 0 30px 80px -30px rgba(0,0,0,.65);
+  }
+  .scheibe img { width: 286px; height: 286px; display: block; }
+
+  .kicker {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 21px;
+    letter-spacing: .17em;
+    text-transform: uppercase;
+    color: #40e0d0;
+    margin-bottom: 22px;
+  }
+  h1 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 56px;
+    line-height: 1.13;
+    letter-spacing: -.022em;
+    text-wrap: balance;
+  }
+  .unter {
+    margin-top: 26px;
+    font-size: 25px;
+    line-height: 1.45;
+    color: #e2cfe9;
+  }
+  .fuss {
+    margin-top: 34px;
+    display: flex; align-items: center; gap: 18px;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    font-size: 23px;
+  }
+  .pille {
+    background: #40e0d0; color: #16202a;
+    padding: 9px 20px; border-radius: 999px;
+  }
+  .domain { color: #b79ec3; }
+</style>
+</head>
+<body>
+  <div class="scheibe"><img src="../public/images/ROKABO.png" alt=""></div>
+  <div>
+    <p class="kicker">Website im Abo</p>
+    <h1>Eine Website, um die sich jemand kümmert.</h1>
+    <p class="unter">Gebaut, betreut und dauerhaft aktuell — ohne hohe Startkosten.</p>
+    <p class="fuss"><span class="pille">ab 49 € im Monat</span><span class="domain">rokabo.de</span></p>
+  </div>
+</body>
+</html>

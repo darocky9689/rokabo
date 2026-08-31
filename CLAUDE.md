@@ -308,4 +308,11 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
   bewusst eng gefasst: „an den Anforderungen der BITV 2.0 ausgerichtet", ausdrücklich
   **ohne** Zusage einer förmlichen Konformitätsprüfung. Diese Grenze nicht aufweichen,
   ohne dass die Prüfung auch geliefert werden kann.
-- **OG-Bild** in 1200 × 630 fehlt weiterhin (siehe oben).
+- **Das OG-Bild ist reproduzierbar, kein loses Binärobjekt.**
+  `public/images/og-rokabo.png` (1200 × 630) wird aus
+  [scripts/og-bild.html](scripts/og-bild.html) mit Headless Chrome gerendert – das
+  Kommando steht als Kommentar in der Datei. Wer die Maße ändert, muss sie in
+  [lib/seo/metadata.ts](lib/seo/metadata.ts) **und** [app/layout.tsx](app/layout.tsx)
+  nachziehen, sonst stimmt die Deklaration nicht mehr mit der Datei überein.
+  `ROKABO.png` bleibt Favicon und Apple-Touch-Icon, ist aber nicht mehr das
+  Vorschaubild – ein quadratisches Logo passt nicht zu `summary_large_image`.

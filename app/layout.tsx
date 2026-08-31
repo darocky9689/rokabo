@@ -67,10 +67,10 @@ export const metadata: Metadata = {
     description: siteConfig.defaultDescription,
     images: [
       {
-        url: '/images/ROKABO.png',
-        width: 500,
-        height: 500,
-        alt: 'Logo von rokabo, Websites im Abo'
+        url: '/images/og-rokabo.png',
+        width: 1200,
+        height: 630,
+        alt: 'rokabo - eine Website, um die sich jemand kümmert. Ab 49 € im Monat.'
       }
     ]
   },
@@ -80,8 +80,8 @@ export const metadata: Metadata = {
     description: siteConfig.defaultDescription,
     images: [
       {
-        url: '/images/ROKABO.png',
-        alt: 'Logo von rokabo, Websites im Abo'
+        url: '/images/og-rokabo.png',
+        alt: 'rokabo - eine Website, um die sich jemand kümmert. Ab 49 € im Monat.'
       }
     ]
   },

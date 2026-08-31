@@ -46,7 +46,10 @@ export function buildPageMetadata(input: SeoMetadataInput): Metadata {
   const normalizedPath = normalizePath(input.path);
   const pageTitle = trimToLength(input.title, 60);
   const pageDescription = trimToLength(withKeyword(input.description, input.keyword), 160);
-  const imageUrl = input.imagePath ? absoluteUrl(input.imagePath) : absoluteUrl('/images/ROKABO.png');
+  /* Standard ist die Linkvorschau-Grafik in 1200x630, nicht das quadratische
+     Logo - "summary_large_image" verlangt ein breites Bild. Neu erzeugen laesst
+     sie sich aus scripts/og-bild.html, dort steht das Kommando. */
+  const imageUrl = input.imagePath ? absoluteUrl(input.imagePath) : absoluteUrl('/images/og-rokabo.png');
 
   return {
     title: pageTitle,
@@ -62,7 +65,7 @@ export function buildPageMetadata(input: SeoMetadataInput): Metadata {
       url: absoluteUrl(normalizedPath),
       title: pageTitle,
       description: pageDescription,
-      images: [{ url: imageUrl, width: 500, height: 500, alt: `${pageTitle} – ${siteConfig.name}` }]
+      images: [{ url: imageUrl, width: 1200, height: 630, alt: `${pageTitle} – ${siteConfig.name}` }]
     },
     twitter: {
       card: 'summary_large_image',
