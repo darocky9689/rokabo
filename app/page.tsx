@@ -18,18 +18,15 @@ export default function HomePage() {
       <section className="hero">
         <div className="container hero-inner">
           <div>
-            <h1>Eine Website, um die sich jemand kümmert.</h1>
+            <h1>Deine Website, im Abo. Gebaut, betreut, immer aktuell.</h1>
             <p>
-              rokabo baut sie, hält sie aktuell und ist erreichbar, wenn etwas ist.
-              Du zahlst monatlich - ohne hohe Startkosten und ohne dass du dich
-              um Technik, Updates oder Sicherheit kümmern musst.
-            </p>
-            <p className="hero-price">
-              <strong>ab 49 € im Monat</strong>
-              <span className="hero-price-note">ohne hohe Einmalzahlung zum Start</span>
+              Rokabo baut deine Website, bringt sie online und pflegt sie danach
+              weiter. Kein Vorschuss in vierstelliger Höhe, keine Technik-Baustelle,
+              kein Baukasten, den am Ende doch niemand anfasst. Ein fester Betrag im
+              Monat, und rokabo kümmert sich um den Rest.
             </p>
             <div className="btn-row">
-              <Link className="btn btn-accent" href="/kontakt">Kostenloses Erstgespräch anfragen</Link>
+              <Link className="btn btn-accent" href="/kontakt">Kostenloses Angebot in 2 Werktagen</Link>
               <Link className="btn btn-quiet" href="/preise">Pakete ansehen</Link>
             </div>
           </div>
@@ -42,6 +39,76 @@ export default function HomePage() {
               <li>Hosting, Sicherheit und Updates inklusive</li>
             </ul>
           </aside>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container card">
+          <h2 className="card-title">
+            Websites scheitern selten an der Idee. Sie scheitern am Danach.
+          </h2>
+          <p className="muted">
+            Die meisten schlechten Erfahrungen mit einer Website fangen nicht schlecht an.
+            Da war ein Baukasten, der am Anfang machbar wirkte, dann aber doch zu kompliziert
+            war. Da war eine Agentur mit einem Angebot voller Begriffe, die niemand erklärt
+            hat. Da war eine Website, die halbfertig liegen blieb, weil plötzlich niemand
+            mehr Zeit dafür hatte.
+          </p>
+          <p className="muted">
+            Rokabo macht das anders. Du bekommst eine fertige, professionelle Website, ohne
+            dass du dich mit Technik, Design oder Text beschäftigen musst. Dafür zahlst du
+            einen festen Betrag im Monat, keinen großen Betrag auf einmal. Was danach
+            passiert, macht rokabo: hosten, pflegen, aktualisieren. Du musst dich um nichts
+            kümmern.
+          </p>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Darum ist das Abo der bessere Weg</h2>
+          <div className="grid grid-3">
+            <article className="card">
+              <h3>Kein großer Betrag auf einmal</h3>
+              <p className="muted">
+                Statt eines vierstelligen Rechnungsbetrags am Anfang zahlst du einen festen
+                Betrag im Monat. Planbar, ohne Überraschung, ohne dass du erst sparen musst,
+                bevor du überhaupt online gehst.
+              </p>
+            </article>
+            <article className="card">
+              <h3>Rokabo übernimmt Technik und Pflege</h3>
+              <p className="muted">
+                Hosting, Updates, Sicherheit. Das läuft im Hintergrund, ohne dass du dich
+                einlesen oder etwas selbst einstellen musst. Wenn sich etwas ändern muss,
+                kümmert sich rokabo darum.
+              </p>
+            </article>
+            <article className="card">
+              <h3>Kein Baukasten, den du selbst bedienen musst</h3>
+              <p className="muted">
+                Du musst kein Werkzeug lernen und keine Vorlage anpassen. Rokabo baut die
+                Website für dich und meldet sich, wenn etwas gebraucht wird. Der Rest ist
+                nicht dein Job.
+              </p>
+            </article>
+            <article className="card">
+              <h3>Klar von Anfang an</h3>
+              <p className="muted">
+                Du weißt vorher, was es kostet und was du bekommst. Ein Angebot liegt
+                innerhalb von zwei Werktagen vor, ohne Fachchinesisch und ohne
+                Kleingedrucktes, das erst später auffällt.
+              </p>
+            </article>
+            <article className="card">
+              <h3>Änderungen sind eingeplant, nicht extra</h3>
+              <p className="muted">
+                Deine Website bleibt nicht stehen, sobald sie online ist. Kleinere
+                Änderungen sind über die Care Coins im Abo bereits eingerechnet, größere
+                werden vorher abgesprochen.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
 
