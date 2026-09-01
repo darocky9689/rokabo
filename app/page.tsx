@@ -176,7 +176,7 @@ export default function HomePage() {
 
       <section className="section-tight">
         <div className="container">
-          <h2 className="section-title section-title-sm">Wofür soll die Website arbeiten?</h2>
+          <h2 className="section-title section-title-sm">Wo startest du?</h2>
           <p className="section-subtitle">
             Drei Ausgangslagen, drei Wege. Such dir den aus, der zu dir passt.
           </p>
