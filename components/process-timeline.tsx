@@ -100,7 +100,7 @@ export default function ProcessTimeline() {
   }, [activeIndex]);
 
   return (
-    <section className="process-timeline" aria-label="Ablauf in vier Phasen" style={{ '--process-progress': `${progress}%` } as CSSProperties}>
+    <section className="process-timeline" aria-label="Ablauf in vier Phasen" style={{ '--process-progress': `${progress / 100}` } as CSSProperties}>
       <div className="process-track" aria-hidden="true">
         <span className="process-track-fill" />
       </div>
@@ -117,8 +117,7 @@ export default function ProcessTimeline() {
             <article key={step.title} className={`process-step ${isActive ? 'is-active' : ''}`}>
               <button
                 type="button"
-                aria-expanded={isActive}
-                aria-controls={`process-step-panel-${index}`}
+                aria-current={isActive ? 'step' : undefined}
                 className="process-step-toggle"
                 onClick={() => setActiveIndex(index)}
               >
@@ -126,7 +125,7 @@ export default function ProcessTimeline() {
                   <TimelineIcon icon={step.icon} />
                 </span>
                 <span className="process-title">{step.title}</span>
-                <span className="process-desc text">{step.description}</span>
+                <span className="process-desc">{step.description}</span>
                 <span className="process-cta">Details ansehen</span>
               </button>
 

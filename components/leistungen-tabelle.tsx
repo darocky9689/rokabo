@@ -51,7 +51,7 @@ export default function LeistungenTabelle() {
   return (
     <div className="services-table-shell card">
       <div className="services-horizontal-scroll">
-        <div className="services-horizontal" role="tablist" aria-label="Leistungsbausteine">
+        <div className="services-horizontal" role="group" aria-label="Leistungsbausteine">
           {leistungen.map((item, index) => {
             const isActive = index === activeIndex;
 
@@ -59,15 +59,12 @@ export default function LeistungenTabelle() {
               <button
                 key={item.title}
                 type="button"
-                role="tab"
-                aria-selected={isActive}
+                aria-pressed={isActive}
                 className={`services-tile ${isActive ? 'is-active' : ''}`}
                 onClick={() => setActiveIndex(index)}
-                onMouseEnter={() => setActiveIndex(index)}
               >
                 <h3>{item.title}</h3>
-                <div className="services-tile-extra text">
-                  <p>{item.description}</p>
+                <div className="services-tile-extra">
                   <ul className="services-tile-meta">
                     <li>{item.pages}</li>
                     <li>SEO: {item.seo}</li>

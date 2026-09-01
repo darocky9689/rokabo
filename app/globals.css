@@ -10,7 +10,12 @@
   --ink:          #17141b;   /* Ueberschriften, Fliesstext */
   --ink-soft:     #45404d;   /* Sekundaertext */
   --ink-muted:    #6f6a77;   /* Meta, Labels */
-  --rule:         #ddd8d0;   /* Haarlinie - sie traegt die Struktur */
+  --rule:         #bbb8b0;   /* Haarlinie zwischen Textbloecken - 1,90:1 */
+  /* Begrenzungen von BEDIENELEMENTEN brauchen 3:1 (WCAG 1.4.11). Gemessen
+     gegen --surface, den unguenstigeren der beiden Gruende: 3,00:1 dort,
+     3,30:1 auf --paper. Vorher trug --rule mit 1,36:1 beides - dekorative
+     Trennung und Affordanz - und war fuer letzteres viel zu leise. */
+  --rule-interactive: #8d8a82;
   --rule-strong:  #17141b;   /* Abschnittstrenner, 2px */
   --accent:       #5a1168;   /* Pflaume: Links, Fokus, Aktion */
   --accent-hover: #7d2090;
@@ -71,7 +76,8 @@
   --ink:          #f4f1ee;
   --ink-soft:     #b8b2bd;
   --ink-muted:    #8b8590;
-  --rule:         #302c37;
+  --rule:         #46424d;
+  --rule-interactive: #6a6671;
   --rule-strong:  #f4f1ee;
   --accent:       #d9a3ea;
   --accent-hover: #eec4fa;
@@ -157,7 +163,7 @@ input, textarea, select { caret-color: var(--accent); }
 
 @keyframes hero-rise {
   from {
-    opacity: 0.5;
+    opacity: 0;
     transform: translateY(0.4rem);
   }
 }
@@ -359,9 +365,9 @@ input, textarea, select { caret-color: var(--accent); }
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2.2rem;
-  height: 2.2rem;
-  padding: 0.45rem;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.7rem;
   background: transparent;
   border: 1px solid var(--rule);
   border-radius: var(--radius);
@@ -639,7 +645,7 @@ th {
   color: var(--ink);
   background-image: linear-gradient(var(--mark), var(--mark));
   background-size: 100% 0.3em;
-  background-position: 0 88%;
+  background-position: 0 93%;
   background-repeat: no-repeat;
 }
 
@@ -773,7 +779,7 @@ input, textarea, select {
   display: block;
   width: 100%;
   padding: .7rem;
-  border: 1px solid var(--rule);
+  border: 1px solid var(--rule-interactive);
   border-radius: var(--radius);
   background: var(--paper);
   color: var(--ink);
@@ -817,7 +823,7 @@ input:focus, textarea:focus, select:focus { border-color: var(--rule-strong); }
 
 .form-status-fehler {
   padding: var(--space-1);
-  border-left: 3px solid var(--danger);
+  border: 1px solid var(--danger);
   background: var(--paper);
   color: var(--danger);
 }
@@ -825,8 +831,8 @@ input:focus, textarea:focus, select:focus { border-color: var(--rule-strong); }
 
 .form-status-ok {
   padding: var(--space-2);
-  border-left: 3px solid var(--mark);
-  background: var(--paper);
+  border: 1px solid var(--rule-interactive);
+  background: var(--surface);
   color: var(--ink);
 }
 .form-status-ok p:first-child { font-weight: 600; }
@@ -976,9 +982,11 @@ footer p, .site-footer p {
   left: 0;
   top: 0;
   width: 100%;
-  height: var(--process-progress, 0%);
+  height: 100%;
   background: var(--mark);
-  transition: width var(--dur) var(--ease), height var(--dur) var(--ease);
+  transform: scaleY(var(--process-progress, 0));
+  transform-origin: top center;
+  transition: transform var(--dur) var(--ease);
   pointer-events: none;
 }
 
@@ -988,14 +996,30 @@ footer p, .site-footer p {
   position: relative;
   z-index: 2;
 }
+/* .process-step und .services-tile sind randlose <button>. Ihr einziges
+   Affordanz-Signal war die Haarlinie - bei 1,36:1 hat sie niemand als
+   Schaltflaeche gelesen. Jetzt: staerkere Oberkante plus eine Marke, die
+   im Ruhezustand schon da ist und beim Aktivieren die Markenfarbe annimmt. */
 .process-step {
   position: relative;
   z-index: 1;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-interactive);
   background: none;
   color: var(--ink);
-  transition: border-color var(--dur-fast) var(--ease);
+  transition: border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
 }
+.process-step::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--rule-interactive);
+  transition: background var(--dur-fast) var(--ease);
+}
+.process-step.is-active::before { background: var(--mark); }
 .process-step-toggle {
   width: 100%;
   border: 0;
@@ -1015,6 +1039,11 @@ footer p, .site-footer p {
   outline-offset: -2px;
 }
 .process-step.is-active { border-top-color: var(--rule-strong); }
+/* Auf Desktop wiederholt das Akkordeon darunter description wortgleich.
+   Zweimal derselbe Satz ist reine Zusatzlast. */
+@media (min-width: 48rem) {
+  .process-desc { display: none; }
+}
 .process-step.is-active .process-title { text-decoration: underline; text-underline-offset: 4px; }
 
 .process-icon {
@@ -1041,7 +1070,7 @@ footer p, .site-footer p {
 }
 .process-desc { color: var(--ink-soft); max-width: var(--measure); }
 .process-cta {
-  color: var(--ink-muted);
+  color: var(--accent);
   font-weight: 500;
   font-size: var(--step--1);
 }
@@ -1085,15 +1114,25 @@ footer p, .site-footer p {
   height: 100%;
   text-align: left;
   border: 0;
-  border-top: 1px solid var(--rule);
+  border-top: 1px solid var(--rule-interactive);
   background: none;
   color: var(--ink);
   padding: var(--space-2) 0;
   cursor: pointer;
-  transition: border-color var(--dur-fast) var(--ease);
+  transition: border-color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+.services-tile::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 2.5rem;
+  height: 2px;
+  background: var(--rule-interactive);
+  transition: background var(--dur-fast) var(--ease);
 }
 .services-tile h3 { margin: 0; font-size: var(--step-1); }
-.services-tile p { margin: 0; color: var(--ink-soft); max-width: var(--measure); }
 .services-tile-extra { display: none; }
 .services-tile-meta {
   list-style: none;
@@ -1105,15 +1144,7 @@ footer p, .site-footer p {
 .services-tile-meta li { color: var(--ink-muted); font-size: var(--step--1); }
 
 .services-tile.is-active { border-top-color: var(--rule-strong); }
-.services-tile.is-active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: -1px;
-  width: 2.5rem;
-  height: 2px;
-  background: var(--mark);
-}
+.services-tile.is-active::before { background: var(--mark); }
 
 /* Ebene 1 - das Detailpanel ist das eine gedeckte Feld der Seite. */
 .services-details {
@@ -1174,7 +1205,10 @@ footer p, .site-footer p {
 
   .process-timeline { gap: var(--space-1); }
   .process-track { width: 100%; height: 2px; margin: 0; }
-  .process-track-fill { width: var(--process-progress, 0%); height: 100%; }
+  .process-track-fill {
+    transform: scaleX(var(--process-progress, 0));
+    transform-origin: left center;
+  }
   .process-steps {
     grid-template-columns: repeat(4, minmax(0, 1fr));
     align-items: stretch;
@@ -1192,12 +1226,10 @@ footer p, .site-footer p {
     gap: var(--space-3);
   }
   .services-tile h3 { margin: 0 0 0.45rem; }
-  .services-tile-extra {
-    display: grid;
-    grid-template-rows: minmax(5.8rem, auto) auto;
-    gap: var(--space-1);
-  }
-  .services-tile p { min-height: 5.8rem; }
+  /* Die Kachel traegt nur noch Titel und Kennzahlen - die Beschreibung
+     stand hier wortgleich wie im Panel darunter. Kein Platzhalter mehr
+     fuer einen Absatz, den es nicht gibt. */
+  .services-tile-extra { display: block; }
   .services-tile-meta { margin-top: 0; }
 
   .pricing-mobile-accordion { display: none; }
@@ -1208,8 +1240,16 @@ footer p, .site-footer p {
 }
 
 @media (hover: hover) and (pointer: fine) {
+  /* Rueckmeldung auf der Flaeche, nicht an der Oberkante: der Zeiger ist
+     in der Kachel, nicht auf ihrer 1px-Linie. */
   .process-step:hover,
-  .process-step:focus-within { border-top-color: var(--rule-strong); }
+  .process-step:focus-within {
+    border-top-color: var(--rule-strong);
+    background: var(--surface);
+  }
   .services-tile:hover,
-  .services-tile:focus-visible { border-top-color: var(--rule-strong); }
+  .services-tile:focus-visible {
+    border-top-color: var(--rule-strong);
+    background: var(--surface);
+  }
 }

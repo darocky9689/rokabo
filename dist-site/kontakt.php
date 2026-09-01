@@ -36,6 +36,15 @@ function fehler(string $text, int $status = 400): void
 
 /* mbstring ist auf den meisten Plesk-Installationen da, aber nicht
    garantiert. Ohne Fallback waere ein fehlendes Modul ein Fatal Error. */
+/* Alle Felder ausser Name und E-Mail koennen leer ankommen - '-' statt
+   einer Leerstelle, damit Mail und Log lesbar bleiben. Bewusst eine
+   benannte Funktion und keine Arrow-Funktion: die gibt es erst ab
+   PHP 7.4, und die PHP-Version des Hosters ist hier nicht pruefbar. */
+function oder(string $wert): string
+{
+    return $wert !== '' ? $wert : '-';
+}
+
 function laenge(string $wert): int
 {
     return function_exists('mb_strlen') ? mb_strlen($wert) : strlen($wert);
@@ -96,28 +105,34 @@ $paket      = feld('package', 80);
 $bestehend  = feld('bestehend', 80);
 $nachricht  = feld('message', MAX_LAENGE);
 
-if ($name === '' || $email === '' || $betrieb === '' || $paket === '' || $bestehend === '') {
-    fehler('Bitte fülle die Pflichtfelder aus.');
-}
-if (laenge($nachricht) < 20) {
-    fehler('Bitte beschreibe dein Vorhaben in mindestens 20 Zeichen.');
+/* Pflicht sind nur Name und E-Mail - dieselbe Regel wie im Formular.
+   Alles andere klaert das Erstgespraech; es vorab zu verlangen stand im
+   Widerspruch zu dem Versprechen, das daneben steht. Werden die Regeln
+   hier und in components/contact-form.tsx unterschiedlich, laesst der
+   Client durch, was der Server abweist. */
+if ($name === '' || $email === '') {
+    fehler('Bitte gib deinen Namen und deine E-Mail-Adresse an.');
 }
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     fehler('Diese E-Mail-Adresse sieht nicht gültig aus.');
 }
 
-$betreff = betreffKodieren('Anfrage über rokabo.de: ' . $paket);
+/* Ohne Paketangabe bleibt der Betreff sonst mit einem Doppelpunkt und
+   nichts dahinter stehen. */
+$betreff = betreffKodieren(
+    $paket !== '' ? 'Anfrage über rokabo.de: ' . $paket : 'Anfrage über rokabo.de'
+);
 
 $koerper = implode("\n", [
     'Name:            ' . $name,
-    'Betrieb:         ' . $betrieb,
+    'Betrieb:         ' . oder($betrieb),
     'E-Mail:          ' . $email,
-    'Telefon:         ' . ($telefon !== '' ? $telefon : '-'),
-    'Gewähltes Paket: ' . $paket,
-    'Website bisher:  ' . $bestehend,
+    'Telefon:         ' . oder($telefon),
+    'Gewähltes Paket: ' . oder($paket),
+    'Website bisher:  ' . oder($bestehend),
     '',
     'Nachricht:',
-    $nachricht,
+    oder($nachricht),
     '',
     '--',
     'Gesendet am ' . date('d.m.Y H:i') . ' über das Formular auf rokabo.de',
@@ -153,8 +168,8 @@ if (!$gesendet) {
  */
 $logZeile = implode("\t", [
     date('c'),
-    str_replace("\t", ' ', $paket),
-    str_replace("\t", ' ', $bestehend),
+    str_replace("\t", ' ', oder($paket)),
+    str_replace("\t", ' ', oder($bestehend)),
     str_replace("\t", ' ', (string) ($_SERVER['HTTP_REFERER'] ?? '-')),
     $telefon !== '' ? 'telefon' : 'nur-mail',
 ]) . "\n";

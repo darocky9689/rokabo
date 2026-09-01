@@ -38,26 +38,28 @@ export function ContactForm() {
     const form = event.currentTarget;
     const data = new FormData(form);
 
+    /* Pflicht sind nur Name und E-Mail. Alles andere klaert das Gespraech
+       ohnehin - und es stand im Widerspruch zu dem Versprechen daneben:
+       ein unverbindliches Erstgespraech darf keine Paketwahl vorab
+       verlangen. kontakt.php prueft dasselbe Paar. */
     const pflicht: Array<[string, string]> = [
       ['name', 'Name'],
       ['email', 'E-Mail'],
-      ['company', 'Betrieb oder Organisation'],
-      ['package', 'Gewünschtes Paket'],
-      ['bestehend', 'Bestehende Website'],
     ];
 
     const leer = pflicht.filter(([feld]) => String(data.get(feld) || '').trim() === '');
-    const nachricht = String(data.get('message') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const emailUnplausibel = email !== '' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-    if (leer.length > 0 || nachricht.length < 20) {
+    if (leer.length > 0 || emailUnplausibel) {
       const felder = leer.map(([feld]) => feld);
-      if (nachricht.length < 20) felder.push('message');
+      if (emailUnplausibel) felder.push('email');
       setFehlerFelder(felder);
       setStatus('fehler');
       setMeldung(
         leer.length > 0
           ? `Bitte ausfüllen: ${leer.map(([, label]) => label).join(', ')}.`
-          : 'Bitte beschreibe dein Vorhaben in mindestens 20 Zeichen.'
+          : 'Diese E-Mail-Adresse sieht nicht gültig aus.'
       );
       return;
     }
@@ -144,29 +146,25 @@ export function ContactForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="company">Betrieb oder Organisation</label>
+        <label htmlFor="company">Betrieb oder Organisation <span className="form-optional">optional</span></label>
         <input
           className="form-input"
           type="text"
           id="company"
           name="company"
           autoComplete="organization"
-          required
-          aria-invalid={fehlerhaft('company') || undefined}
         />
       </div>
 
       <div className="form-group">
-        <label htmlFor="package">Gewünschtes Paket</label>
+        <label htmlFor="package">Gewünschtes Paket <span className="form-optional">optional</span></label>
         <select
           className="form-select"
           id="package"
           name="package"
-          required
-          aria-invalid={fehlerhaft('package') || undefined}
           defaultValue=""
         >
-          <option value="">Bitte wählen</option>
+          <option value="">Noch offen</option>
           <option value="Unsicher">Ich bin noch unsicher</option>
           <option value="Starter - Single Page">Starter - Single Page</option>
           <option value="Professional">Professional</option>
@@ -176,16 +174,14 @@ export function ContactForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="bestehend">Hast du schon eine Website?</label>
+        <label htmlFor="bestehend">Hast du schon eine Website? <span className="form-optional">optional</span></label>
         <select
           className="form-select"
           id="bestehend"
           name="bestehend"
-          required
-          aria-invalid={fehlerhaft('bestehend') || undefined}
           defaultValue=""
         >
-          <option value="">Bitte wählen</option>
+          <option value="">Noch offen</option>
           <option value="Nein, noch keine">Nein, noch keine</option>
           <option value="Ja, soll ersetzt werden">Ja, soll ersetzt werden</option>
           <option value="Ja, soll nur betreut werden">Ja, soll nur betreut werden</option>
@@ -193,17 +189,15 @@ export function ContactForm() {
       </div>
 
       <div className="form-group">
-        <label htmlFor="message">Nachricht</label>
+        <label htmlFor="message">Nachricht <span className="form-optional">optional</span></label>
         <textarea
           className="form-textarea"
           id="message"
           name="message"
-          required
-          aria-invalid={fehlerhaft('message') || undefined}
           aria-describedby="message-hinweis"
         />
         <p className="form-hint" id="message-hinweis">
-          Was machst du, und was soll die Website leisten? Mindestens 20 Zeichen.
+          Was machst du, und was soll die Website leisten? Ein, zwei Sätze reichen.
         </p>
       </div>
 
