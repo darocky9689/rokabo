@@ -180,11 +180,23 @@ export default function HomePage() {
           <p className="section-subtitle">
             Drei Ausgangslagen, drei Wege. Such dir den aus, der zu dir passt.
           </p>
-          <p className="segment-zeile">
-            <Link className="inline-link" href="/website-fuer-handwerker">Handwerk und Bau</Link>
-            <Link className="inline-link" href="/website-fuer-fotografen">Fotografie und Kreative</Link>
-            <Link className="inline-link" href="/website-fuer-schulen">Schulen, Kitas und Vereine</Link>
-          </p>
+          <div className="segment-grid">
+            <Link className="segment-card" href="/website-fuer-handwerker">
+              <h3>Handwerk und Bau</h3>
+              <p>Wer dich sucht, soll dich finden - und anrufen können.</p>
+              <span className="segment-card-cta">Weg für Handwerk und Bau</span>
+            </Link>
+            <Link className="segment-card" href="/website-fuer-fotografen">
+              <h3>Fotografie und Kreative</h3>
+              <p>Arbeiten, die wirken - und ein Weg zur Anfrage, der nicht fehlt.</p>
+              <span className="segment-card-cta">Weg für Fotografie und Kreative</span>
+            </Link>
+            <Link className="segment-card" href="/website-fuer-schulen">
+              <h3>Schulen, Kitas und Vereine</h3>
+              <p>Termine und Formulare, aktuell - auch ohne die eine Person, die sich kümmert.</p>
+              <span className="segment-card-cta">Weg für Schulen, Kitas und Vereine</span>
+            </Link>
+          </div>
         </div>
       </section>
 
