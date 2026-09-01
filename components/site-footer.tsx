@@ -9,14 +9,6 @@ export function SiteFooter() {
           <p>Websites im Abo - gebaut, betreut und dauerhaft aktuell. Für Betriebe, Selbstständige und Einrichtungen.</p>
         </div>
         <div>
-          <h2>Für wen</h2>
-          <ul className="footer-links">
-            <li><Link href="/website-fuer-handwerker">Handwerk und Bau</Link></li>
-            <li><Link href="/website-fuer-fotografen">Fotografie und Kreative</Link></li>
-            <li><Link href="/website-fuer-schulen">Schulen, Kitas, Vereine</Link></li>
-          </ul>
-        </div>
-        <div>
           <h2>Seiten</h2>
           <ul className="footer-links">
             <li><Link href="/">Start</Link></li>

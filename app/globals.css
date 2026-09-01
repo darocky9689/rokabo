@@ -276,7 +276,11 @@ input, textarea, select { caret-color: var(--accent); }
 
 /* ===== HEADER & NAV =====
    Frueher lagen hier zwei backdrop-filter und ein Schatten. Der Header ist
-   jetzt schlicht Papier mit einer Haarlinie darunter. */
+   jetzt schlicht Papier mit einer Haarlinie darunter. Er zieht sich beim
+   Scrollen leicht zusammen (--header-height/--brand-logo-size werden auf
+   .header ueberschrieben, damit .nav ueber --header-offset mitzieht) -
+   die einzige Stelle im Projekt, die staendig in Bewegung ist, und genau
+   deshalb bewusst zurueckhaltend. */
 .header {
   position: sticky;
   top: 0;
@@ -285,17 +289,24 @@ input, textarea, select { caret-color: var(--accent); }
   border-bottom: 1px solid var(--rule);
   transition: background var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
+.header.is-scrolled {
+  --header-height: 3rem;
+  --brand-logo-size: 2rem;
+}
 .header-inner {
   min-height: var(--header-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-2);
+  transition: min-height var(--dur) var(--ease);
 }
 
 /* Bildmarke und Wortmarke sind getrennt: der Kreis als Bild, "rokabo" als
    echter Text. Vorher steckte die Wortmarke im PNG und zwang den Header
-   auf 90px, weil sie sonst unlesbar geworden waere. */
+   auf 90px, weil sie sonst unlesbar geworden waere. Die Marke ist ein
+   Kreis - der einzige Bewegungsgrund, der aus ihrer Form selbst kommt,
+   ist eine Drehung, kein generisches Hover-Heben. */
 .brand {
   display: inline-flex;
   align-items: center;
@@ -308,6 +319,12 @@ input, textarea, select { caret-color: var(--accent); }
   height: auto;
   max-height: var(--brand-logo-size);
   max-width: var(--brand-logo-size);
+  transition: max-height var(--dur) var(--ease), max-width var(--dur) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+.brand:hover .brand-mark,
+.brand:focus-visible .brand-mark {
+  transform: rotate(22deg);
 }
 .brand-wort {
   font-family: var(--font-display), Georgia, serif;
@@ -333,9 +350,18 @@ input, textarea, select { caret-color: var(--accent); }
   right: 0;
   background: var(--paper);
   border-bottom: 1px solid var(--rule);
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-.4rem);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease),
+    visibility 0s linear var(--dur);
 }
-.nav.open { display: block; }
+.nav.open {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
 
 .nav-list {
   list-style: none;
@@ -344,20 +370,41 @@ input, textarea, select { caret-color: var(--accent); }
   display: grid;
   gap: .1rem;
 }
+/* Der Marker unter jedem Link ist dieselbe Figur wie bei .process-step und
+   .process-track-fill: eine 2px-Linie, die auf --mark wechselt und per
+   scaleX einfaehrt - kein neues Bewegungsvokabular, nur derselbe Marker
+   an neuer Stelle. */
 .nav-link {
+  position: relative;
   display: block;
   padding: .7rem;
   min-height: 48px;
   text-decoration: none;
   color: var(--ink-soft);
   font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  transition: color var(--dur-fast) var(--ease);
 }
-.nav-link:hover { color: var(--ink); }
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--mark);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--dur) var(--ease);
+}
+.nav-link:hover,
+.nav-link:focus-visible,
 .nav-link.active {
   color: var(--ink);
-  border-bottom-color: var(--rule-strong);
+}
+.nav-link:hover::after,
+.nav-link:focus-visible::after,
+.nav-link.active::after {
+  transform: scaleX(1);
 }
 
 /* ===== THEME TOGGLE ===== */
@@ -432,6 +479,76 @@ input, textarea, select { caret-color: var(--accent); }
 .hero-card {
   border-top: 2px solid var(--rule-strong);
   padding-top: var(--space-2);
+}
+
+/* Die Skizze im Hero-Card: eine Website, die sich selbst zeichnet - das
+   Betriebsversprechen (gebaut, betreut, immer aktuell) als Bild statt nur
+   als Satz. Haarlinien wie im Rest des Systems, ein --mark-Punkt als
+   einziger Akzent. fill statt color haelt die --mark-Hartregel ein - der
+   Punkt ist eine Flaeche, keine Schrift. */
+/* Das Easter Egg: ein Klick zeichnet die Skizze neu. Kein eigenes
+   Hover-Signal - die Entdeckung soll ueber den Cursor und den nativen
+   Tooltip passieren, nicht ueber eine zusaetzliche Flaeche. */
+.hero-visual-trigger {
+  display: block;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.hero-visual {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  margin-bottom: var(--space-2);
+}
+.hero-visual-shape {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.hero-visual-toolbar,
+.hero-visual-block {
+  stroke: var(--rule);
+}
+.hero-visual-dot { fill: var(--mark); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-visual-shape {
+    stroke-dasharray: 1100;
+    stroke-dashoffset: 1100;
+    animation: hero-visual-draw 560ms var(--ease) backwards;
+  }
+  .hero-visual-frame { animation-delay: 0ms; }
+  .hero-visual-toolbar { animation-delay: 240ms; }
+  .hero-visual-line-1 { animation-delay: 360ms; }
+  .hero-visual-line-2 { animation-delay: 420ms; }
+  .hero-visual-line-3 { animation-delay: 480ms; }
+  .hero-visual-block { animation-delay: 540ms; }
+  .hero-visual-line-4 { animation-delay: 660ms; }
+  .hero-visual-line-5 { animation-delay: 720ms; }
+  .hero-visual-line-6 { animation-delay: 780ms; }
+
+  .hero-visual-dot {
+    opacity: 0;
+    animation: hero-visual-dot-in 200ms var(--ease) 820ms backwards,
+      hero-visual-pulse 2400ms ease-in-out 1400ms infinite;
+  }
+}
+
+@keyframes hero-visual-draw {
+  from { stroke-dashoffset: 1100; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes hero-visual-dot-in {
+  to { opacity: 1; }
+}
+@keyframes hero-visual-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
 }
 
 /* Ebene 1 - das Formular braucht eine Flaeche, damit es als ein Ding
@@ -1180,6 +1297,9 @@ footer p, .site-footer p {
     display: block;
     border: 0;
     background: transparent;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
   .nav-list {
     padding: 0;
@@ -1199,7 +1319,7 @@ footer p, .site-footer p {
 
   .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-4); }
   .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-3); }
-  .footer-grid { grid-template-columns: 1.2fr .8fr .8fr; }
+  .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; }
 
   .trust-strip > p { padding-right: var(--space-3); }
 

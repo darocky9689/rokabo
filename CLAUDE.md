@@ -204,7 +204,8 @@ lässt es auf einen zentrierten Schnitt zurückfallen.
   je einer eigenen Seite unter flacher URL: `/website-fuer-handwerker`,
   `/website-fuer-fotografen`, `/website-fuer-schulen` (letztere deckt Schulen, Kitas und
   Vereine ab). Sie stehen **nicht** in der Hauptnavigation – erreichbar über die
-  Orientierungszeile auf der Startseite, den Footer-Block „Für wen" und die Sitemap.
+  Orientierungszeile auf der Startseite und die Sitemap (der Footer-Block „Für wen" wurde
+  entfernt, damit der Footer bei drei Spalten in einer Zeile bleibt).
 
   **Jede Segmentseite muss substanziell eigenständig sein**, sonst sind es Doorway Pages:
   eigenes Versprechen, eigene Problembeschreibung in der Sprache des Segments, eigener
@@ -337,3 +338,13 @@ Gesicht: helles Design, Signalgelb und Petrol, System-Schriften, keine externen 
   nachziehen, sonst stimmt die Deklaration nicht mehr mit der Datei überein.
   `ROKABO.png` bleibt Favicon und Apple-Touch-Icon, ist aber nicht mehr das
   Vorschaubild – ein quadratisches Logo passt nicht zu `summary_large_image`.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

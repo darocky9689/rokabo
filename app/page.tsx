@@ -3,6 +3,7 @@ import { buildPageMetadata } from '@/lib/seo/metadata';
 import Image from 'next/image';
 import Link from 'next/link';
 import ProcessTimeline from '@/components/process-timeline';
+import HeroVisual from '@/components/hero-visual';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'rokabo | Eine Website, um die sich jemand kümmert',
@@ -31,6 +32,7 @@ export default function HomePage() {
             </div>
           </div>
           <aside className="hero-card" aria-label="Vorteile auf einen Blick">
+            <HeroVisual />
             <h2 className="card-title">Was du bekommst</h2>
             <ul className="check-list">
               <li>Feste Monatskosten, klar planbar</li>

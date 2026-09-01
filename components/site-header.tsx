@@ -19,6 +19,7 @@ const navItems = [
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -40,8 +41,23 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 8);
+        ticking = false;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
-    <header className="header" ref={headerRef}>
+    <header className={`header ${scrolled ? 'is-scrolled' : ''}`} ref={headerRef}>
       <div className="container header-inner">
         <Link className="brand" href="/">
           {/* Nur noch die Bildmarke. Das alte PNG trug die Wortmarke
