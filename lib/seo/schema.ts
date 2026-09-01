@@ -103,6 +103,39 @@ export function serviceSchema(
   };
 }
 
+export function articleSchema(input: {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+}): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: input.title,
+    description: input.description,
+    datePublished: input.datePublished,
+    dateModified: input.datePublished,
+    author: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.baseUrl
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      logo: {
+        '@type': 'ImageObject',
+        url: siteConfig.organization.logo
+      }
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': absoluteUrl(`/ratgeber/${input.slug}`)
+    }
+  };
+}
+
 export function faqSchema(items: Array<{ question: string; answer: string }>): JsonLd {
   return {
     '@context': 'https://schema.org',

@@ -18,6 +18,7 @@ const routeLabels: Record<string, string> = {
   '/leistungen': 'Leistungen',
   '/preise': 'Preise',
   '/portfolio': 'Portfolio',
+  '/ratgeber': 'Ratgeber',
   '/faq': 'FAQ',
   '/ueber-uns': 'Über rokabo',
   '/kontakt': 'Kontakt',

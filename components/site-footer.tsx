@@ -15,6 +15,7 @@ export function SiteFooter() {
             <li><Link href="/leistungen">Leistungen</Link></li>
             <li><Link href="/portfolio">Portfolio</Link></li>
             <li><Link href="/preise">Preise</Link></li>
+            <li><Link href="/ratgeber">Ratgeber</Link></li>
             <li><Link href="/ueber-uns">Über rokabo</Link></li>
             <li><Link href="/kontakt">Kontakt</Link></li>
             <li><Link href="/faq">FAQ</Link></li>

@@ -144,6 +144,13 @@ export default function PreisePage() {
                 <strong>Nach oben wechseln geht jederzeit.</strong> Was klein anfängt, wird
                 erweitert statt neu gebaut.
               </li>
+              <li>
+                Unsicher, ob ein Baukasten nicht doch reicht? Der{' '}
+                <Link className="inline-link" href="/ratgeber/website-baukasten-oder-website-im-abo">
+                  ehrliche Vergleich im Ratgeber
+                </Link>{' '}
+                hilft bei der Entscheidung.
+              </li>
             </ul>
           </div>
         </section>

@@ -50,6 +50,7 @@ export const siteRoutes = [
   '/leistungen',
   '/preise',
   '/portfolio',
+  '/ratgeber',
   '/faq',
   '/ueber-uns',
   '/kontakt',

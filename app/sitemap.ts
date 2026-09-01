@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { siteConfig, siteRoutes } from '@/lib/seo/site';
+import { ratgeberArtikel } from '@/lib/ratgeber/artikel';
 
 /* Next 16 verlangt bei output: 'export' die ausdrueckliche Kennzeichnung
    als statisch - Metadata-Routen gelten sonst als dynamisch und der Build
@@ -15,6 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/leistungen': 0.9,
     '/preise': 0.9,
     '/portfolio': 0.85,
+    '/ratgeber': 0.8,
     '/faq': 0.8,
     '/kontakt': 0.8,
     '/ueber-uns': 0.7,
@@ -31,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/leistungen': 'monthly',
     '/preise': 'weekly',
     '/portfolio': 'monthly',
+    '/ratgeber': 'weekly',
     '/faq': 'monthly',
     '/kontakt': 'weekly',
     '/ueber-uns': 'monthly',
@@ -45,9 +48,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
     (route) => route !== '/impressum' && route !== '/datenschutz'
   );
 
-  return indexableRoutes.map((route) => ({
+  const routeEntries = indexableRoutes.map((route) => ({
     url: `${siteConfig.baseUrl}${route}`,
     changeFrequency: frequencyByRoute[route] ?? 'monthly',
     priority: priorityByRoute[route] ?? 0.5
   }));
+
+  /* Einzelne Ratgeber-Artikel sind dynamische Routen und deshalb nicht Teil
+     von siteRoutes - ihre Sitemap-Eintraege kommen direkt aus der
+     Artikel-Datenliste. */
+  const ratgeberEntries = ratgeberArtikel.map((artikel) => ({
+    url: `${siteConfig.baseUrl}/ratgeber/${artikel.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.6
+  }));
+
+  return [...routeEntries, ...ratgeberEntries];
 }

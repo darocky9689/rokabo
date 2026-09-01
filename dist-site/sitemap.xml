@@ -36,6 +36,11 @@
 <priority>0.85</priority>
 </url>
 <url>
+<loc>https://www.rokabo.de/ratgeber</loc>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
 <loc>https://www.rokabo.de/faq</loc>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
@@ -54,5 +59,10 @@
 <loc>https://www.rokabo.de/sitemap</loc>
 <changefreq>monthly</changefreq>
 <priority>0.3</priority>
+</url>
+<url>
+<loc>https://www.rokabo.de/ratgeber/website-baukasten-oder-website-im-abo</loc>
+<changefreq>monthly</changefreq>
+<priority>0.6</priority>
 </url>
 </urlset>
