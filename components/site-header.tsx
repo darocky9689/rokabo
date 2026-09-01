@@ -12,7 +12,6 @@ const navItems = [
   { href: '/portfolio', label: 'Portfolio' },
   { href: '/preise', label: 'Preise' },
   { href: '/ratgeber', label: 'Ratgeber' },
-  { href: '/ueber-uns', label: 'Über rokabo' },
   { href: '/kontakt', label: 'Kontakt' },
   { href: '/faq', label: 'FAQ' },
 ];

@@ -7,6 +7,7 @@ export function SiteFooter() {
         <div>
           <h2>rokabo</h2>
           <p>Websites im Abo - gebaut, betreut und dauerhaft aktuell. Für Betriebe, Selbstständige und Einrichtungen.</p>
+          <p><Link href="/ueber-uns">Mehr erfahren</Link></p>
         </div>
         <div>
           <h2>Seiten</h2>
@@ -16,7 +17,6 @@ export function SiteFooter() {
             <li><Link href="/portfolio">Portfolio</Link></li>
             <li><Link href="/preise">Preise</Link></li>
             <li><Link href="/ratgeber">Ratgeber</Link></li>
-            <li><Link href="/ueber-uns">Über rokabo</Link></li>
             <li><Link href="/kontakt">Kontakt</Link></li>
             <li><Link href="/faq">FAQ</Link></li>
           </ul>
