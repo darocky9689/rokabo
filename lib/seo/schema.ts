@@ -66,6 +66,43 @@ export function breadcrumbSchema(items: Array<{ name: string; path: string }>): 
   };
 }
 
+export function serviceSchema(
+  packages: Array<{ name: string; description: string; price: number }>
+): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Website im Abo',
+    provider: {
+      '@type': 'Organization',
+      name: siteConfig.name,
+      url: siteConfig.baseUrl
+    },
+    areaServed: 'DE',
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Website-Abo-Pakete',
+      itemListElement: packages.map((pkg) => ({
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: pkg.name,
+          description: pkg.description
+        },
+        price: pkg.price,
+        priceCurrency: 'EUR',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price: pkg.price,
+          priceCurrency: 'EUR',
+          billingIncrement: 1,
+          unitCode: 'MON'
+        }
+      }))
+    }
+  };
+}
+
 export function faqSchema(items: Array<{ question: string; answer: string }>): JsonLd {
   return {
     '@context': 'https://schema.org',

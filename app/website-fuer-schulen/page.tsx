@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { JsonLdScript } from '@/components/seo/json-ld';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { faqSchema } from '@/lib/seo/schema';
+import { breadcrumbSchema, faqSchema } from '@/lib/seo/schema';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Schulwebsite für Schulen, Kitas und Vereine',
@@ -44,6 +44,13 @@ const fragen = [
 export default function SchulenPage() {
   return (
     <main id="main-content">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Schulwebsite für Schulen, Kitas und Vereine', path: '/website-fuer-schulen' }
+        ])}
+      />
       <JsonLdScript id="faq-schulen" schema={faqSchema(fragen)} />
 
       <section className="section">

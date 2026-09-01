@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema } from '@/lib/seo/schema';
+import { JsonLdScript } from '@/components/seo/json-ld';
 import { ContactForm } from '@/components/contact-form';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -13,6 +15,14 @@ export const metadata: Metadata = buildPageMetadata({
 export default function KontaktPage() {
   return (
     <main id="main-content" className="section">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Kontakt', path: '/kontakt' }
+        ])}
+      />
+
       <div className="container">
         <article className="form">
           <h1 className="section-title">Kostenloses Erstgespräch</h1>

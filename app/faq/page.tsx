@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema, faqSchema } from '@/lib/seo/schema';
+import { JsonLdScript } from '@/components/seo/json-ld';
 import Link from 'next/link';
 
 const faqs = [
@@ -104,21 +106,17 @@ export const metadata: Metadata = buildPageMetadata({
 });
 
 export default function FaqPage() {
-  const faqSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'FAQPage',
-    mainEntity: faqs.map((item) => ({
-      '@type': 'Question',
-      name: item.question,
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: item.answer
-      }
-    }))
-  };
-
   return (
     <main id="main-content">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'FAQ', path: '/faq' }
+        ])}
+      />
+      <JsonLdScript id="faq-schema" schema={faqSchema(faqs)} />
+
       <section className="section">
         <div className="container">
           <h1 className="section-title">Häufige Fragen (FAQ)</h1>
@@ -146,11 +144,6 @@ export default function FaqPage() {
           </div>
         </div>
       </section>
-
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
     </main>
   );
 }

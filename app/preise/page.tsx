@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema, serviceSchema } from '@/lib/seo/schema';
+import { JsonLdScript } from '@/components/seo/json-ld';
 import Link from 'next/link';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -10,11 +12,26 @@ export const metadata: Metadata = buildPageMetadata({
   path: '/preise'
 });
 
+const pakete = [
+  { name: 'Starter – Single Page', description: 'Single Page mit SEO Basis, ohne Care Coins.', price: 49 },
+  { name: 'Professional', description: 'Bis zu 5 Seiten mit SEO erweitert und 6 Care Coins im Jahr.', price: 79 },
+  { name: 'Premium', description: 'Bis zu 10 Seiten mit SEO stark und 12 Care Coins im Jahr.', price: 119 }
+];
+
 export default function PreisePage() {
   return (
     <main id="main-content" className="section">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Preise', path: '/preise' }
+        ])}
+      />
+      <JsonLdScript id="service-schema" schema={serviceSchema(pakete)} />
+
       <div className="container">
-        <h1 className="section-title">Preise</h1>
+        <h1 className="section-title">Preise für die Website im Abo</h1>
         <p className="section-subtitle">
           Drei Pakete mit festen Monatskosten. Du zahlst monatlich, ohne hohe Startkosten -
           rokabo kümmert sich um Technik, Pflege und Sichtbarkeit.
@@ -90,6 +107,18 @@ export default function PreisePage() {
           Hosting, Updates und Sicherheit sind in allen Paketen enthalten. Nur E-Mail und Domain,
           ohne Website? Das gibt es weiterhin ab 15 € im Monat - frag im Gespräch danach.
         </p>
+
+        <section className="section" aria-label="Passendes Paket nach Branche">
+          <h2 className="section-title section-title-sm">Passendes Paket nach Branche</h2>
+          <p className="section-subtitle">
+            Für drei Branchen gibt es eine eigene Seite mit passendem Paketvorschlag und Beispiel.
+          </p>
+          <ul className="check-list">
+            <li><Link className="inline-link" href="/website-fuer-handwerker">Website für Handwerksbetriebe</Link></li>
+            <li><Link className="inline-link" href="/website-fuer-fotografen">Website für Fotografen und Kreative</Link></li>
+            <li><Link className="inline-link" href="/website-fuer-schulen">Schulwebsite für Schulen, Kitas und Vereine</Link></li>
+          </ul>
+        </section>
 
         <div className="btn-row btn-row-spaced">
           <Link className="btn btn-primary" href="/kontakt">Passendes Paket kostenlos besprechen</Link>

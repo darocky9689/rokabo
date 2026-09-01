@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema } from '@/lib/seo/schema';
+import { JsonLdScript } from '@/components/seo/json-ld';
 import Link from 'next/link';
 
 export const metadata: Metadata = buildPageMetadata({
@@ -13,6 +15,14 @@ export const metadata: Metadata = buildPageMetadata({
 export default function UeberUnsPage() {
   return (
     <main id="main-content" className="section">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Über rokabo', path: '/ueber-uns' }
+        ])}
+      />
+
       <div className="container">
         <h1 className="section-title">Über rokabo</h1>
         <p className="section-subtitle">

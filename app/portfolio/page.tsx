@@ -2,6 +2,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { buildPageMetadata } from '@/lib/seo/metadata';
+import { breadcrumbSchema } from '@/lib/seo/schema';
+import { JsonLdScript } from '@/components/seo/json-ld';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Referenzen: Websites, die du ansehen kannst',
@@ -79,6 +81,13 @@ export default function PortfolioPage() {
 
   return (
     <main id="main-content">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Referenzen', path: '/portfolio' }
+        ])}
+      />
       <section className="section">
         <div className="container">
           <h1 className="section-title">Portfolio</h1>

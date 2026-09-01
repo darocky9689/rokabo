@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { JsonLdScript } from '@/components/seo/json-ld';
 import { buildPageMetadata } from '@/lib/seo/metadata';
-import { faqSchema } from '@/lib/seo/schema';
+import { breadcrumbSchema, faqSchema } from '@/lib/seo/schema';
 
 export const metadata: Metadata = buildPageMetadata({
   title: 'Website für Fotografen und Kreative',
@@ -44,6 +44,13 @@ const fragen = [
 export default function FotografenPage() {
   return (
     <main id="main-content">
+      <JsonLdScript
+        id="breadcrumb-schema"
+        schema={breadcrumbSchema([
+          { name: 'Start', path: '/' },
+          { name: 'Website für Fotografen und Kreative', path: '/website-fuer-fotografen' }
+        ])}
+      />
       <JsonLdScript id="faq-fotografen" schema={faqSchema(fragen)} />
 
       <section className="section">

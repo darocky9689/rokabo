@@ -29,6 +29,7 @@ export const siteConfig = {
       addressLocality: 'Steinhöfel',
       addressCountry: 'DE'
     },
+    priceRange: '€€',
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
