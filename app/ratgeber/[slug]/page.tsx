@@ -35,6 +35,19 @@ function formatDatum(iso: string): string {
   return new Date(iso).toLocaleDateString('de-DE', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
+function renderParagraph(text: string) {
+  return text.split(/(\[[^\]]+\]\([^)]+\))/g).map((part, index) => {
+    const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (!match) return part;
+    const [, label, href] = match;
+    return (
+      <Link key={index} href={href}>
+        {label}
+      </Link>
+    );
+  });
+}
+
 export default async function RatgeberArtikelPage({ params }: Props) {
   const { slug } = await params;
   const artikel = findArtikel(slug);
@@ -69,7 +82,7 @@ export default async function RatgeberArtikelPage({ params }: Props) {
             <div key={section.heading ?? `abschnitt-${index}`}>
               {section.heading ? <h2>{section.heading}</h2> : null}
               {section.paragraphs.map((paragraph, paragraphIndex) => (
-                <p key={paragraphIndex}>{paragraph}</p>
+                <p key={paragraphIndex}>{renderParagraph(paragraph)}</p>
               ))}
             </div>
           ))}
